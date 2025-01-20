@@ -1,0 +1,159 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f5efe7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'roboto';
+}
+.roboto{
+  font-family: "Roboto", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+#Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  background-color: #d8c4b6;
+  color: #213555;
+  border-radius: 10px;
+}
+h1, h4 {
+  margin: 5px; 
+}
+
+#Header-inside {
+  flex: 1;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#social-buttons {
+  display: flex;
+  gap: 15px;
+  margin-left: 20px;
+  padding-right: 50px;
+  align-items: center;
+}
+
+.social-logo {
+  transition: transform 0.3s ease;
+}
+
+.social-logo:hover {
+  transform: scale(1.2);
+}
+
+#profile {
+  border-radius: 50%;
+  transition: all 0.5s ease;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#profile:hover {
+  transform: scale(1.2);
+}
+
+#profile {
+  border-radius: 50%;
+  transition: all 0.5s ease;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#profile:hover {
+  transform: scale(1.2);
+}
+
+
+hr {  
+  height: 2px;  
+  background-color: black;  
+  border: black;  
+}  
+
+#About-Section {
+  background-color: #d8c4b6;
+  color: #213555;
+  border-radius: 10px;
+  padding-top:10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 93%;
+  margin: 20px 0;
+  margin-bottom: 5px;
+}
+
+#expandable-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.expandable-section {
+  width: 115px;
+  height: 80px;
+  background-color: #d8c4b6;
+  color: #213555;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease;
+  flex: 1;
+}
+
+.expandable-section:hover {
+  width: 305px;
+  height: 150px;
+  flex:2;
+}
+
+.class-name {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.class-description {
+  display: none;
+  position: absolute;
+  top: 35px;
+  left: 10px;
+  right: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+#Skills {
+  background-color: #d8c4b6;
+  color: #213555;
+  border-radius: 10px;
+  padding-top:10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.expandable-section:hover .class-description {
+  display: block;
+}
