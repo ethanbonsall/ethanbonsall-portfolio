@@ -114,35 +114,51 @@ hr {
   position: relative;
   overflow: hidden;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: all 0.4s ease;
+  transition: all 0.5s ease;
   flex: 1;
+  text-align: center;
 }
 
 .expandable-section:hover {
   width: 305px;
-  height: 150px;
-  flex:2;
+  height: auto; 
+  max-height: 200px;
+  padding: 15px;
+  flex: 2;
 }
 
-.class-name {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 16px;
-  font-weight: bold;
+.expandable-section.active {
+  width: 305px;
+  height: auto; 
+  max-height: 200px; 
+  padding: 15px;
+  flex: 2;
 }
 
 .class-description {
   display: none;
-  position: absolute;
-  top: 35px;
-  left: 10px;
-  right: 10px;
+  position: relative; 
+  top: 0;
+  left: 0;
+  right: 0;
   font-size: 14px;
   line-height: 1.5;
+  margin-top: 10px;
+  word-wrap: break-word; 
 }
+
+.expandable-section:hover .class-description {
+  display: block;
+}
+
+.expandable-section:hover .class-name {
+  position: relative;
+  margin-bottom: 10px; 
+}
+
 #Skills {
   background-color: #d8c4b6;
   color: #213555;
@@ -152,8 +168,4 @@ hr {
   padding-right: 15px;
   width: 100%;
   margin-top: 10px;
-}
-
-.expandable-section:hover .class-description {
-  display: block;
 }
