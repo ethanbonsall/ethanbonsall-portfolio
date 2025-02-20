@@ -10,16 +10,38 @@ const Portfolio = () => {
       <div className="flex justify-between items-center w-full bg-[#d8c4b6] text-[#213555] p-5 border-y-2">
         <div className="flex flex-col pl-5">
           <h1 className="m-1 text-4xl font-bold">Ethan Bonsall</h1>
-          <h4 className="m-1 text-2xl">UNC Chapel Hill Sophomore | Software Developer</h4>
+          <h4 className="m-1 text-2xl">
+            UNC Chapel Hill Sophomore | Software Developer
+          </h4>
         </div>
         <div className="flex gap-4 items-center pr-10">
-          <a href="https://www.linkedin.com/in/ethanbonsall/" target="_blank" rel="noopener noreferrer">
-            <img src={linkedinLogo} alt="LinkedIn" className="image-hover w-24 h-auto" />
+          <a
+            href="https://www.linkedin.com/in/ethanbonsall/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src={linkedinLogo}
+              alt="LinkedIn"
+              className="image-hover w-24 h-auto"
+            />
           </a>
-          <a href="https://github.com/ethanbonsall" target="_blank" rel="noopener noreferrer">
-            <img src={githubLogo} alt="GitHub" className="image-hover w-14 h-auto" />
+          <a
+            href="https://github.com/ethanbonsall"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src={githubLogo}
+              alt="GitHub"
+              className="image-hover w-14 h-auto"
+            />
           </a>
-          <img src={profilePic} alt="Profile" className="image-hover w-40 h-40 rounded-full ml-6 border-2" />
+          <img
+            src={profilePic}
+            alt="Profile"
+            className="image-hover w-40 h-40 rounded-full ml-6 border-2"
+          />
         </div>
       </div>
 
@@ -28,9 +50,18 @@ const Portfolio = () => {
         <h1 className="text-4xl font-bold">About Me</h1>
         <hr className="border-black my-2" />
         <p className="text-2xl">
-        Hi! I’m Ethan Bonsall, originally from Camp Hill, Pennsylvania, and currently an undergraduate studying Computer Science at UNC Chapel Hill with a 3.7 GPA. I’m a member of Computer Science and Social Good, where I help develop websites and apps for nonprofit organizations, blending my passion for technology and social impact.
-          My expertise includes web development, artificial intelligence, and machine learning algorithms, with a focus on creating practical and innovative solutions. Outside of academics, I’m a sports enthusiast who enjoys playing soccer and tennis, cheering on the Steelers, hiking, and spending time with friends.
-          I’m actively seeking an internship where I can apply my skills and continue learning—let’s make something great together!
+          Hi! I’m Ethan Bonsall, originally from Camp Hill, Pennsylvania, and
+          currently an undergraduate studying Computer Science at UNC Chapel
+          Hill with a 3.7 GPA. I’m a member of Computer Science and Social Good,
+          where I help develop websites and apps for nonprofit organizations,
+          blending my passion for technology and social impact. My expertise
+          includes web development, artificial intelligence, and machine
+          learning algorithms, with a focus on creating practical and innovative
+          solutions. Outside of academics, I’m a sports enthusiast who enjoys
+          playing soccer and tennis, cheering on the Steelers, hiking, and
+          spending time with friends. I’m actively seeking an internship where I
+          can apply my skills and continue learning—let’s make something great
+          together!
         </p>
       </section>
 
@@ -44,7 +75,9 @@ const Portfolio = () => {
         <h1 className="text-4xl font-bold">Skills & Technologies</h1>
         <hr className="border-black my-2" />
 
-        <h2 className="underline text-2xl font-semibold">Programming Languages</h2>
+        <h2 className="underline text-2xl font-semibold">
+          Programming Languages
+        </h2>
         <ul className="list-disc pl-5 text-xl">
           <li>HTML</li>
           <li>CSS</li>
@@ -56,14 +89,24 @@ const Portfolio = () => {
           <li>R</li>
         </ul>
 
-        <h2 className="underline text-2xl font-semibold mt-2">Frameworks & Libraries</h2>
+        <h2 className="underline text-2xl font-semibold mt-2">
+          Frameworks & Libraries
+        </h2>
         <ul className="list-disc pl-5 text-xl">
-          <li><strong>Frontend:</strong> React, Angular, Bootstrap</li>
-          <li><strong>Backend:</strong> Node.js, Express.js</li>
-          <li><strong>Database:</strong> Supabase, MySQL, PostgreSQL</li>
+          <li>
+            <strong>Frontend:</strong> React, Angular, Bootstrap
+          </li>
+          <li>
+            <strong>Backend:</strong> Node.js, Express.js
+          </li>
+          <li>
+            <strong>Database:</strong> Supabase, MySQL, PostgreSQL
+          </li>
         </ul>
 
-        <h2 className="underline text-2xl font-semibold mt-2">Tools & Platforms</h2>
+        <h2 className="underline text-2xl font-semibold mt-2">
+          Tools & Platforms
+        </h2>
         <ul className="list-disc pl-5 text-xl">
           <li>Microsoft Office Suite (Word, Excel, PowerPoint, Access)</li>
           <li>Tableau (Data Visualization)</li>
@@ -71,7 +114,9 @@ const Portfolio = () => {
           <li>Visual Studio Code, IntelliJ IDEA (IDEs)</li>
         </ul>
 
-        <h2 className="underline text-2xl font-semibold mt-2">Additional Skills</h2>
+        <h2 className="underline text-2xl font-semibold mt-2">
+          Additional Skills
+        </h2>
         <ul className="list-disc pl-5 text-xl">
           <li>RESTful API Development</li>
           <li>Machine Learning (scikit-learn, TensorFlow basics)</li>
