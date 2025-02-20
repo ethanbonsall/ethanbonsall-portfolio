@@ -52,7 +52,7 @@ const Portfolio = () => {
         <p className="text-2xl">
           Hi! I’m Ethan Bonsall, originally from Camp Hill, Pennsylvania, and
           currently an undergraduate studying Computer Science at UNC Chapel
-          Hill with a 3.7 GPA. I’m a member of Computer Science and Social Good,
+          Hill with a 3.7 GPA. I’m a member of Computer Science & Social Good,
           where I help develop websites and apps for nonprofit organizations,
           blending my passion for technology and social impact. My expertise
           includes web development, artificial intelligence, and machine
@@ -87,6 +87,7 @@ const Portfolio = () => {
           <li>Java</li>
           <li>C++</li>
           <li>R</li>
+          <li>Python</li>
         </ul>
 
         <h2 className="underline text-2xl font-semibold mt-2">
