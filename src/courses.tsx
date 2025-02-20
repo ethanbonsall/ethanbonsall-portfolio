@@ -78,7 +78,7 @@ const Courses = () => {
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <h3
-                className={`text-[#213555] font-semibold transition-all duration-500 ease-in-out 
+                className={`text-[#213555] font-semibold transition-all duration-500 ease-in-out
         ${hoveredIndex !== null ? (isHovered ? "underline" : "") : ""}`}
                 style={{
                   fontSize:
@@ -86,7 +86,7 @@ const Courses = () => {
                       ? isHovered
                         ? "clamp(1rem, 1.2vw, 1.6rem)"
                         : "clamp(0.6rem, 0.8vw, 1rem)"
-                      : "min(1.4rem,1.8vw)",
+                      : "min(1.4rem,1.75vw)",
                 }}
               >
                 {course.name}
