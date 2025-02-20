@@ -9,59 +9,61 @@ const Courses = () => {
         { name: "Introduction to Probability", description: "Learned the mathematical theory of probability covering random variables; moments; binomial, Poisson, and normal distributions; generating functions; sums of random variables; and statistical applications." },
         { name: "Discrete Mathematics", description: "Learned the foundations of mathematics: logic, set theory, relations and functions, induction, permutations and combinations, recurrence." },
         { name: "Linear Algebra", description: "Algebra of matrices with applications: determinants, solution of linear systems by Gaussian elimination, Gram-Schmidt procedure, and eigenvalues." },
-      ];
+    ];
 
-  interface Course {
-    name: string;
-    description: string;
-  }
+    interface Course {
+        name: string;
+        description: string;
+    }
 
-  const CourseList = ({ courses }: { courses: Course[] }) => {
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-    return (
-      <div className="flex justify-center items-center w-[94.3%] gap-3 px-4 pb-4 pt-2 ">
-        {courses.map((course, index) => {
-          const isHovered = hoveredIndex === index;
-          const [isMobile, setIsMobile] = useState(false);
+    const CourseList = ({ courses }: { courses: Course[] }) => {
+        const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+        const [isMobile, setIsMobile] = useState(false);
 
-          useEffect(() => {
-            const checkAspectRatio = () => {
-              setIsMobile(window.innerWidth / window.innerHeight < 1);
-            };
-      
-            checkAspectRatio(); // Run initially
-            window.addEventListener("resize", checkAspectRatio);
-            return () => window.removeEventListener("resize", checkAspectRatio);
-          }, );
-          return (
-            <div
-              key={index}
-              className={`relative flex flex-col justify-center items-center text-center border-1
-                          bg-[#d8c4b6] text-[#213555] rounded-xl transition-all duration-700 ease-in-out
-                          flex-1 min-w-0 max-w-500 aspect-[7/3] will-change-transform p-2 overflow-clip 
-  ${isMobile ? (isHovered ? "flex-[1.5] scale-105" : "flex-[0.5] scale-100") : (isHovered ? "flex-[1.5] scale-105" : "flex-[1] scale-100")}`}
-              style={{ transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)" }} 
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            > 
-              <h3 className={`text-[clamp(0.7rem,1.5vw,1rem)] font-semibold transition-all duration-500 ease-in-out ${isHovered ? "scale-100" : "scale-50"}`}>
-                {course.name}
-              </h3>
+        useEffect(() => {
+            const mediaQuery = window.matchMedia("(max-aspect-ratio: 1/1)");
+            setIsMobile(mediaQuery.matches);
 
-              <p
-  className={`text-[#213555] mt-2 transition-all ease-in-out overflow-clip text-sm
-              ${isHovered ? "opacity-100 translate-y-0 scale-100 max-h-100 duration-700" : "opacity-0 translate-y-2 scale-90 max-h-0 duration-500"}`}
->
-                {course.description}
-              </p>
+            const updateAspectRatio = () => setIsMobile(mediaQuery.matches);
+            mediaQuery.addEventListener("change", updateAspectRatio);
+
+            return () => mediaQuery.removeEventListener("change", updateAspectRatio);
+        }, []);
+
+        return (
+            <div className="flex justify-center items-center w-[94.3%] gap-3 px-4 pb-4 pt-2">
+                {courses.map((course, index) => {
+                    const isHovered = hoveredIndex === index;
+
+                    return (
+                        <div
+                            key={index}
+                            className={`relative flex flex-col justify-center items-center text-center border-1
+                                        bg-[#d8c4b6] text-[#213555] rounded-xl transition-all duration-700 ease-in-out
+                                        flex-1 min-w-0 max-w-500 aspect-[7/3] will-change-transform p-2 overflow-hidden
+                            ${isMobile ? (isHovered ? "flex-[1.5] scale-105" : "flex-[0.5] scale-100") : (isHovered ? "flex-[1.5] scale-105" : "flex-[1] scale-100")}`}
+                            style={{ transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)" }}
+                            onMouseEnter={() => setHoveredIndex(index)}
+                            onMouseLeave={() => setHoveredIndex(null)}
+                        >
+                            <h3 className={`text-[min(1rem,1.5vw)] font-semibold transition-all duration-500 ease-in-out ${isHovered ? "scale-100" : "scale-50"}`}>
+                                {course.name}
+                            </h3>
+
+                            <p
+                                className={`text-[#213555] mt-2 transition-all ease-in-out text-sm
+                                ${isHovered ? "opacity-100 translate-y-0 scale-100 max-h-[100px] duration-700 overflow-visible" : "opacity-0 translate-y-2 scale-90 max-h-0 duration-500 overflow-hidden"}`}
+                            >
+                                {course.description}
+                            </p>
+                        </div>
+                    );
+                })}
             </div>
-          );
-        })}
-      </div>
-    );
-  };
+        );
+    };
 
-  return <CourseList courses={courses} />;
+    return <CourseList courses={courses} />;
 };
 
 export default Courses;
