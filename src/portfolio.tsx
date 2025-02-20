@@ -1,4 +1,3 @@
-import React from "react";
 import linkedinLogo from "./assets/linkedin-logo.jpeg";
 import githubLogo from "./assets/github-logo.png";
 import profilePic from "./assets/image.jpeg";
@@ -20,7 +19,7 @@ const Portfolio = () => {
           <a href="https://github.com/ethanbonsall" target="_blank" rel="noopener noreferrer">
             <img src={githubLogo} alt="GitHub" className="image-hover w-12 h-auto" />
           </a>
-          <img src={profilePic} alt="Profile" className="image-hover w-36 h-36 rounded-full  ml-6 border-2" />
+          <img src={profilePic} alt="Profile" className="image-hover w-36 h-36 rounded-full ml-6 border-2" />
         </div>
       </div>
 
