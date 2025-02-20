@@ -36,7 +36,6 @@ const Courses = () => {
             <div className="flex justify-center items-center w-[94.3%] gap-3 px-4 pb-4 pt-2">
                 {courses.map((course, index) => {
                     const isHovered = hoveredIndex === index;
-    
                     return (
                         <div
                             key={index}
@@ -45,15 +44,16 @@ const Courses = () => {
                                         flex-1 min-w-0 max-w-500 will-change-transform px-3 py-1.5 overflow-hidden
                             ${isMobile ? (isHovered ? "flex-[2] scale-100 aspect-[36/25] justify-around" : "flex-[0.35] scale-100 aspect-[36/25] justify-center") : (isHovered ? "flex-[1.4] scale-105 aspect-[6/3] justify-around" : "flex-[0.4] scale-100 aspect-[6/3] justify-center")}`}
                             style={{ transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)" }}
-                            onMouseEnter={() => setHoveredIndex(index)}
-                            onMouseLeave={() => setHoveredIndex(null)}
+                            onMouseEnter={() =>  setHoveredIndex(index)}
+                            onMouseLeave={() => setHoveredIndex(null) }
                         >
-                            <h3 className={`text-[min(1.4rem,1.8vw)] font-semibold transition-all duration-500 ease-in-out`}>
+                            <h3 className={`text-[#213555] font-semibold transition-all duration-500 ease-in-out 
+                                ${hoveredIndex !== null ? (isHovered ? "text-[min(1.4rem,1.8vw)]" : "text-[min(1.0rem,1.4vw)]") : "text-[min(1.4rem,1.8vw)]"}`}>
                                 {course.name}
                             </h3>
     
                             <p
-                                className={`text-[#213555] transition-all ease-in-out text-lg
+                                className={`text-[#213555] text-min(1rem, 1.2vw) transition-all ease-in-out 
                                 ${isHovered ? "opacity-100 translate-y-0 scale-100 max-h-[120px] duration-700 overflow-visible" : "opacity-0 translate-y-2 scale-90 max-h-0 duration-500 overflow-hidden"}`}
                                 style={{
                                     whiteSpace: "normal",
