@@ -1,4 +1,4 @@
-import graham from './graham.jpeg';
+import graham from './assets/graham.jpeg';
 
 const Sam = () => {
   return (

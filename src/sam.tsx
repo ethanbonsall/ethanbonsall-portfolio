@@ -1,4 +1,4 @@
-import sam from './sam.jpeg';
+import sam from './assets/sam.jpeg';
 
 const Sam = () => {
   return (
