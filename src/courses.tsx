@@ -69,7 +69,7 @@ const Courses = () => {
               key={index}
               className={`relative flex flex-col items-center text-center border-1
                                         bg-[#d8c4b6] text-[#213555] rounded-xl transition-all duration-700 ease-in-out
-                                        flex-1 min-w-0 max-w-500 will-change-transform px-3 py-1.5 overflow-hidden
+                                        flex-1 min-w-0 max-w-500 will-change-transform px-3 py-1.5 overflow-clip
                             ${isMobile ? (isHovered ? "flex-[2] scale-100 aspect-[36/25] justify-center" : "flex-[0.35] scale-100 aspect-[36/25] justify-center") : isHovered ? "flex-[1.5] scale-105 aspect-[6/3] justify-center" : "flex-[0.5] scale-100 aspect-[6/3] justify-center"}`}
               style={{
                 transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
@@ -86,14 +86,14 @@ const Courses = () => {
                       ? isHovered
                         ? "clamp(1rem, 1.2vw, 1.6rem)"
                         : "clamp(0.6rem, 0.8vw, 1rem)"
-                      : "min(1.4rem,1.75vw)",
+                      : "min(1.4rem,1.8vw)",
                 }}
               >
                 {course.name}
               </h3>
 
               <p
-                className={`text-[#213555] transition-all ease-in-out 
+                className={`text-[#213555] transition-all ease-in-out
     ${isHovered ? "opacity-100 translate-y-0 scale-100 max-h-[120px] duration-700 overflow-visible mt-3" : "opacity-0 translate-y-2 scale-90 max-h-0 duration-500 overflow-hidden"}`}
                 style={{
                   fontSize: "clamp(1rem, 1vw, 1.6rem)", // Ensures text grows properly
