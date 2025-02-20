@@ -1,0 +1,7 @@
+@import "tailwindcss";
+.image-hover {
+    transition: transform 0.3s ease-in-out;
+  }
+  .image-hover:hover {
+    transform: scale(1.3);
+  }
