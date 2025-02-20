@@ -19,40 +19,50 @@ const Courses = () => {
     const CourseList = ({ courses }: { courses: Course[] }) => {
         const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
         const [isMobile, setIsMobile] = useState(false);
-
+    
         useEffect(() => {
-            const mediaQuery = window.matchMedia("(max-aspect-ratio: 1/1)");
-            setIsMobile(mediaQuery.matches);
-
-            const updateAspectRatio = () => setIsMobile(mediaQuery.matches);
-            mediaQuery.addEventListener("change", updateAspectRatio);
-
-            return () => mediaQuery.removeEventListener("change", updateAspectRatio);
+            const checkAspectRatio = () => {
+                setTimeout(() => {
+                    setIsMobile(window.innerWidth / window.innerHeight < 1);
+                }, 50);
+            };
+    
+            checkAspectRatio();
+            window.addEventListener("resize", checkAspectRatio);
+            return () => window.removeEventListener("resize", checkAspectRatio);
         }, []);
-
+    
         return (
             <div className="flex justify-center items-center w-[94.3%] gap-3 px-4 pb-4 pt-2">
                 {courses.map((course, index) => {
                     const isHovered = hoveredIndex === index;
-
+    
                     return (
                         <div
                             key={index}
-                            className={`relative flex flex-col justify-center items-center text-center border-1
+                            className={`relative flex flex-col items-center text-center border-1
                                         bg-[#d8c4b6] text-[#213555] rounded-xl transition-all duration-700 ease-in-out
-                                        flex-1 min-w-0 max-w-500 aspect-[7/3] will-change-transform p-2 overflow-hidden
-                            ${isMobile ? (isHovered ? "flex-[1.5] scale-105" : "flex-[0.5] scale-100") : (isHovered ? "flex-[1.5] scale-105" : "flex-[1] scale-100")}`}
+                                        flex-1 min-w-0 max-w-500 will-change-transform px-3 py-1.5 overflow-hidden
+                            ${isMobile ? (isHovered ? "flex-[1.8] scale-100 aspect-[36/25] justify-evenly" : "flex-[0.35] scale-100 aspect-[36/25] justify-center") : (isHovered ? "flex-[1.5] scale-105 aspect-[7/3] justify-evenly" : "flex-[1] scale-100 aspect-[7/3] justify-center")}`}
                             style={{ transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)" }}
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
                         >
-                            <h3 className={`text-[min(1rem,1.5vw)] font-semibold transition-all duration-500 ease-in-out ${isHovered ? "scale-100" : "scale-50"}`}>
+                            <h3 className={`text-[min(1.4rem,1.8vw)] font-semibold transition-all duration-500 ease-in-out`}>
                                 {course.name}
                             </h3>
-
+    
                             <p
-                                className={`text-[#213555] mt-2 transition-all ease-in-out text-sm
-                                ${isHovered ? "opacity-100 translate-y-0 scale-100 max-h-[100px] duration-700 overflow-visible" : "opacity-0 translate-y-2 scale-90 max-h-0 duration-500 overflow-hidden"}`}
+                                className={`text-[#213555] transition-all ease-in-out text-lg
+                                ${isHovered ? "opacity-100 translate-y-0 scale-100 max-h-[120px] duration-700 overflow-visible" : "opacity-0 translate-y-2 scale-90 max-h-0 duration-500 overflow-hidden"}`}
+                                style={{
+                                    whiteSpace: "normal",
+                                    textAlign: "center",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                }}
                             >
                                 {course.description}
                             </p>
@@ -61,8 +71,7 @@ const Courses = () => {
                 })}
             </div>
         );
-    };
-
+    };    
     return <CourseList courses={courses} />;
 };
 
