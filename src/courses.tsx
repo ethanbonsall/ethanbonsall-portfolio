@@ -42,13 +42,13 @@ const Courses = () => {
                             className={`relative flex flex-col items-center text-center border-1
                                         bg-[#d8c4b6] text-[#213555] rounded-xl transition-all duration-700 ease-in-out
                                         flex-1 min-w-0 max-w-500 will-change-transform px-3 py-1.5 overflow-hidden
-                            ${isMobile ? (isHovered ? "flex-[2] scale-100 aspect-[36/25] justify-around" : "flex-[0.35] scale-100 aspect-[36/25] justify-center") : (isHovered ? "flex-[1.4] scale-105 aspect-[6/3] justify-around" : "flex-[0.4] scale-100 aspect-[6/3] justify-center")}`}
+                            ${isMobile ? (isHovered ? "flex-[2] scale-100 aspect-[36/25] justify-around" : "flex-[0.35] scale-100 aspect-[36/25] justify-center") : (isHovered ? "flex-[1.5] scale-105 aspect-[6/3] justify-around" : "flex-[0.5] scale-100 aspect-[6/3] justify-center")}`}
                             style={{ transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)" }}
                             onMouseEnter={() =>  setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null) }
                         >
                             <h3 className={`text-[#213555] font-semibold transition-all duration-500 ease-in-out 
-                                ${hoveredIndex !== null ? (isHovered ? "text-[min(1.4rem,1.8vw)]" : "text-[min(1.0rem,1.4vw)]") : "text-[min(1.4rem,1.8vw)]"}`}>
+                                ${hoveredIndex !== null ? (isHovered ? "text-[min(1.4rem,1.8vw)] underline" : "text-[min(0.8rem,1.2vw)]") : "text-[min(1.4rem,1.8vw)]"}`}>
                                 {course.name}
                             </h3>
     
