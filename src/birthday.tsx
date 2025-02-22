@@ -12,12 +12,8 @@ export default function BirthdayPage() {
     return localStorage.getItem("spotifyToken") || null;
   });
 
-  const playlistId = "6yoTyxeEYmrn0GQ0rpATGv";
+ 
   const authorizationHeader = `Basic ${btoa(`${clientId}:${clientSecret}`)}`;
-  const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-  const CLIENT_ID = clientId;
-  const REDIRECT_URI = "http://192.168.86.29:4260/birthday";
-  const RESPONSE_TYPE = "token";
 
   useEffect(() => {
     const fetchAccessToken = async () => {
@@ -55,7 +51,7 @@ export default function BirthdayPage() {
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
-        const response = await fetch("http://192.168.86.29:4261/api/photos");
+        const response = await fetch("https://ethanbonsall.com/api/photos");
         const data = await response.json();
         setPhotos(data); // Assuming API returns an array of photo paths
       } catch (error) {
@@ -77,7 +73,7 @@ export default function BirthdayPage() {
     formData.append("photo", files[0]); // Only upload the first file
   
     try {
-      const response = await fetch("http://192.168.86.29:4261/api/photos", {
+      const response = await fetch("https://ethanbonsall.com/api/photos", {
         method: "POST",
         body: formData,
       });
@@ -128,7 +124,7 @@ export default function BirthdayPage() {
     setSongs(updatedSongs);
   
     try {
-      const response = await fetch("http://192.168.86.29:4261/api/songs", {
+      const response = await fetch("https://ethanbonsall.com/api/songs", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -198,7 +194,7 @@ export default function BirthdayPage() {
         {photos.map((photo, index) => (
           <div key={index} className="overflow-hidden border rounded-lg">
             <img
-              src={`http://192.168.86.29:4261${photo}`}
+              src={`https://ethanbonsall.com${photo}`}
               alt="Uploaded"
               className="w-full h-full object-cover rounded-lg"
             />
