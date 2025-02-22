@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const CLIENT_ID = "a2e6aeb9971e4287a1985803be608d24";
-const REDIRECT_URI = "https://ethanbonsall.com/birthdaysubmit";
+const REDIRECT_URI = "https://www.ethanbonsall.com/birthdaysubmit";
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const RESPONSE_TYPE = "token";
 const PLAYLIST_ID = "6yoTyxeEYmrn0GQ0rpATGv";
@@ -79,7 +79,7 @@ export default function BirthdaySubmitPage() {
 
   const uploadStoredSongs = async (userToken: string) => {
     try {
-      const response = await fetch("https://ethanbonsall.com/api/songs");
+      const response = await fetch("https://www.ethanbonsall.com/api/songs");
       if (!response.ok) {
         console.error("Failed to fetch stored songs");
         return;
