@@ -95,7 +95,7 @@ const Courses = () => {
 
               <p
                 className={`text-[#213555] transition-all ease-in-out
-    ${isHovered ? "opacity-100 translate-y-0 scale-100 max-h-[240px] duration-700 overflow- mt-3" : "opacity-0 translate-y-2 scale-90 max-h-0 duration-500 overflow-hidden"}`}
+    ${isHovered ? "opacity-100 translate-y-0 scale-100 max-h-[240px] duration-800 overflow- mt-3" : "opacity-0 translate-y-2 scale-90 max-h-0 duration-500 overflow-hidden"}`}
                 style={{
                   fontSize: !isMobile ? "clamp(0.8rem, 1vw, 1.6rem)" : "clamp(0.6rem,1.6vw,1.8rem", // Ensures text grows properly
                   maxWidth: "90%", // Prevents tiny text inside a massive boxs
