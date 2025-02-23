@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Upload } from "lucide-react";
-import { supabase } from "./utils/supabaseClient";
+import { supabase } from "./utils/supabaseClient.ts";
 
 export default function BirthdayPage() {
   const [, setSongs] = useState<any[]>([]);
