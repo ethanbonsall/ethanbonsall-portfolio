@@ -1,4 +1,4 @@
-import { supabase } from "../../supabaseClient.js";
+import { supabase } from "../../supabaseClient.ts";
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
