@@ -329,14 +329,14 @@ export default function BirthdayPage() {
 
           {/* Photo Carousel */}
           {photos.length > 0 ? (
-            <div className="relative border border-black bg-gray-200 p-2 flex items-center justify-center">
+            <div className="relative border border-black bg-gray-200 p-2 flex items-center justify-center h-[200px]">
               <button
                 onClick={handlePrevPhoto}
                 className="absolute left-2 text-black text-lg"
               >
                 ◀
               </button>
-              <div className="max-w-full max-h-[500px] flex items-center justify-center">
+              <div className="w-full h-full flex items-center justify-center">
                 <img
                   src={photos[currentPhotoIndex]}
                   alt="Uploaded"
