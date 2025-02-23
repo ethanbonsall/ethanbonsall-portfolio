@@ -1,5 +1,3 @@
-const clientId = "a2e6aeb9971e4287a1985803be608d24";
-const clientSecret = "cd6215638ad643acb1b251ce49139db0";
 import { useState, useEffect } from "react";
 import { Upload } from "lucide-react";
 import { supabase } from "./utils/supabaseClient";
@@ -14,8 +12,6 @@ export default function BirthdayPage() {
   const [accessToken, setAccessToken] = useState<string | null>(() => {
     return localStorage.getItem("spotifyToken") || null;
   });
-
-  const authorizationHeader = `Basic ${btoa(`${clientId}:${clientSecret}`)}`;
 
   useEffect(() => {
     const fetchAccessToken = async () => {
