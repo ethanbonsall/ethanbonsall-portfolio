@@ -12,6 +12,8 @@ export default function BirthdayPage() {
   const [accessToken, setAccessToken] = useState<string | null>(() => {
     return localStorage.getItem("spotifyToken") || null;
   });
+  const [showDropdown, setShowDropdown] = useState(false);
+
 
   useEffect(() => {
     const fetchAccessToken = async () => {
@@ -117,6 +119,7 @@ export default function BirthdayPage() {
 
     const data = await response.json();
     setSearchResults(data.tracks.items || []);
+    setShowDropdown(true);
   };
 
   const addSongToList = async (song: { id: any; name: any; artists: any[]; uri: any }) => {
@@ -124,6 +127,7 @@ export default function BirthdayPage() {
       console.error("Access token is missing");
       return;
     }
+    setShowDropdown(false);
   
     try {
       // Fetch the current playlist songs
@@ -176,73 +180,72 @@ export default function BirthdayPage() {
     }
   };
   
-  
-  
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6 flex flex-col items-center">
-      <h1 className="text-4xl font-bold mb-4">Ethan's Birthday Rager</h1>
-      <p className="text-xl mb-2">February 28, 8:00 PM</p>
-      <p className="text-lg mb-6">508 Chapel Street</p>
+    <div className="min-h-screen bg-gray-700 flex items-center justify-center p-6">
+      {/* Windows 95 Window */}
+      <div className="w-[500px] border border-black bg-gray-300 shadow-[4px_4px_0px_black]">
+        {/* Title Bar */}
+        <div className="flex items-center justify-between bg-gray-500 px-2 py-1 border-b border-black">
+          <span className="text-xs font-bold text-white">Birthday Rager</span>
+          <div className="flex space-x-1">
+            <button className="w-3 h-3 bg-gray-800 border border-white"></button>
+            <button className="w-3 h-3 bg-gray-800 border border-white"></button>
+            <button className="w-3 h-3 bg-red-600 border border-white"></button>
+          </div>
+        </div>
 
-      <div className="w-full max-w-md">
-        <input
-          type="text"
-          placeholder="Search for a song..."
-          className="mb-2 p-2 border rounded w-full"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button
-          onClick={handleSearch}
-          className="w-full mb-6 bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Search
-        </button>
-      </div>
+        {/* Body */}
+        <div className="p-4 font-[Arial] text-black">
+          <h1 className="text-2xl font-bold text-center text-red-600 drop-shadow-[2px_2px_0px_white]">
+            You Know It's a Party If...
+          </h1>
+          <p className="text-center text-sm mb-2">February 28, 8:00 PM</p>
+          <p className="text-center text-sm mb-6">508 Chapel Street</p>
 
-      <div className="w-full max-w-md">
-        {searchResults.map((song) => (
-          <div
-            key={song.id}
-            className="mb-2 p-2 border rounded bg-gray-800 flex justify-between items-center"
-          >
-            <span>
-              {song.name} - {song.artists[0].name}
-            </span>
+          {/* Search Box */}
+          <div className="border border-black bg-gray-200 p-2">
+            <input
+              type="text"
+              placeholder="Search for a song..."
+              className="w-full p-1 border border-black bg-white text-sm"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
             <button
-              onClick={() => addSongToList(song)}
-              className="bg-green-500 px-2 py-1 rounded"
+              onClick={() => {}}
+              className="w-full mt-2 bg-gray-300 border border-black py-1 
+              shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
+              hover:bg-gray-400 
+              active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] 
+              active:translate-y-[1px] active:translate-x-[1px]"
             >
-              +
+              Search
             </button>
           </div>
-        ))}
-      </div>
 
-      <div className="w-full max-w-md">
-        <label className="flex items-center space-x-2 cursor-pointer bg-gray-700 px-4 py-2 rounded-lg">
-          <Upload size={20} />
-          <span>Upload Photos</span>
-          <input
-            type="file"
-            multiple
-            accept="image/*"
-            className="hidden"
-            onChange={handleFileUpload}
-          />
-        </label>
-      </div>
-
-      <div className="mt-6 grid grid-cols-3 gap-4">
-        {photos.map((photo, index) => (
-          <div key={index} className="overflow-hidden border rounded-lg">
-            <img
-              src={photo}
-              alt="Uploaded"
-              className="w-full h-full object-cover rounded-lg"
-            />
+          {/* Upload Button */}
+          <div className="mt-4 border border-black bg-gray-200 p-2">
+            <label className="flex items-center space-x-2 cursor-pointer border border-black bg-gray-300 px-4 py-1 
+              shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
+              hover:bg-gray-400 
+              active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] 
+              active:translate-y-[1px] active:translate-x-[1px]"
+            >
+              <Upload className="w-4 h-4" />
+              <span>Upload Photos</span>
+              <input type="file" multiple accept="image/*" className="hidden" onChange={handleFileUpload} />
+            </label>
           </div>
-        ))}
+
+          {/* Uploaded Photos */}
+          <div className="mt-6 grid grid-cols-3 gap-2 border border-black p-3 bg-gray-200">
+            {photos.map((photo, index) => (
+              <div key={index} className="overflow-hidden border border-black">
+                <img src={photo} alt="Uploaded" className="w-full h-full object-cover" />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
