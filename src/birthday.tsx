@@ -41,7 +41,7 @@ export default function BirthdayPage() {
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
-        const response = await fetch("https://www.ethanbonsall.com/api/photos");
+        const response = await fetch("https://www.ethanbonsall.com/api/photos/");
   
         if (!response.ok) {
           throw new Error(`Server responded with ${response.status}`);
@@ -77,7 +77,8 @@ export default function BirthdayPage() {
       return null;
     }
   
-    return supabase.storage.from("photos").getPublicUrl(filePath).data.publicUrl; // ✅ Corrected
+    const { data } = supabase.storage.from("photos").getPublicUrl(filePath);
+    return data.publicUrl;
   };
   
   

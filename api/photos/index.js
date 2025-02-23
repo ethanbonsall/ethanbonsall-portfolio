@@ -12,10 +12,13 @@ export default async function handler(req, res) {
 
     if (error) throw error;
 
-    const photoUrls = data.map((file) => ({
-      name: file.name,
-      url: supabase.storage.from("photos").getPublicUrl(`uploads/${file.name}`).publicUrl,
-    }));
+    const photoUrls = data.map((file) => {
+      const { data: urlData } = supabase.storage.from("photos").getPublicUrl(`uploads/${file.name}`);
+      return {
+        name: file.name,
+        url: urlData.publicUrl, 
+      };
+    });
 
     res.status(200).json(photoUrls);
   } catch (error) {
