@@ -312,13 +312,13 @@ export default function BirthdayPage() {
           </div>
 
           {/* Upload Button */}
-          <div className="mt-4 border border-black bg-gray-200 p-2">
+          <div className="mt-4 w-full max-w-md border border-black bg-gray-200 p-2">
             <label
               className="flex items-center space-x-2 cursor-pointer border border-black bg-gray-300 px-4 py-1 
-              shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
-              hover:bg-gray-400 
-              active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] 
-              active:translate-y-[1px] active:translate-x-[1px]"
+    shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
+    hover:bg-gray-400 
+    active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] 
+    active:translate-y-[1px] active:translate-x-[1px] w-full"
             >
               <span>Upload Photos</span>
               <input
@@ -333,7 +333,7 @@ export default function BirthdayPage() {
 
           {/* Photo Carousel */}
           {photos.length > 0 ? (
-            <div className="relative border border-black bg-gray-200 p-2 flex items-center justify-center h-[200px]">
+            <div className="relative w-full max-w-md border border-black bg-gray-200 p-2 flex items-center justify-center h-[200px]">
               <button
                 onClick={handlePrevPhoto}
                 className="absolute left-2 text-black text-lg"
@@ -355,7 +355,9 @@ export default function BirthdayPage() {
               </button>
             </div>
           ) : (
-            <p className="text-center text-sm">No photos uploaded yet.</p>
+            <p className="text-center text-sm w-full max-w-md">
+              No photos uploaded yet.
+            </p>
           )}
         </div>
         {/* "See Playlist" Button */}
