@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { error } = await supabase.from("songs").delete().gte("id", 0); // Delete all
+    const { error } = await supabase.from("songs").delete().neq("id", "");    // Delete all
 
     if (error) throw error;
 

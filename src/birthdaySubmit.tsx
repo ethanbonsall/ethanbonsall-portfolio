@@ -108,7 +108,7 @@ export default function BirthdaySubmitPage() {
         return;
       }
   
-      const uris = storedSongs.map((song: { uri?: string }) => song.uri).filter(uri => uri);
+      const uris = storedSongs.map((song: { uri?: string }) => song.uri).filter((uri: any) => uri);
       if (uris.length === 0) {
         console.error("Stored songs are missing URIs");
         return;
