@@ -8,8 +8,8 @@
 
     /* Bundler mode */
     "moduleResolution": "node",
-    "allowImportingTsExtensions": false,
-    "noEmit": false,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "jsx": "react-jsx",
