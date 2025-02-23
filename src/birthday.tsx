@@ -3,7 +3,7 @@ import { Upload } from "lucide-react";
 import { supabase } from "./utils/supabaseClient";
 
 export default function BirthdayPage() {
-  const [songs, setSongs] = useState<any[]>([]);
+  const [, setSongs] = useState<any[]>([]);
   const [photos, setPhotos] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<
@@ -23,8 +23,10 @@ export default function BirthdayPage() {
           setAccessToken(data.access_token);
           localStorage.setItem("spotifyToken", data.access_token);
           
-          // Refresh token before it expires
-          setTimeout(fetchAccessToken, (data.expires_in - 60) * 1000);
+          if (data.expires_in) {
+            setTimeout(fetchAccessToken, (data.expires_in - 60) * 1000);
+          }
+          
         } else {
           console.error("Failed to fetch access token", data);
         }
@@ -41,19 +43,19 @@ export default function BirthdayPage() {
       try {
         const response = await fetch("https://www.ethanbonsall.com/api/photos");
   
-        // Check if response is OK (status 200-299)
         if (!response.ok) {
           throw new Error(`Server responded with ${response.status}`);
         }
   
         const data = await response.json();
   
-        // Ensure data is an array before setting state
         if (!Array.isArray(data)) {
           throw new Error("Invalid response format");
         }
   
-        setPhotos(data);
+        // ✅ Extract URLs properly
+        setPhotos(Array.isArray(data) ? data.map((photo) => photo.url) : []);
+
       } catch (error) {
         console.error("Error fetching photos:", error);
         setPhotos([]); // Prevents .map() errors
@@ -62,6 +64,7 @@ export default function BirthdayPage() {
   
     fetchPhotos();
   }, []);
+  
   
 
   const uploadPhoto = async (file: File) => {
@@ -74,18 +77,22 @@ export default function BirthdayPage() {
       return null;
     }
   
-    return supabase.storage.from("photos").getPublicUrl(filePath).data.publicUrl;
+    return supabase.storage.from("photos").getPublicUrl(filePath).data.publicUrl; // ✅ Corrected
   };
+  
   
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files || files.length === 0) return;
   
-    const uploadedPhotoUrl = await uploadPhoto(files[0]);
-    if (uploadedPhotoUrl) {
-      setPhotos((prevPhotos) => [...prevPhotos, uploadedPhotoUrl]);
-    }
+    const uploadedPhotos = (await Promise.all(
+      Array.from(files).map(async (file) => uploadPhoto(file).catch(() => null))
+    )).filter((url): url is string => url !== null);
+    
+  
+    setPhotos((prevPhotos) => [...prevPhotos, ...uploadedPhotos.filter((url): url is string => url !== null)]);
   };
+  
 
   const handleSearch = async () => {
     if (accessToken === null) {
@@ -111,15 +118,15 @@ export default function BirthdayPage() {
     setSearchResults(data.tracks.items || []);
   };
 
-  const addSongToList = async (song: { id: any; name: any; artists: any; uri: any; }) => {
+  const addSongToList = async (song: { id: any; name: any; artists: any[]; uri: any; }) => {
     const simplifiedSong = {
       id: song.id,
       name: song.name,
-      artists: JSON.stringify(song.artists.map((artist: { name: any; }) => artist.name)), // Store as JSON string
-      uri: song.uri
+      artists: song.artists.map((artist) => artist.name).join(", "), // ✅ Store as string
+      uri: song.uri,
     };
   
-    setSongs([...songs, simplifiedSong]);
+    setSongs((prevSongs) => [...prevSongs, simplifiedSong]);
   
     try {
       const response = await fetch("https://www.ethanbonsall.com/api/songs", {
@@ -127,7 +134,7 @@ export default function BirthdayPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify([simplifiedSong]), // Send as an array
+        body: JSON.stringify(simplifiedSong), // ✅ Send as a single object
       });
   
       if (!response.ok) {
@@ -138,7 +145,7 @@ export default function BirthdayPage() {
     }
   };
   
-
+  
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6 flex flex-col items-center">
       <h1 className="text-4xl font-bold mb-4">Ethan's Birthday Rager</h1>
