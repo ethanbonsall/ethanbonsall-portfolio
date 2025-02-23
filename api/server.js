@@ -1,4 +1,4 @@
-import { supabase } from "./supabaseClient.js";
+import { supabase } from "../supabaseClient.js";
 import multer from "multer";
 import { Readable } from "stream";
 
