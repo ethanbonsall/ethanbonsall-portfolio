@@ -228,10 +228,11 @@ export default function BirthdaySubmitPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="text-black text-lg font-bold mb-2">
+              <button className="text-black text-lg font-bold mb-2 transition-colors duration-200 hover:bg-gray-200">
                 📂 Playlist Songs
               </button>
             </a>
+
             {playlistSongs.length === 0 ? (
               <p className="text-gray-700">No songs in the playlist.</p>
             ) : (
