@@ -158,6 +158,7 @@ export default function BirthdaySubmitPage() {
       <h1 className="text-4xl font-bold mb-4 text-center bg-gray-300 text-black p-2 border-2 border-black shadow-md">
         Ethan's Birthday Rager 🎶
       </h1>
+
       {!token ? (
         <button
           onClick={handleLogin}
@@ -167,6 +168,7 @@ export default function BirthdaySubmitPage() {
         </button>
       ) : (
         <>
+          {/* Search Input */}
           <input
             type="text"
             placeholder="Search for a song..."
@@ -181,48 +183,39 @@ export default function BirthdaySubmitPage() {
             Search
           </button>
 
-          <div className="relative w-full max-w-md mt-4">
-            <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="bg-gray-300 text-black border-2 border-black p-2 shadow-md active:shadow-inner w-full text-left"
-            >
-              📂 Show Playlist Songs
-            </button>
-            {dropdownOpen && (
-              <div
-                ref={dropdownRef}
-                className="absolute bg-gray-100 text-black p-2 border-2 border-black mt-1 w-full max-h-60 overflow-y-auto z-10 shadow-md"
-              >
-                {playlistSongs.length === 0 ? (
-                  <p className="text-gray-700">No songs in the playlist.</p>
-                ) : (
-                  playlistSongs.map((song) => (
-                    <div key={song.id} className="p-2 border-b border-black last:border-b-0">
-                      {song.name} - {song.artists[0].name}
-                    </div>
-                  ))
-                )}
-              </div>
+          {/* Search Results (Dropdown with Scroll) */}
+          <div className="relative w-full max-w-md mt-2 bg-gray-100 text-black p-2 border-2 border-black shadow-md max-h-60 overflow-y-auto">
+            {searchResults.length === 0 ? (
+              <p className="text-gray-700">No results found.</p>
+            ) : (
+              searchResults.map((song) => (
+                <div key={song.id} className="p-2 border-b border-black last:border-b-0 flex justify-between items-center">
+                  <span>{song.name} - {song.artists[0].name}</span>
+                  {!playlistSongs.some((s) => s.uri === song.uri) && (
+                    <button
+                      onClick={() => addSongToPlaylist(song)}
+                      className="bg-green-500 px-2 py-1 border-2 border-black shadow-md active:shadow-inner"
+                    >
+                      +
+                    </button>
+                  )}
+                </div>
+              ))
             )}
           </div>
 
+          {/* Always Open Playlist */}
           <div className="w-full max-w-md mt-4 bg-gray-300 border-2 border-black p-2 shadow-md">
-            {searchResults.map((song) => (
-              <div
-                key={song.id}
-                className="p-2 border-b border-black last:border-b-0 flex justify-between items-center"
-              >
-                <span className="text-black">{song.name} - {song.artists[0].name}</span>
-                {!playlistSongs.some((s) => s.uri === song.uri) && (
-                  <button
-                    onClick={() => addSongToPlaylist(song)}
-                    className="bg-green-500 px-2 py-1 border-2 border-black shadow-md active:shadow-inner"
-                  >
-                    +
-                  </button>
-                )}
-              </div>
-            ))}
+            <h2 className="text-lg font-bold text-black mb-2">📂 Playlist Songs</h2>
+            {playlistSongs.length === 0 ? (
+              <p className="text-gray-700">No songs in the playlist.</p>
+            ) : (
+              playlistSongs.map((song) => (
+                <div key={song.id} className="p-2 border-b border-black last:border-b-0">
+                  {song.name} - {song.artists[0].name}
+                </div>
+              ))
+            )}
           </div>
         </>
       )}
