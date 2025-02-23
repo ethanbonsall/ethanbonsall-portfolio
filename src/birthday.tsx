@@ -16,7 +16,7 @@ export default function BirthdayPage() {
   const [showRSVP, setShowRSVP] = useState(true);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [addedSongs] = useState<string[]>([]);
+  const [existingSongs, setExistingSongs] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const fetchAccessToken = async () => {
@@ -54,14 +54,29 @@ export default function BirthdayPage() {
 
     if (showDropdown) {
       document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showDropdown]);
+
+  useEffect(() => {
+    // Fetch songs from the API to determine which ones should not show the "+"
+    const fetchExistingSongs = async () => {
+      try {
+        const response = await fetch("/api/songs");
+        if (!response.ok) throw new Error("Failed to fetch existing songs");
+
+        const data = await response.json();
+        setExistingSongs(new Set(data.map((song: any) => song.id))); // Store song IDs in a Set
+      } catch (error) {
+        console.error("Error fetching existing songs:", error);
+      }
+    };
+
+    fetchExistingSongs();
+  }, []);
 
   useEffect(() => {
     const fetchPhotos = async () => {
@@ -296,7 +311,7 @@ export default function BirthdayPage() {
                       <span className="text-xs">
                         {song.name} - {song.artists[0].name}
                       </span>
-                      {!addedSongs.includes(song.id) && (
+                      {!existingSongs.has(song.id) && ( // Hide "+" if the song is in /api/songs
                         <button
                           className="border border-black bg-gray-300 px-2 py-1 text-xs shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
                     hover:bg-gray-400 active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] active:translate-y-[1px] active:translate-x-[1px]"
