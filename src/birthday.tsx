@@ -259,7 +259,7 @@ export default function BirthdayPage() {
           <p className="text-center text-sm mb-6">508 Chapel Street</p>
 
           {/* Search Box */}
-          <div className=" relative border border-black bg-gray-200 p-2">
+          <div className="relative w-full max-w-md border border-black bg-gray-200 p-2">
             <input
               type="text"
               placeholder="Search for a song..."
@@ -270,10 +270,10 @@ export default function BirthdayPage() {
             <button
               onClick={handleSearch}
               className="w-full mt-2 bg-gray-300 border border-black py-1 
-              shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
-              hover:bg-gray-400 
-              active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] 
-              active:translate-y-[1px] active:translate-x-[1px]"
+        shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
+        hover:bg-gray-400 
+        active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] 
+        active:translate-y-[1px] active:translate-x-[1px]"
             >
               Search
             </button>
@@ -282,7 +282,7 @@ export default function BirthdayPage() {
             {showDropdown && (
               <div
                 ref={dropdownRef}
-                className="absolute w-full border border-black bg-white mt-1 z-10 shadow-lg max-h-60 overflow-y-auto"
+                className="absolute left-0 w-full max-w-md border border-black bg-white mt-1 z-10 shadow-lg max-h-60 overflow-y-auto"
               >
                 {searchResults.length === 0 ? (
                   <p className="text-gray-700 p-2">No results found.</p>
@@ -299,7 +299,7 @@ export default function BirthdayPage() {
                       {!addedSongs.includes(song.id) && (
                         <button
                           className="border border-black bg-gray-300 px-2 py-1 text-xs shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
-                hover:bg-gray-400 active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] active:translate-y-[1px] active:translate-x-[1px]"
+                    hover:bg-gray-400 active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] active:translate-y-[1px] active:translate-x-[1px]"
                         >
                           +
                         </button>
