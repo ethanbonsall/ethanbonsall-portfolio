@@ -127,7 +127,7 @@ export default function BirthdaySubmitPage() {
   
       if (spotifyResponse.ok) {
         console.log("✅ Successfully added stored songs to the playlist");
-        await fetch("https://www.ethanbonsall.com/api/songs", { method: "DELETE" });
+        await fetch("https://www.ethanbonsall.com/api/songs/delete", { method: "DELETE" });
       } else {
         console.error("❌ Failed to upload stored songs to Spotify", await spotifyResponse.json());
       }
