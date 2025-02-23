@@ -51,16 +51,15 @@ export default function BirthdayPage() {
         setShowDropdown(false);
       }
     };
-  
+
     if (showDropdown) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-  
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showDropdown]);
-  
 
   useEffect(() => {
     // Fetch songs from the API to determine which ones should not show the "+"
@@ -191,7 +190,7 @@ export default function BirthdayPage() {
     setShowDropdown(false);
 
     try {
-      // Fetch the current playlist songs
+      // Fetch the current songs
       const playlistResponse = await fetch(
         "https://api.spotify.com/v1/playlists/6yoTyxeEYmrn0GQ0rpATGv/tracks",
         {
@@ -254,7 +253,7 @@ export default function BirthdayPage() {
     <div className="min-h-screen bg-gray-700 flex items-center justify-center p-6">
       {/* Window Frame */}
       {showRSVP && <RSVPModal onClose={() => setShowRSVP(false)} />}
-      <div className="w-[500px] border border-black bg-gray-300 shadow-[4px_4px_0px_black]">
+      <div className=" border border-black w-3/4 max-w-[600px] bg-gray-300 shadow-[4px_4px_0px_black]">
         {/* Title Bar */}
         <div className="flex items-center justify-between bg-gray-500 px-2 py-1 border-b border-black">
           <span className="text-xs font-bold text-white">
@@ -276,11 +275,11 @@ export default function BirthdayPage() {
           <p className="text-center text-sm mb-6">508 Chapel Street</p>
 
           {/* Search Box */}
-          <div className="relative w-full max-w-md border border-black bg-gray-200 p-2">
+          <div className="relative w-full max-w-md mx-auto border border-black bg-gray-200 p-2">
             <input
               type="text"
               placeholder="Search for a song..."
-              className="w-full p-1 border border-black bg-white text-sm"
+              className="w-full p-1 border border-black bg-white text-sm text-center focus:outline-none focus:ring-2 focus:ring-gray-500"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -308,15 +307,18 @@ export default function BirthdayPage() {
                     <div
                       key={song.id}
                       className="p-2 border-b border-black last:border-b-0 flex justify-between items-center hover:bg-gray-400 cursor-pointer"
-                      onClick={(event) => {addSongToList(song); event.stopPropagation();}}
+                      onClick={(event) => {
+                        addSongToList(song);
+                        event.stopPropagation();
+                      }}
                     >
                       <span className="text-xs">
                         {song.name} - {song.artists[0].name}
                       </span>
-                      {!existingSongs.has(song.id) && ( // Hide "+" if the song is in /api/songs
+                      {!existingSongs.has(song.id) && (
                         <button
                           className="border border-black bg-gray-300 px-2 py-1 text-xs shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
-                    hover:bg-gray-400 active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] active:translate-y-[1px] active:translate-x-[1px]"
+                hover:bg-gray-400 active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] active:translate-y-[1px] active:translate-x-[1px]"
                         >
                           +
                         </button>
@@ -329,13 +331,13 @@ export default function BirthdayPage() {
           </div>
 
           {/* Upload Button */}
-          <div className="mt-4 w-full max-w-md border border-black bg-gray-200 p-2">
+          <div className="mt-4 w-full max-w-md mx-auto border border-black bg-gray-200 p-2">
             <label
               className="flex items-center space-x-2 cursor-pointer border border-black bg-gray-300 px-4 py-1 
-    shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
-    hover:bg-gray-400 
-    active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] 
-    active:translate-y-[1px] active:translate-x-[1px] w-full"
+        shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
+        hover:bg-gray-400 
+        active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] 
+        active:translate-y-[1px] active:translate-x-[1px] w-full"
             >
               <span>Upload Photos</span>
               <input
@@ -350,7 +352,7 @@ export default function BirthdayPage() {
 
           {/* Photo Carousel */}
           {photos.length > 0 ? (
-            <div className="relative w-full max-w-md border border-black bg-gray-200 p-2 flex items-center justify-center h-[200px]">
+            <div className="relative w-full max-w-md mx-auto border border-black bg-gray-200 p-2 flex items-center justify-center h-[200px]">
               <button
                 onClick={handlePrevPhoto}
                 className="absolute left-2 text-black text-lg"
@@ -372,11 +374,12 @@ export default function BirthdayPage() {
               </button>
             </div>
           ) : (
-            <p className="text-center text-sm w-full max-w-md">
+            <p className="text-center text-sm w-full max-w-md mx-auto">
               No photos uploaded yet.
             </p>
           )}
         </div>
+
         {/* "See Playlist" Button */}
         <div className="mt-4 flex justify-center">
           <a
