@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Upload } from "lucide-react";
 import supabase from "./supabaseClient";
 
 export default function BirthdayPage() {
