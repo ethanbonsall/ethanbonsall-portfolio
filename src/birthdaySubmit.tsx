@@ -13,21 +13,31 @@ export default function BirthdaySubmitPage() {
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    const hash = window.location.hash;
-    let storedToken = localStorage.getItem("spotifyToken");
-
-    if (!storedToken && hash) {
-      const params = new URLSearchParams(hash.substring(1));
-      storedToken = params.get("access_token");
-      if (storedToken) {
-        localStorage.setItem("spotifyToken", storedToken);
-        setToken(storedToken);
-        uploadStoredSongs(storedToken);
+    const fetchAccessToken = async () => {
+      try {
+        const response = await fetch("/api/spotify-token");
+        const data = await response.json();
+  
+        if (response.ok) {
+          setToken(data.access_token);
+          localStorage.setItem("spotifyToken", data.access_token);
+  
+          // Schedule token refresh before it expires
+          if (data.expires_in) {
+            setTimeout(fetchAccessToken, (data.expires_in - 60) * 1000);
+          }
+  
+          // Call uploadStoredSongs after login
+          uploadStoredSongs(data.access_token);
+        } else {
+          console.error("Failed to fetch access token", data);
+        }
+      } catch (error) {
+        console.error("Error fetching access token:", error);
       }
-    } else if (storedToken) {
-      setToken(storedToken);
-      uploadStoredSongs(storedToken);
-    }
+    };
+  
+    fetchAccessToken();
   }, []);
 
   const handleLogin = () => {
