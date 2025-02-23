@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 const CLIENT_ID = "a2e6aeb9971e4287a1985803be608d24";
 const REDIRECT_URI = "https://www.ethanbonsall.com/birthdaysubmit";
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-const RESPONSE_TYPE = "token";
 const PLAYLIST_ID = "6yoTyxeEYmrn0GQ0rpATGv";
 
 export default function BirthdaySubmitPage() {
@@ -14,8 +13,13 @@ export default function BirthdaySubmitPage() {
 
   useEffect(() => {
     const fetchAccessToken = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get("code");
+  
+      if (!code) return;
+  
       try {
-        const response = await fetch("/api/spotify-token");
+        const response = await fetch(`/api/auth-token?code=${code}`);
         const data = await response.json();
   
         if (response.ok) {
@@ -39,9 +43,10 @@ export default function BirthdaySubmitPage() {
   
     fetchAccessToken();
   }, []);
+  
 
   const handleLogin = () => {
-    window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=playlist-modify-public`;
+    window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=playlist-modify-public playlist-modify-private`;
   };
 
   const handleSearch = async () => {
