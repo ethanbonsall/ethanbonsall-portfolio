@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import supabase from "./supabaseClient";
+import RSVPModal from "./rsvp";
 
 export default function BirthdayPage() {
   const [, setSongs] = useState<any[]>([]);
@@ -12,6 +13,7 @@ export default function BirthdayPage() {
     return localStorage.getItem("spotifyToken") || null;
   });
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showRSVP, setShowRSVP] = useState(true);
 
 
   useEffect(() => {
@@ -179,9 +181,10 @@ export default function BirthdayPage() {
     }
   };
   
-  return (
-    <div className="min-h-screen bg-gray-700 flex items-center justify-center p-6">
+  return (    
+  <div className="min-h-screen bg-gray-700 flex items-center justify-center p-6">
       {/* Window Frame */}
+      {showRSVP && <RSVPModal onClose={() => setShowRSVP(false)} />}
       <div className="w-[500px] border border-black bg-gray-300 shadow-[4px_4px_0px_black]">
         {/* Title Bar */}
         <div className="flex items-center justify-between bg-gray-500 px-2 py-1 border-b border-black">

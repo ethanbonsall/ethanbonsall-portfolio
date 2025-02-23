@@ -5,3 +5,19 @@
 .image-hover:hover {
   transform: scale(1.3);
 }
+
+.retro-window {
+  font-family: "MS Sans Serif", Tahoma, Geneva, sans-serif;
+  box-shadow: 4px 4px 0px #222;
+  border-width: 3px;
+}
+
+button {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+button:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
