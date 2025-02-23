@@ -6,7 +6,6 @@ const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const PLAYLIST_ID = "6yoTyxeEYmrn0GQ0rpATGv";
 
 export default function BirthdaySubmitPage() {
-  
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<
     { id: string; name: string; artists: { name: string }[]; uri: string }[]
@@ -55,7 +54,10 @@ export default function BirthdaySubmitPage() {
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setDropdownOpen(false);
       }
     }
@@ -97,7 +99,10 @@ export default function BirthdaySubmitPage() {
       `https://api.spotify.com/v1/playlists/${PLAYLIST_ID}/tracks`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ uris: [song.uri] }),
       }
     );
@@ -131,7 +136,9 @@ export default function BirthdaySubmitPage() {
       if (!response.ok) return;
 
       const storedSongs = await response.json();
-      const uris = storedSongs.map((song: { uri: string }) => song.uri).filter((uri: any) => uri);
+      const uris = storedSongs
+        .map((song: { uri: string }) => song.uri)
+        .filter((uri: any) => uri);
 
       if (uris.length === 0) return;
 
@@ -139,13 +146,18 @@ export default function BirthdaySubmitPage() {
         `https://api.spotify.com/v1/playlists/${PLAYLIST_ID}/tracks`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${userToken}` },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
           body: JSON.stringify({ uris }),
         }
       );
 
       if (spotifyResponse.ok) {
-        await fetch("https://www.ethanbonsall.com/api/songs/delete", { method: "DELETE" });
+        await fetch("https://www.ethanbonsall.com/api/songs/delete", {
+          method: "DELETE",
+        });
         fetchPlaylistSongs(userToken);
       }
     } catch (error) {
@@ -189,8 +201,13 @@ export default function BirthdaySubmitPage() {
               <p className="text-gray-700">No results found.</p>
             ) : (
               searchResults.map((song) => (
-                <div key={song.id} className="p-2 border-b border-black last:border-b-0 flex justify-between items-center">
-                  <span>{song.name} - {song.artists[0].name}</span>
+                <div
+                  key={song.id}
+                  className="p-2 border-b border-black last:border-b-0 flex justify-between items-center"
+                >
+                  <span>
+                    {song.name} - {song.artists[0].name}
+                  </span>
                   {!playlistSongs.some((s) => s.uri === song.uri) && (
                     <button
                       onClick={() => addSongToPlaylist(song)}
@@ -206,12 +223,23 @@ export default function BirthdaySubmitPage() {
 
           {/* Always Open Playlist */}
           <div className="w-full max-w-md mt-4 bg-gray-300 border-2 border-black p-2 shadow-md">
-            <h2 className="text-black text-lg font-bold mb-2">📂 Playlist Songs</h2>
+            <a
+              href="https://open.spotify.com/playlist/6yoTyxeEYmrn0GQ0rpATGv"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="text-black text-lg font-bold mb-2">
+                📂 Playlist Songs
+              </button>
+            </a>
             {playlistSongs.length === 0 ? (
               <p className="text-gray-700">No songs in the playlist.</p>
             ) : (
               playlistSongs.map((song) => (
-                <div key={song.id} className=" text-black p-2 border-b border-black last:border-b-0">
+                <div
+                  key={song.id}
+                  className=" text-black p-2 border-b border-black last:border-b-0"
+                >
                   {song.name} - {song.artists[0].name}
                 </div>
               ))
