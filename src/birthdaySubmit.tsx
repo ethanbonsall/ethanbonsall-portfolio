@@ -154,10 +154,15 @@ export default function BirthdaySubmitPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6 flex flex-col items-center">
-      <h1 className="text-4xl font-bold mb-4">Ethan's Birthday Rager</h1>
+    <div className="min-h-screen bg-gray-800 text-white p-6 flex flex-col items-center font-mono">
+      <h1 className="text-4xl font-bold mb-4 text-center bg-gray-300 text-black p-2 border-2 border-black shadow-md">
+        Ethan's Birthday Rager 🎶
+      </h1>
       {!token ? (
-        <button onClick={handleLogin} className="bg-green-500 text-white px-4 py-2 rounded">
+        <button
+          onClick={handleLogin}
+          className="bg-gray-300 text-black border-2 border-black px-4 py-2 shadow-md active:shadow-inner"
+        >
           Login to Spotify
         </button>
       ) : (
@@ -167,29 +172,32 @@ export default function BirthdaySubmitPage() {
             placeholder="Search for a song..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="mb-2 p-2 border rounded w-full text-black"
+            className="mb-2 p-2 border-2 border-black bg-gray-100 text-black w-full max-w-md shadow-inner"
           />
-          <button onClick={handleSearch} className="w-full bg-blue-500 text-white px-4 py-2 rounded">
+          <button
+            onClick={handleSearch}
+            className="w-full max-w-md bg-blue-600 text-white px-4 py-2 border-2 border-black shadow-md active:shadow-inner"
+          >
             Search
           </button>
 
-          <div className="relative w-full max-w-md">
+          <div className="relative w-full max-w-md mt-4">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="bg-gray-800 text-white p-2 rounded mt-2 w-full text-left"
+              className="bg-gray-300 text-black border-2 border-black p-2 shadow-md active:shadow-inner w-full text-left"
             >
-              Show Playlist Songs
+              📂 Show Playlist Songs
             </button>
             {dropdownOpen && (
               <div
                 ref={dropdownRef}
-                className="absolute bg-gray-700 p-2 rounded mt-1 w-full max-h-60 overflow-y-auto z-10 shadow-lg"
+                className="absolute bg-gray-100 text-black p-2 border-2 border-black mt-1 w-full max-h-60 overflow-y-auto z-10 shadow-md"
               >
                 {playlistSongs.length === 0 ? (
-                  <p className="text-gray-300">No songs in the playlist.</p>
+                  <p className="text-gray-700">No songs in the playlist.</p>
                 ) : (
                   playlistSongs.map((song) => (
-                    <div key={song.id} className="p-2 border-b last:border-b-0">
+                    <div key={song.id} className="p-2 border-b border-black last:border-b-0">
                       {song.name} - {song.artists[0].name}
                     </div>
                   ))
@@ -198,17 +206,17 @@ export default function BirthdaySubmitPage() {
             )}
           </div>
 
-          <div className="w-full max-w-md mt-4">
+          <div className="w-full max-w-md mt-4 bg-gray-300 border-2 border-black p-2 shadow-md">
             {searchResults.map((song) => (
               <div
                 key={song.id}
-                className="p-2 border rounded bg-gray-800 flex justify-between items-center"
+                className="p-2 border-b border-black last:border-b-0 flex justify-between items-center"
               >
-                <span>{song.name} - {song.artists[0].name}</span>
+                <span className="text-black">{song.name} - {song.artists[0].name}</span>
                 {!playlistSongs.some((s) => s.uri === song.uri) && (
                   <button
                     onClick={() => addSongToPlaylist(song)}
-                    className="bg-green-500 px-2 py-1 rounded"
+                    className="bg-green-500 px-2 py-1 border-2 border-black shadow-md active:shadow-inner"
                   >
                     +
                   </button>
