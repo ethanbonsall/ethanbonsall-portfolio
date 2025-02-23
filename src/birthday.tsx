@@ -129,7 +129,7 @@ export default function BirthdayPage() {
     setSongs((prevSongs) => [...prevSongs, simplifiedSong]);
   
     try {
-      const response = await fetch("https://www.ethanbonsall.com/api/songs", {
+      const response = await fetch("https://www.ethanbonsall.com/api/songs/put", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
