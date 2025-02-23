@@ -250,46 +250,46 @@ export default function BirthdayPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-700 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-gray-700 flex items-center justify-center p-8">
       {/* Window Frame */}
       {showRSVP && <RSVPModal onClose={() => setShowRSVP(false)} />}
-      <div className=" border border-black w-3/4 max-w-[600px] bg-gray-300 shadow-[4px_4px_0px_black]">
+      <div className="border border-black w-4/5 max-w-[700px] bg-gray-300 shadow-[6px_6px_0px_black]">
         {/* Title Bar */}
-        <div className="flex items-center justify-between bg-gray-500 px-2 py-1 border-b border-black">
-          <span className="text-xs font-bold text-white">
+        <div className="flex items-center justify-between bg-gray-500 px-4 py-2 border-b border-black">
+          <span className="text-md font-bold text-white">
             Ethan's Birthday Rager
           </span>
-          <div className="flex space-x-1">
-            <button className="w-3 h-3 bg-gray-800 border border-white"></button>
-            <button className="w-3 h-3 bg-gray-800 border border-white"></button>
-            <button className="w-3 h-3 bg-red-600 border border-white"></button>
+          <div className="flex space-x-2">
+            <button className="w-4 h-4 bg-gray-800 border border-white"></button>
+            <button className="w-4 h-4 bg-gray-800 border border-white"></button>
+            <button className="w-4 h-4 bg-red-600 border border-white"></button>
           </div>
         </div>
 
         {/* Body */}
-        <div className="p-4 font-[Arial] text-black">
-          <h1 className="text-2xl font-bold text-center text-red-600 drop-shadow-[2px_2px_0px_white]">
+        <div className="p-6 font-[Arial] text-black">
+          <h1 className="text-3xl font-bold text-center text-red-600 drop-shadow-[3px_3px_0px_white]">
             You Know It's a Party If...
           </h1>
-          <p className="text-center text-sm mb-2">February 28, 8:00 PM</p>
-          <p className="text-center text-sm mb-6">508 Chapel Street</p>
+          <p className="text-center text-xl text-base m-3">February 28, 8:00 PM</p>
+          <p className="text-center text-xl text-base mb-8">508 Chapel Street</p>
 
           {/* Search Box */}
-          <div className="relative w-full max-w-md mx-auto border border-black bg-gray-200 p-2">
+          <div className="relative w-full max-w-lg mx-auto border border-black bg-gray-200 p-3">
             <input
               type="text"
               placeholder="Search for a song..."
-              className="w-full p-1 border border-black bg-white text-sm text-center focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className="w-full p-2 border border-black bg-white text-base  focus:outline-none focus:ring-2 focus:ring-gray-500"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
             <button
               onClick={handleSearch}
-              className="w-full mt-2 bg-gray-300 border border-black py-1 
-        shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
+              className="w-full mt-3 bg-gray-300 border border-black py-2 
+        shadow-[inset_-3px_-3px_0px_#ddd,inset_3px_3px_0px_#555] 
         hover:bg-gray-400 
-        active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] 
-        active:translate-y-[1px] active:translate-x-[1px]"
+        active:shadow-[inset_3px_3px_0px_#555,inset_-3px_-3px_0px_#ddd] 
+        active:translate-y-[2px] active:translate-x-[2px]"
             >
               Search
             </button>
@@ -298,27 +298,27 @@ export default function BirthdayPage() {
             {showDropdown && (
               <div
                 ref={dropdownRef}
-                className="absolute left-0 w-full max-w-md border border-black bg-white mt-1 z-10 shadow-lg max-h-60 overflow-y-auto"
+                className="absolute left-0 w-full max-w-lg border border-black bg-white mt-2 z-10 shadow-lg max-h-60 overflow-y-auto"
               >
                 {searchResults.length === 0 ? (
-                  <p className="text-gray-700 p-2">No results found.</p>
+                  <p className="text-gray-700 p-3">No results found.</p>
                 ) : (
                   searchResults.map((song) => (
                     <div
                       key={song.id}
-                      className="p-2 border-b border-black last:border-b-0 flex justify-between items-center hover:bg-gray-400 cursor-pointer"
+                      className="p-3 border-b border-black last:border-b-0 flex justify-between items-center hover:bg-gray-400 cursor-pointer"
                       onClick={(event) => {
                         addSongToList(song);
                         event.stopPropagation();
                       }}
                     >
-                      <span className="text-xs">
+                      <span className="text-sm">
                         {song.name} - {song.artists[0].name}
                       </span>
                       {!existingSongs.has(song.id) && (
                         <button
-                          className="border border-black bg-gray-300 px-2 py-1 text-xs shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
-                hover:bg-gray-400 active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] active:translate-y-[1px] active:translate-x-[1px]"
+                          className="border border-black bg-gray-300 px-3 py-1 text-sm shadow-[inset_-3px_-3px_0px_#ddd,inset_3px_3px_0px_#555] 
+                  hover:bg-gray-400 active:shadow-[inset_3px_3px_0px_#555,inset_-3px_-3px_0px_#ddd] active:translate-y-[2px] active:translate-x-[2px]"
                         >
                           +
                         </button>
@@ -331,15 +331,15 @@ export default function BirthdayPage() {
           </div>
 
           {/* Upload Button */}
-          <div className="mt-4 w-full max-w-md mx-auto border border-black bg-gray-200 p-2">
+          <div className="mt-6 w-full max-w-lg mx-auto border border-black bg-gray-200 p-3">
             <label
-              className="flex items-center space-x-2 cursor-pointer border border-black bg-gray-300 px-4 py-1 
-        shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
+              className="flex items-center space-x-3 cursor-pointer border border-black bg-gray-300 px-5 py-2 
+        shadow-[inset_-3px_-3px_0px_#ddd,inset_3px_3px_0px_#555] 
         hover:bg-gray-400 
-        active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] 
-        active:translate-y-[1px] active:translate-x-[1px] w-full"
+        active:shadow-[inset_3px_3px_0px_#555,inset_-3px_-3px_0px_#ddd] 
+        active:translate-y-[2px] active:translate-x-[2px] w-full"
             >
-              <span>Upload Photos</span>
+              <span className="text-base">Upload Photos</span>
               <input
                 type="file"
                 multiple
@@ -378,19 +378,19 @@ export default function BirthdayPage() {
               No photos uploaded yet.
             </p>
           )}
-        </div>
 
-        {/* "See Playlist" Button */}
-        <div className="mt-4 flex justify-center">
-          <a
-            href="https://www.ethanbonsall.com/birthdaysubmit"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-4 py-2 border border-black bg-gray-300 shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
-                hover:bg-gray-400 active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] active:translate-y-[1px] active:translate-x-[1px]"
-          >
-            See Playlist
-          </a>
+          {/* "See Playlist" Button */}
+          <div className="mt-6 flex justify-center">
+            <a
+              href="https://www.ethanbonsall.com/birthdaysubmit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-3 border border-black bg-gray-300 shadow-[inset_-3px_-3px_0px_#ddd,inset_3px_3px_0px_#555] 
+                  hover:bg-gray-400 active:shadow-[inset_3px_3px_0px_#555,inset_-3px_-3px_0px_#ddd] active:translate-y-[2px] active:translate-x-[2px] text-lg"
+            >
+              See Playlist
+            </a>
+          </div>
         </div>
       </div>
     </div>
