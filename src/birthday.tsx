@@ -52,15 +52,29 @@ export default function BirthdayPage() {
     const fetchPhotos = async () => {
       try {
         const response = await fetch("https://www.ethanbonsall.com/api/photos");
+  
+        // Check if response is OK (status 200-299)
+        if (!response.ok) {
+          throw new Error(`Server responded with ${response.status}`);
+        }
+  
         const data = await response.json();
+  
+        // Ensure data is an array before setting state
+        if (!Array.isArray(data)) {
+          throw new Error("Invalid response format");
+        }
+  
         setPhotos(data);
       } catch (error) {
         console.error("Error fetching photos:", error);
+        setPhotos([]); // Prevents .map() errors
       }
     };
   
     fetchPhotos();
   }, []);
+  
 
   const handleFileUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
