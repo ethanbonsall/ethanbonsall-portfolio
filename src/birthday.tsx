@@ -182,11 +182,11 @@ export default function BirthdayPage() {
   
   return (
     <div className="min-h-screen bg-gray-700 flex items-center justify-center p-6">
-      {/* Windows 95 Window */}
+      {/* Window Frame */}
       <div className="w-[500px] border border-black bg-gray-300 shadow-[4px_4px_0px_black]">
         {/* Title Bar */}
         <div className="flex items-center justify-between bg-gray-500 px-2 py-1 border-b border-black">
-          <span className="text-xs font-bold text-white">Birthday Rager</span>
+          <span className="text-xs font-bold text-white">Ethan's Birthday Rager</span>
           <div className="flex space-x-1">
             <button className="w-3 h-3 bg-gray-800 border border-white"></button>
             <button className="w-3 h-3 bg-gray-800 border border-white"></button>
@@ -212,7 +212,7 @@ export default function BirthdayPage() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
             <button
-              onClick={() => {}}
+              onClick={handleSearch}
               className="w-full mt-2 bg-gray-300 border border-black py-1 
               shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
               hover:bg-gray-400 
@@ -221,6 +221,31 @@ export default function BirthdayPage() {
             >
               Search
             </button>
+
+            {/* Dropdown */}
+            {showDropdown && (
+              <div className="border border-black bg-white mt-2 w-full">
+                {searchResults.map((song) => (
+                  <div
+                    key={song.id}
+                    className="p-1 hover:bg-gray-400 cursor-pointer flex justify-between items-center border-b border-black"
+                    onClick={() => addSongToList(song)}
+                  >
+                    <span className="text-xs">
+                      {song.name} - {song.artists[0].name}
+                    </span>
+                    <button className="border border-black bg-gray-300 px-2 py-1 text-xs
+                      shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
+                      hover:bg-gray-400 
+                      active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] 
+                      active:translate-y-[1px] active:translate-x-[1px]"
+                    >
+                      +
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Upload Button */}
@@ -231,9 +256,14 @@ export default function BirthdayPage() {
               active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] 
               active:translate-y-[1px] active:translate-x-[1px]"
             >
-              <Upload className="w-4 h-4" />
               <span>Upload Photos</span>
-              <input type="file" multiple accept="image/*" className="hidden" onChange={handleFileUpload} />
+              <input
+                type="file"
+                multiple
+                accept="image/*"
+                className="hidden"
+                onChange={handleFileUpload}
+              />
             </label>
           </div>
 
