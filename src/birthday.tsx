@@ -2,6 +2,7 @@ const clientId = "a2e6aeb9971e4287a1985803be608d24";
 const clientSecret = "cd6215638ad643acb1b251ce49139db0";
 import { useState, useEffect } from "react";
 import { Upload } from "lucide-react";
+import { supabase } from "./utils/supabaseClient";
 
 export default function BirthdayPage() {
   const [songs, setSongs] = useState<any[]>([]);
@@ -19,32 +20,23 @@ export default function BirthdayPage() {
   useEffect(() => {
     const fetchAccessToken = async () => {
       try {
-        const response = await fetch("https://accounts.spotify.com/api/token", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            Authorization: authorizationHeader,
-          },
-          body: new URLSearchParams({ grant_type: "client_credentials" }),
-        });
-
-        if (!response.ok) {
-          console.error("Failed to fetch access token", await response.json());
-          return;
-        }
-
+        const response = await fetch("/api/spotify-token");
         const data = await response.json();
-        if (!localStorage.getItem("spotifyToken")) {
+  
+        if (response.ok) {
           setAccessToken(data.access_token);
+          localStorage.setItem("spotifyToken", data.access_token);
+          
+          // Refresh token before it expires
+          setTimeout(fetchAccessToken, (data.expires_in - 60) * 1000);
+        } else {
+          console.error("Failed to fetch access token", data);
         }
-
-        // Refresh token every 59 minutes
-        setTimeout(fetchAccessToken, 59 * 60 * 1000);
       } catch (error) {
         console.error("Error fetching access token:", error);
       }
     };
-
+  
     fetchAccessToken();
   }, []);
 
@@ -76,29 +68,26 @@ export default function BirthdayPage() {
   }, []);
   
 
-  const handleFileUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const uploadPhoto = async (file: File) => {
+    const filePath = `uploads/${Date.now()}_${file.name}`;
+  
+    const { error } = await supabase.storage.from("photos").upload(filePath, file);
+  
+    if (error) {
+      console.error("Upload error:", error.message);
+      return null;
+    }
+  
+    return supabase.storage.from("photos").getPublicUrl(filePath).data.publicUrl;
+  };
+  
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files || files.length === 0) return;
-
-    const formData = new FormData();
-    formData.append("photo", files[0]);
-
-    try {
-      const response = await fetch("https://www.ethanbonsall.com/api/photos", {
-        method: "POST",
-        body: formData,
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        setPhotos((prevPhotos) => [...prevPhotos, data.url]);
-      } else {
-        console.error("Upload failed", data.message);
-      }
-    } catch (error) {
-      console.error("Error uploading photo:", error);
+  
+    const uploadedPhotoUrl = await uploadPhoto(files[0]);
+    if (uploadedPhotoUrl) {
+      setPhotos((prevPhotos) => [...prevPhotos, uploadedPhotoUrl]);
     }
   };
 
