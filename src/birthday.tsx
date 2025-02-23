@@ -120,25 +120,37 @@ export default function BirthdayPage() {
   };
 
   const addSongToList = async (song: { id: any; name: any; artists: any[]; uri: any }) => {
+    if (!accessToken) {
+      console.error("Access token is missing");
+      return;
+    }
+  
     try {
-      // Check if the song already exists in the playlist
-      const { data: existingSongs, error: fetchError } = await supabase
-        .from("songs")
-        .select("id")
-        .eq("id", song.id);
+      // Fetch the current playlist songs
+      const playlistResponse = await fetch(
+        "https://api.spotify.com/v1/playlists/6yoTyxeEYmrn0GQ0rpATGv/tracks",
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
   
-      if (fetchError) {
-        console.error("Error fetching songs:", fetchError.message);
+      if (!playlistResponse.ok) {
+        console.error("Failed to fetch playlist songs", await playlistResponse.text());
         return;
       }
   
-      // If the song is already in the playlist, prevent adding
-      if (existingSongs && existingSongs.length > 0) {
-        console.log("Song already exists in the playlist.");
+      const playlistData = await playlistResponse.json();
+      const existingSongs = playlistData.items.map((item: any) => item.track.uri);
+  
+      // Check if the song is already in the playlist
+      if (existingSongs.includes(song.uri)) {
+        console.log("Song is already in the playlist.");
         return;
       }
   
-      // Prepare song object
+      // Proceed with adding the song if it's not found
       const simplifiedSong = {
         id: song.id,
         name: song.name,
@@ -146,17 +158,21 @@ export default function BirthdayPage() {
         uri: song.uri,
       };
   
-      // Add song to state
       setSongs((prevSongs) => [...prevSongs, simplifiedSong]);
   
-      // Save song to Supabase
-      const { error: insertError } = await supabase.from("songs").insert([simplifiedSong]);
+      const response = await fetch("https://www.ethanbonsall.com/api/songs/put", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(simplifiedSong),
+      });
   
-      if (insertError) {
-        console.error("Error adding song:", insertError.message);
+      if (!response.ok) {
+        console.error("Failed to save song", await response.text());
       }
     } catch (error) {
-      console.error("Error adding song:", error);
+      console.error("Error checking or adding song:", error);
     }
   };
   
