@@ -93,18 +93,29 @@ export default function BirthdaySubmitPage() {
   };
 
   const uploadStoredSongs = async (userToken: string) => {
+    console.log("Using token for stored songs:", userToken); // ✅ Log token before making API call
+  
     try {
       const response = await fetch("https://www.ethanbonsall.com/api/songs");
       if (!response.ok) {
         console.error("Failed to fetch stored songs");
         return;
       }
-
+  
       const storedSongs = await response.json();
-      if (storedSongs.length === 0) return;
-
-      const uris = storedSongs.map((song: { uri: string }) => song.uri);
-
+      if (!storedSongs || storedSongs.length === 0) {
+        console.warn("No stored songs found.");
+        return;
+      }
+  
+      const uris = storedSongs.map((song: { uri?: string }) => song.uri).filter(uri => uri);
+      if (uris.length === 0) {
+        console.error("Stored songs are missing URIs");
+        return;
+      }
+  
+      console.log("Adding stored songs:", uris); // ✅ Log before making API call
+  
       const spotifyResponse = await fetch(`https://api.spotify.com/v1/playlists/${PLAYLIST_ID}/tracks`, {
         method: "POST",
         headers: {
@@ -113,20 +124,18 @@ export default function BirthdaySubmitPage() {
         },
         body: JSON.stringify({ uris }),
       });
-
+  
       if (spotifyResponse.ok) {
-        console.log("Successfully added stored songs to the playlist");
-        await fetch("https://ethanbonsall.com/api/songs", {
-          method: "DELETE",
-        });
+        console.log("✅ Successfully added stored songs to the playlist");
+        await fetch("https://www.ethanbonsall.com/api/songs", { method: "DELETE" });
       } else {
-        console.error("Failed to upload stored songs to Spotify", await spotifyResponse.json());
+        console.error("❌ Failed to upload stored songs to Spotify", await spotifyResponse.json());
       }
     } catch (error) {
       console.error("Error uploading stored songs:", error);
     }
   };
-
+  
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6 flex flex-col items-center">
       <h1 className="text-4xl font-bold mb-4">Ethan's Birthday Rager</h1>
