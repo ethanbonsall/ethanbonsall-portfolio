@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import supabase from "./supabaseClient";
 import RSVPModal from "./rsvp";
 
@@ -14,6 +14,10 @@ export default function BirthdayPage() {
   });
   const [showDropdown, setShowDropdown] = useState(false);
   const [showRSVP, setShowRSVP] = useState(true);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [addedSongs] = useState<string[]>([]);
+
 
 
   useEffect(() => {
@@ -42,6 +46,24 @@ export default function BirthdayPage() {
   }, []);
 
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+
+    if (showDropdown) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showDropdown]);
+
+  useEffect(() => {
     const fetchPhotos = async () => {
       try {
         const response = await fetch("https://www.ethanbonsall.com/api/photos/");
@@ -67,7 +89,14 @@ export default function BirthdayPage() {
   
     fetchPhotos();
   }, []);
-  
+
+  const handleNextPhoto = () => {
+    setCurrentPhotoIndex((prevIndex) => (prevIndex + 1) % photos.length);
+  };
+
+  const handlePrevPhoto = () => {
+    setCurrentPhotoIndex((prevIndex) => (prevIndex - 1 + photos.length) % photos.length);
+  };
   
 
   const uploadPhoto = async (file: File) => {
@@ -226,7 +255,7 @@ export default function BirthdayPage() {
 
             {/* Dropdown */}
             {showDropdown && (
-              <div className="border border-black bg-white mt-2 w-full">
+              <div ref={dropdownRef} className="border border-black bg-white mt-2 w-full absolute top-full left-0 z-10 shadow-lg">
                 {searchResults.map((song) => (
                   <div
                     key={song.id}
@@ -236,14 +265,13 @@ export default function BirthdayPage() {
                     <span className="text-xs">
                       {song.name} - {song.artists[0].name}
                     </span>
-                    <button className="border border-black bg-gray-300 px-2 py-1 text-xs
-                      shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
-                      hover:bg-gray-400 
-                      active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] 
-                      active:translate-y-[1px] active:translate-x-[1px]"
-                    >
-                      +
-                    </button>
+                    {!addedSongs.includes(song.id) && (
+                      <button className="border border-black bg-gray-300 px-2 py-1 text-xs shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] hover:bg-gray-400 
+                        active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] active:translate-y-[1px] active:translate-x-[1px]"
+                      >
+                        +
+                      </button>
+                    )}
                   </div>
                 ))}
               </div>
@@ -269,15 +297,33 @@ export default function BirthdayPage() {
             </label>
           </div>
 
-          {/* Uploaded Photos */}
-          <div className="mt-6 grid grid-cols-3 gap-2 border border-black p-3 bg-gray-200">
-            {photos.map((photo, index) => (
-              <div key={index} className="overflow-hidden border border-black">
-                <img src={photo} alt="Uploaded" className="w-full h-full object-cover" />
-              </div>
-            ))}
-          </div>
+        {/* Photo Carousel */}
+          {photos.length > 0 ? (
+            <div className="relative border border-black bg-gray-200 p-2 flex items-center justify-center">
+              <button onClick={handlePrevPhoto} className="absolute left-2 text-black text-lg">
+                ◀
+              </button>
+              <img src={photos[currentPhotoIndex]} alt="Uploaded" className="w-full h-48 object-cover border border-black" />
+              <button onClick={handleNextPhoto} className="absolute right-2 text-black text-lg">
+                ▶
+              </button>
+            </div>
+          ) : (
+            <p className="text-center text-sm">No photos uploaded yet.</p>
+          )}
         </div>
+        {/* "See Playlist" Button */}
+        <div className="mt-4 flex justify-center">
+            <a
+              href="https://www.ethanbonsall.com/birthdaysubmit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 border border-black bg-gray-300 shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
+                hover:bg-gray-400 active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] active:translate-y-[1px] active:translate-x-[1px]"
+            >
+              See Playlist
+            </a>
+          </div>
       </div>
     </div>
   );
