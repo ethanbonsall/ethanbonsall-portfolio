@@ -51,15 +51,16 @@ export default function BirthdayPage() {
         setShowDropdown(false);
       }
     };
-
+  
     if (showDropdown) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-
+  
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showDropdown]);
+  
 
   useEffect(() => {
     // Fetch songs from the API to determine which ones should not show the "+"
@@ -228,6 +229,7 @@ export default function BirthdayPage() {
       };
 
       setSongs((prevSongs) => [...prevSongs, simplifiedSong]);
+      setExistingSongs((prev) => new Set([...prev, song.id]));
 
       const response = await fetch(
         "https://www.ethanbonsall.com/api/songs/put",
@@ -306,7 +308,7 @@ export default function BirthdayPage() {
                     <div
                       key={song.id}
                       className="p-2 border-b border-black last:border-b-0 flex justify-between items-center hover:bg-gray-400 cursor-pointer"
-                      onClick={() => addSongToList(song)}
+                      onClick={(event) => {addSongToList(song); event.stopPropagation();}}
                     >
                       <span className="text-xs">
                         {song.name} - {song.artists[0].name}
