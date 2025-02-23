@@ -18,7 +18,7 @@ export default function RSVPModal({ onClose }: RSVPModalProps) {
   const handleSubmit = async () => {
     if (!rsvpName.trim()) return alert("Please enter your name!");
 
-    const rsvpData = [{ name: rsvpName, plus: plusOne }];
+    const rsvpData = { name: rsvpName, plus: plusOne };
 
     try {
       const response = await fetch("/api/rsvp", {
