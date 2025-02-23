@@ -259,7 +259,7 @@ export default function BirthdayPage() {
           <p className="text-center text-sm mb-6">508 Chapel Street</p>
 
           {/* Search Box */}
-          <div className="border border-black bg-gray-200 p-2">
+          <div className=" relative border border-black bg-gray-200 p-2">
             <input
               type="text"
               placeholder="Search for a song..."
