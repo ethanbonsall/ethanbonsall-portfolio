@@ -282,27 +282,31 @@ export default function BirthdayPage() {
             {showDropdown && (
               <div
                 ref={dropdownRef}
-                className="absolute w-full border border-black bg-white mt-1 left-0 z-10 shadow-lg"
+                className="absolute w-full border border-black bg-white mt-1 z-10 shadow-lg max-h-60 overflow-y-auto"
               >
-                {searchResults.map((song) => (
-                  <div
-                    key={song.id}
-                    className="p-1 hover:bg-gray-400 cursor-pointer flex justify-between items-center border-b border-black"
-                    onClick={() => addSongToList(song)}
-                  >
-                    <span className="text-xs">
-                      {song.name} - {song.artists[0].name}
-                    </span>
-                    {!addedSongs.includes(song.id) && (
-                      <button
-                        className="border border-black bg-gray-300 px-2 py-1 text-xs shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
-            hover:bg-gray-400 active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] active:translate-y-[1px] active:translate-x-[1px]"
-                      >
-                        +
-                      </button>
-                    )}
-                  </div>
-                ))}
+                {searchResults.length === 0 ? (
+                  <p className="text-gray-700 p-2">No results found.</p>
+                ) : (
+                  searchResults.map((song) => (
+                    <div
+                      key={song.id}
+                      className="p-2 border-b border-black last:border-b-0 flex justify-between items-center hover:bg-gray-400 cursor-pointer"
+                      onClick={() => addSongToList(song)}
+                    >
+                      <span className="text-xs">
+                        {song.name} - {song.artists[0].name}
+                      </span>
+                      {!addedSongs.includes(song.id) && (
+                        <button
+                          className="border border-black bg-gray-300 px-2 py-1 text-xs shadow-[inset_-2px_-2px_0px_#ddd,inset_2px_2px_0px_#555] 
+                hover:bg-gray-400 active:shadow-[inset_2px_2px_0px_#555,inset_-2px_-2px_0px_#ddd] active:translate-y-[1px] active:translate-x-[1px]"
+                        >
+                          +
+                        </button>
+                      )}
+                    </div>
+                  ))
+                )}
               </div>
             )}
           </div>

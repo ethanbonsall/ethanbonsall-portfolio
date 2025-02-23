@@ -206,7 +206,7 @@ export default function BirthdaySubmitPage() {
 
           {/* Always Open Playlist */}
           <div className="w-full max-w-md mt-4 bg-gray-300 border-2 border-black p-2 shadow-md">
-            <h2 className="text-lg font-bold text-black mb-2">📂 Playlist Songs</h2>
+            <h2 className="text-lg font-bold mb-2">📂 Playlist Songs</h2>
             {playlistSongs.length === 0 ? (
               <p className="text-gray-700">No songs in the playlist.</p>
             ) : (
