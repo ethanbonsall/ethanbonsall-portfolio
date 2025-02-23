@@ -119,32 +119,47 @@ export default function BirthdayPage() {
     setSearchResults(data.tracks.items || []);
   };
 
-  const addSongToList = async (song: { id: any; name: any; artists: any[]; uri: any; }) => {
-    const simplifiedSong = {
-      id: song.id,
-      name: song.name,
-      artists: song.artists.map((artist) => artist.name).join(", "), // ✅ Store as string
-      uri: song.uri,
-    };
-  
-    setSongs((prevSongs) => [...prevSongs, simplifiedSong]);
-  
+  const addSongToList = async (song: { id: any; name: any; artists: any[]; uri: any }) => {
     try {
-      const response = await fetch("https://www.ethanbonsall.com/api/songs/put", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(simplifiedSong), // ✅ Send as a single object
-      });
+      // Check if the song already exists in the playlist
+      const { data: existingSongs, error: fetchError } = await supabase
+        .from("songs")
+        .select("id")
+        .eq("id", song.id);
   
-      if (!response.ok) {
-        console.error("Failed to save song", await response.text());
+      if (fetchError) {
+        console.error("Error fetching songs:", fetchError.message);
+        return;
+      }
+  
+      // If the song is already in the playlist, prevent adding
+      if (existingSongs && existingSongs.length > 0) {
+        console.log("Song already exists in the playlist.");
+        return;
+      }
+  
+      // Prepare song object
+      const simplifiedSong = {
+        id: song.id,
+        name: song.name,
+        artists: song.artists.map((artist) => artist.name).join(", "),
+        uri: song.uri,
+      };
+  
+      // Add song to state
+      setSongs((prevSongs) => [...prevSongs, simplifiedSong]);
+  
+      // Save song to Supabase
+      const { error: insertError } = await supabase.from("songs").insert([simplifiedSong]);
+  
+      if (insertError) {
+        console.error("Error adding song:", insertError.message);
       }
     } catch (error) {
-      console.error("Error saving song:", error);
+      console.error("Error adding song:", error);
     }
   };
+  
   
   
   return (

@@ -114,7 +114,7 @@ export default function BirthdaySubmitPage() {
         return;
       }
   
-      console.log("Adding stored songs:", uris); // ✅ Log before making API call
+      console.log("Adding stored songs:", uris); 
   
       const spotifyResponse = await fetch(`https://api.spotify.com/v1/playlists/${PLAYLIST_ID}/tracks`, {
         method: "POST",
@@ -129,7 +129,7 @@ export default function BirthdaySubmitPage() {
         console.log("✅ Successfully added stored songs to the playlist");
         await fetch("https://www.ethanbonsall.com/api/songs/delete", { method: "DELETE" });
       } else {
-        console.error("❌ Failed to upload stored songs to Spotify", await spotifyResponse.json());
+        console.error("Failed to upload stored songs to Spotify", await spotifyResponse.json());
       }
     } catch (error) {
       console.error("Error uploading stored songs:", error);
