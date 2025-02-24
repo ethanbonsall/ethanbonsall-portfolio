@@ -124,9 +124,22 @@ export default function BirthdaySubmitPage() {
       if (response.ok) {
         const data = await response.json();
         setPlaylistSongs(data.items.map((item: any) => item.track));
+        return;
       }
     } catch (error) {
-      console.error("Error fetching playlist songs:", error);
+      console.error("Error fetching playlist songs from Spotify:", error);
+    }
+
+    try {
+      const fallbackResponse = await fetch("/api/songs");
+      if (fallbackResponse.ok) {
+        const fallbackData = await fallbackResponse.json();
+        setPlaylistSongs(fallbackData);
+      } else {
+        console.error("Error fetching fallback songs from Supabase");
+      }
+    } catch (fallbackError) {
+      console.error("Failed to fetch songs from Supabase:", fallbackError);
     }
   };
 
@@ -142,7 +155,7 @@ export default function BirthdaySubmitPage() {
 
       if (uris.length === 0) return;
 
-      const spotifyResponse = await fetch(
+      await fetch(
         `https://api.spotify.com/v1/playlists/${PLAYLIST_ID}/tracks`,
         {
           method: "POST",
@@ -153,13 +166,6 @@ export default function BirthdaySubmitPage() {
           body: JSON.stringify({ uris }),
         }
       );
-
-      if (spotifyResponse.ok) {
-        await fetch("https://www.ethanbonsall.com/api/songs/delete", {
-          method: "DELETE",
-        });
-        fetchPlaylistSongs(userToken);
-      }
     } catch (error) {
       console.error("Error uploading stored songs:", error);
     }
