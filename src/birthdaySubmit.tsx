@@ -114,7 +114,29 @@ export default function BirthdaySubmitPage() {
       setPlaylistSongs([...playlistSongs, song]);
     }
   };
+  useEffect(() => {
+    const fetchAccessToken = async () => {
+      try {
+        const response = await fetch("/api/spotify-token");
+        const data = await response.json();
 
+        if (response.ok) {
+          setAccessToken(data.access_token);
+          localStorage.setItem("spotifyToken", data.access_token);
+
+          if (data.expires_in) {
+            setTimeout(fetchAccessToken, (data.expires_in - 60) * 1000);
+          }
+        } else {
+          console.error("Failed to fetch access token", data);
+        }
+      } catch (error) {
+        console.error("Error fetching access token:", error);
+      }
+    };
+
+    fetchAccessToken();
+  }, []);
   const fetchPlaylistSongs = async (userToken: string) => {
     try {
       const response = await fetch(
@@ -157,29 +179,6 @@ export default function BirthdaySubmitPage() {
       console.error("Failed to fetch songs from Supabase:", fallbackError);
     }
   };
-  useEffect(() => {
-    const fetchAccessToken = async () => {
-      try {
-        const response = await fetch("/api/spotify-token");
-        const data = await response.json();
-
-        if (response.ok) {
-          setAccessToken(data.access_token);
-          localStorage.setItem("spotifyToken", data.access_token);
-
-          if (data.expires_in) {
-            setTimeout(fetchAccessToken, (data.expires_in - 60) * 1000);
-          }
-        } else {
-          console.error("Failed to fetch access token", data);
-        }
-      } catch (error) {
-        console.error("Error fetching access token:", error);
-      }
-    };
-
-    fetchAccessToken();
-  }, []);
 
   const uploadStoredSongs = async (userToken: string) => {
     try {
