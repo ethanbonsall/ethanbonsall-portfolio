@@ -14,6 +14,9 @@ export default function BirthdaySubmitPage() {
   const [playlistSongs, setPlaylistSongs] = useState<any[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(() => {
+    return localStorage.getItem("spotifyToken") || null;
+  });
 
   useEffect(() => {
     const fetchAccessToken = async () => {
@@ -129,6 +132,18 @@ export default function BirthdaySubmitPage() {
     } catch (error) {
       console.error("Error fetching playlist songs from Spotify:", error);
     }
+    try {
+      await fetch(
+        "https://api.spotify.com/v1/playlists/6yoTyxeEYmrn0GQ0rpATGv/tracks",
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Error fetching playlist songs from Spotify:", error);
+    }
 
     try {
       const fallbackResponse = await fetch("/api/songs");
@@ -142,6 +157,29 @@ export default function BirthdaySubmitPage() {
       console.error("Failed to fetch songs from Supabase:", fallbackError);
     }
   };
+  useEffect(() => {
+    const fetchAccessToken = async () => {
+      try {
+        const response = await fetch("/api/spotify-token");
+        const data = await response.json();
+
+        if (response.ok) {
+          setAccessToken(data.access_token);
+          localStorage.setItem("spotifyToken", data.access_token);
+
+          if (data.expires_in) {
+            setTimeout(fetchAccessToken, (data.expires_in - 60) * 1000);
+          }
+        } else {
+          console.error("Failed to fetch access token", data);
+        }
+      } catch (error) {
+        console.error("Error fetching access token:", error);
+      }
+    };
+
+    fetchAccessToken();
+  }, []);
 
   const uploadStoredSongs = async (userToken: string) => {
     try {

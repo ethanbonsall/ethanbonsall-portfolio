@@ -187,7 +187,6 @@ export default function BirthdayPage() {
       console.error("Access token is missing");
       return;
     }
-    setShowDropdown(false);
 
     try {
       // Fetch the current songs
@@ -271,8 +270,8 @@ export default function BirthdayPage() {
           <h1 className="text-3xl font-bold text-center text-red-600 drop-shadow-[3px_3px_0px_white]">
             You Know It's a Party If...
           </h1>
-          <p className="text-center text-xl text-base m-3">February 28, 8:00 PM</p>
-          <p className="text-center text-xl text-base mb-8">508 Chapel Street</p>
+          <p className="text-center text-xl  m-3">February 28, 8:00 PM</p>
+          <p className="text-center text-xl  mb-8">508 Chapel Street</p>
 
           {/* Search Box */}
           <div className="relative w-full max-w-lg mx-auto border border-black bg-gray-200 p-3">
