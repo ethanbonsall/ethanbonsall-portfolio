@@ -166,17 +166,6 @@ export default function BirthdaySubmitPage() {
       console.error("Error fetching playlist songs from Spotify:", error);
     }
 
-    try {
-      const fallbackResponse = await fetch("/api/songs");
-      if (fallbackResponse.ok) {
-        const fallbackData = await fallbackResponse.json();
-        setPlaylistSongs(fallbackData);
-      } else {
-        console.error("Error fetching fallback songs from Supabase");
-      }
-    } catch (fallbackError) {
-      console.error("Failed to fetch songs from Supabase:", fallbackError);
-    }
   };
 
   const handleSearch = async () => {
