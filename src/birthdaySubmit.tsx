@@ -192,21 +192,29 @@ export default function BirthdaySubmitPage() {
 
       if (uris.length === 0) return;
 
-      await fetch(
+      const spotifyResponse = await fetch(
         `https://api.spotify.com/v1/playlists/${PLAYLIST_ID}/tracks`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken|| accessToken}`,
+            Authorization: `Bearer ${userToken}`,
           },
           body: JSON.stringify({ uris }),
         }
       );
+
+      if (spotifyResponse.ok) {
+        await fetch("https://www.ethanbonsall.com/api/songs/delete", {
+          method: "DELETE",
+        });
+        fetchPlaylistSongs(userToken);
+      }
     } catch (error) {
       console.error("Error uploading stored songs:", error);
     }
   };
+
 
   return (
     <div className="min-h-screen bg-gray-800 text-white p-6 flex flex-col items-center font-mono">
