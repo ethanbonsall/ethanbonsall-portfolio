@@ -78,17 +78,6 @@ export default function BirthdaySubmitPage() {
     window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=playlist-modify-public playlist-modify-private`;
   };
 
-  const handleSearch = async () => {
-    if (!token) return;
-    const response = await fetch(
-      `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=track`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    const data = await response.json();
-    setSearchResults(data.tracks.items || []);
-  };
 
   const addSongToPlaylist = async (song: { id: string; uri: string }) => {
     if (!token) return;
@@ -104,7 +93,7 @@ export default function BirthdaySubmitPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token || accessToken}`,
         },
         body: JSON.stringify({ uris: [song.uri] }),
       }
@@ -137,6 +126,16 @@ export default function BirthdaySubmitPage() {
 
     fetchAccessToken();
   }, []);
+
+  useEffect(() => {
+    if (!accessToken) return;
+    if (accessToken) {
+      fetchPlaylistSongs(accessToken);
+      handleSearch()
+    }
+  }, [token]);
+  
+
   const fetchPlaylistSongs = async (userToken: string) => {
     try {
       const response = await fetch(
@@ -180,6 +179,18 @@ export default function BirthdaySubmitPage() {
     }
   };
 
+  const handleSearch = async () => {
+    if (!token) return;
+    const response = await fetch(
+      `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=track`,
+      {
+        headers: { Authorization: `Bearer ${accessToken || token }` },
+      }
+    );
+    const data = await response.json();
+    setSearchResults(data.tracks.items || []);
+  };
+
   const uploadStoredSongs = async (userToken: string) => {
     try {
       const response = await fetch("https://www.ethanbonsall.com/api/songs");
@@ -198,7 +209,7 @@ export default function BirthdaySubmitPage() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
+            Authorization: `Bearer ${userToken|| accessToken}`,
           },
           body: JSON.stringify({ uris }),
         }
