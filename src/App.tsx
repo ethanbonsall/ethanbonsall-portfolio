@@ -5,6 +5,7 @@ import Sam from "./sam";
 import Graham from "./graham";
 import Taylor from "./taylor";
 import BirthdaySubmitPage from "./birthdaySubmit";
+import Audrey from "./audrey";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Route path="/sam" element={<Sam />} />
         <Route path="/graham" element={<Graham />} />
         <Route path="/taylor" element={<Taylor />} />
-
+        <Route path="/audrey" element={<Audrey />} />
       </Routes>
     </Router>
   );
