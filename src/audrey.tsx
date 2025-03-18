@@ -1,6 +1,6 @@
 import audrey from "./assets/audrey.jpeg";
 
-const Sam = () => {
+const Audrey = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <img
@@ -12,4 +12,4 @@ const Sam = () => {
   );
 };
 
-export default Sam;
+export default Audrey;
