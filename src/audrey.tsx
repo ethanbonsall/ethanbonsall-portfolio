@@ -1,11 +1,11 @@
-import audrey from "./assets/audrey.jpeg";
+import audrey from "src/assets/audrey.jpeg";
 
 const Audrey = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <img
         src={audrey}
-        alt="Audrey"
+        alt="audrey"
         className="rounded-lg shadow-lg max-w-full h-auto"
       />
     </div>
