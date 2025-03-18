@@ -1,4 +1,4 @@
-import audrey from "src/assets/audrey.jpeg";
+import audrey from "./assets/audrey.jpeg";
 
 const Audrey = () => {
   return (
