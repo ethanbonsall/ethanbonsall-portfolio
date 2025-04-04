@@ -62,7 +62,7 @@ const Web = () => {
       {loading ? (
         <p className="text-xl">Loading projects...</p>
       ) : (
-        <div className="grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
           {photos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
