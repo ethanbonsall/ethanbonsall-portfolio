@@ -20,20 +20,22 @@ const Portfolio = () => {
         }
 
         const data = await response.json();
-        setPhotos(data);
         setLoading(false);
 
         if (!Array.isArray(data)) {
           throw new Error("Invalid response format");
         }
+
+        setPhotos(Array.isArray(data) ? data.map((photo) => photo.url) : []);
       } catch (error) {
         console.error("Error fetching photos:", error);
-        setPhotos([]);
+        setPhotos([]); // Prevents .map() errors
       }
     };
 
     fetchPhotos();
   }, []);
+
   return (
     <div className="bg-[#f5efe7] flex flex-col items-center font-roboto min-h-screen pt-6">
       {/* Header Section */}
