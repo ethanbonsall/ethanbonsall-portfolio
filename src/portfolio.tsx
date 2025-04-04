@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 
 const Portfolio = () => {
   interface Photo {
-    link: string;
     image: string;
   }
 
@@ -31,8 +30,6 @@ const Portfolio = () => {
         if (!Array.isArray(data)) {
           throw new Error("Invalid response format");
         }
-
-        setPhotos(Array.isArray(data) ? data.map((photo) => photo.url) : []);
       } catch (error) {
         console.error("Error fetching photos:", error);
         setPhotos([]);
@@ -114,19 +111,11 @@ const Portfolio = () => {
         ) : (
           <div className="flex flex-wrap gap-4 mt-4">
             {photos.map((photo, index) => (
-              <a
-                key={index}
-                href={photo.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-transform transform hover:scale-105"
-              >
-                <img
-                  src={photo.image}
-                  alt={`Project ${index + 1}`}
-                  className="w-64 h-40 object-cover rounded-xl border-2 shadow-md"
-                />
-              </a>
+              <img
+                src={photo.image}
+                alt={`Project ${index + 1}`}
+                className="w-64 h-40 object-cover rounded-xl border-2 shadow-md"
+              />
             ))}
           </div>
         )}
