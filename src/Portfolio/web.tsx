@@ -62,25 +62,29 @@ const Web = () => {
       {loading ? (
         <p className="text-xl">Loading projects...</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 relative z-0">
           {photos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group rounded-xl overflow-hidden border-2 shadow-md transition-all duration-300"
+              className="group relative rounded-xl border-2 shadow-md overflow-visible"
             >
-              <a
-                href={projects[index].link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block transition-transform duration-300 group-hover:scale-110"
-              >
-                <img
-                  src={photo}
-                  alt={`Project ${index}`}
-                  className="w-full h-auto object-cover"
-                />
-              </a>
+              {/* Zoomable image wrapper */}
+              <div className="relative z-0">
+                <a
+                  href={projects[index].link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <img
+                    src={photo}
+                    alt={`Project ${index}`}
+                    className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-125 group-hover:z-10 group-hover:relative"
+                  />
+                </a>
+              </div>
 
+              {/* Description (hidden until hover) */}
               <div className="max-h-0 overflow-hidden group-hover:max-h-[300px] transition-all duration-300">
                 <div className="bg-[#f5efe7] text-[#213555] text-sm p-3 flex justify-between items-center mt-1 rounded-b-xl">
                   <p className="whitespace-pre-wrap text-left flex-1 mr-2">
