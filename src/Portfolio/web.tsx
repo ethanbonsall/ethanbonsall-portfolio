@@ -64,26 +64,34 @@ const Web = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
           {photos.slice(0, 8).map((photo, index) => (
+            // Make each card a "group"
             <div
               key={index}
-              className="relative group rounded-xl border-2 shadow-md overflow-hidden isolation-auto"
+              className="group relative border-2 shadow-md rounded-xl overflow-hidden"
             >
               <a
                 href={projects[index].link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block"
+                className="block relative"
               >
+                {/* Scale image on hover */}
                 <img
                   src={photo}
                   alt={`Project ${index}`}
-                  className="w-full h-auto object-cover rounded-t-xl transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-125"
                 />
               </a>
 
-              <div className="max-h-0 overflow-hidden group-hover:max-h-[300px] transition-all duration-300 bg-[#f5efe7] text-[#213555] rounded-b-xl">
-                <div className="p-2 text-sm flex justify-between items-center">
-                  <p className="whitespace-pre-wrap text-left flex-1 mr-2">
+              {/* Description container (collapses by default) */}
+              <div
+                className="bg-[#f5efe7] text-[#213555] text-sm 
+                          max-h-0 overflow-hidden 
+                          transition-all duration-300 
+                          group-hover:max-h-[300px]"
+              >
+                <div className="flex justify-between items-center p-2">
+                  <p className="whitespace-pre-wrap flex-1 mr-2">
                     {projects[index].description}
                   </p>
                   <a
