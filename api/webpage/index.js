@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Ensure we are listing files under "uploads/" inside the "photos" bucket
+    // Ensure we are listing files under "webpage" inside the "uploads" bucket
     const { data, error } = await supabase.storage.from("webpage").list("uploads");
 
     if (error) throw error;

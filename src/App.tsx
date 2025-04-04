@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Portfolio from "./portfolio";
-import Birthday from "./birthday";
-import Sam from "./sam";
-import Graham from "./graham";
-import Taylor from "./taylor";
-import BirthdaySubmitPage from "./birthdaySubmit";
-import Audrey from "./audrey";
+import Portfolio from "./Portfolio/portfolio";
+import Birthday from "./Birthday/birthday";
+import Sam from "./People/sam";
+import Graham from "./People/graham";
+import Taylor from "./People/taylor";
+import BirthdaySubmitPage from "./Birthday/birthdaySubmit";
+import Audrey from "./People/audrey";
 
 function App() {
   return (

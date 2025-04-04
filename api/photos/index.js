@@ -2,16 +2,16 @@ import supabase from "../../src/supabaseClient.js";
 
 
 export default async function handler(req, res) {
+  // Ensure we are only responding to GET requests
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method Not Allowed" });
   }
-
+  //Try to get all photos from supabase photos/uploads bucket. Catch errors. 
   try {
-    // Ensure we are listing files under "uploads/" inside the "photos" bucket
     const { data, error } = await supabase.storage.from("photos").list("uploads");
 
     if (error) throw error;
-
+    // Map through the data to get the public URLs for each file
     const photoUrls = data.map((file) => {
       const { data: urlData } = supabase.storage.from("photos").getPublicUrl(`uploads/${file.name}`);
       return {
