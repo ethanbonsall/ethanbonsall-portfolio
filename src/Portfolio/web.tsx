@@ -66,9 +66,10 @@ const Web = () => {
           {photos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className=" relative rounded-xl border-2 shadow-md overflow-visible hover:rounded-t-xl hover:rounded-b-none"
+              className="group relative rounded-xl border-2 shadow-md overflow-visible"
             >
-              <div className="relative z-0 hover:scale-125 hover:z-10 hover:relative">
+              {/* Outer wrapper is now a group */}
+              <div className="relative z-0 transition-transform duration-300 group-hover:scale-110 group-hover:z-10">
                 <a
                   href={projects[index].link}
                   target="_blank"
@@ -78,12 +79,13 @@ const Web = () => {
                   <img
                     src={photo}
                     alt={`Project ${index}`}
-                    className="group w-full h-auto object-cover rounded-xl transition-transform duration-300"
+                    className="w-full h-auto object-cover rounded-xl"
                   />
                 </a>
 
-                <div className="relative max-h-0 overflow-hidden group-hover:max-h-[300px] transition-all duration-300">
-                  <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center mt-1 rounded-b-xl">
+                {/* Reveal on hover, scoped to this group only */}
+                <div className="relative max-h-0 overflow-hidden transition-all duration-300 group-hover:max-h-[300px]">
+                  <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center mt-1 rounded-b-xl p-2">
                     <p className="whitespace-pre-wrap text-left flex-1 mr-2">
                       {projects[index].description}
                     </p>
@@ -91,12 +93,11 @@ const Web = () => {
                       href={projects[index].git}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className=""
                     >
                       <img
                         src={githubLogo}
                         alt="GitHub"
-                        className="w-6 h-6 hover:scale-110 transition-transform"
+                        className="w-6 h-6 transition-transform group-hover:scale-110"
                       />
                     </a>
                   </div>
