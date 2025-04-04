@@ -64,43 +64,42 @@ const Web = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
           {photos.slice(0, 8).map((photo, index) => (
+            // 1) Each card is its own group
             <div
               key={index}
-              className="group relative rounded-xl border-2 shadow-md overflow-visible"
+              className="group relative rounded-xl border-2 shadow-md overflow-hidden"
             >
-              {/* Outer wrapper is now a group */}
-              <div className="relative z-0 transition-transform duration-300 group-hover:scale-110 group-hover:z-10">
-                <a
-                  href={projects[index].link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <img
-                    src={photo}
-                    alt={`Project ${index}`}
-                    className="w-full h-auto object-cover rounded-xl"
-                  />
-                </a>
+              {/* 2) The image scales on hover, but only within this group */}
+              <a
+                href={projects[index].link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block overflow-hidden"
+              >
+                <img
+                  src={photo}
+                  alt={`Project ${index}`}
+                  className="w-full h-auto object-cover rounded-xl transition-transform duration-300 group-hover:scale-110"
+                />
+              </a>
 
-                {/* Reveal on hover, scoped to this group only */}
-                <div className="relative max-h-0 overflow-hidden transition-all duration-300 group-hover:max-h-[300px]">
-                  <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center mt-1 rounded-b-xl p-2">
-                    <p className="whitespace-pre-wrap text-left flex-1 mr-2">
-                      {projects[index].description}
-                    </p>
-                    <a
-                      href={projects[index].git}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        src={githubLogo}
-                        alt="GitHub"
-                        className="w-6 h-6 transition-transform group-hover:scale-110"
-                      />
-                    </a>
-                  </div>
+              {/* 3) Only expand this description on hover within the same group */}
+              <div className="max-h-0 overflow-hidden transition-all duration-300 group-hover:max-h-[300px]">
+                <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center mt-1 rounded-b-xl p-2">
+                  <p className="whitespace-pre-wrap text-left flex-1 mr-2">
+                    {projects[index].description}
+                  </p>
+                  <a
+                    href={projects[index].git}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={githubLogo}
+                      alt="GitHub"
+                      className="w-6 h-6 transition-transform group-hover:scale-110"
+                    />
+                  </a>
                 </div>
               </div>
             </div>
