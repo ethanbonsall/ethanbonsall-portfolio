@@ -66,40 +66,40 @@ const Web = () => {
           {photos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl border-2 shadow-md overflow-hidden"
+              className="group relative rounded-xl border-2 shadow-md group-hover:scale-125 group-hover:z-10 group-hover:relative"
             >
-              {/* Image with link */}
-              <a
-                href={projects[index].link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <img
-                  src={photo}
-                  alt={`Project ${index}`}
-                  className="w-full h-auto object-cover rounded-xl transition-transform duration-300 group-hover:scale-105"
-                />
-              </a>
+              <div className="relative z-0">
+                <a
+                  href={projects[index].link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <img
+                    src={photo}
+                    alt={`Project ${index}`}
+                    className="w-full h-auto object-cover rounded-xl transition-transform duration-300"
+                  />
+                </a>
 
-              {/* Description overlay */}
-              <div className="absolute inset-0 bg-[#f5efe7]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end rounded-xl p-3">
-                <div className="text-[#213555] text-sm flex justify-between items-center">
-                  <p className="whitespace-pre-wrap text-left flex-1 mr-2">
-                    {projects[index].description}
-                  </p>
-                  <a
-                    href={projects[index].git}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-shrink-0"
-                  >
-                    <img
-                      src={githubLogo}
-                      alt="GitHub"
-                      className="w-6 h-6 hover:scale-110 transition-transform"
-                    />
-                  </a>
+                <div className="max-h-0 overflow-hidden hover:max-h-[300px] transition-all duration-300">
+                  <div className="bg-[#f5efe7] text-[#213555] text-sm p-3 flex justify-between items-center mt-1 rounded-xl">
+                    <p className="whitespace-pre-wrap text-left flex-1 mr-2">
+                      {projects[index].description}
+                    </p>
+                    <a
+                      href={projects[index].git}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-shrink-0"
+                    >
+                      <img
+                        src={githubLogo}
+                        alt="GitHub"
+                        className="w-6 h-6 hover:scale-110 transition-transform"
+                      />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
