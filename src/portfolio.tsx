@@ -107,7 +107,7 @@ const Portfolio = () => {
         {loading ? (
           <p className="text-xl">Loading projects...</p>
         ) : (
-          <div className="flex mt-4 grid-4">
+          <div className="flex flex-wrap gap-4 mt-4 grid-4">
             {photos.slice(0, 8).map((photo, index) => (
               <img
                 src={photo}
