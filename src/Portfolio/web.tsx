@@ -62,7 +62,7 @@ const Web = () => {
       {loading ? (
         <p className="text-xl">Loading projects...</p>
       ) : (
-        <div className="">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
           {photos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
@@ -82,7 +82,7 @@ const Web = () => {
                   />
                 </a>
 
-                <div className="max-h-0 overflow-hidden group-hover:max-h-[300px] transition-all duration-300">
+                <div className="group relative max-h-0 overflow-hidden group-hover:max-h-[300px] transition-all duration-300">
                   <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center mt-1 rounded-b-xl">
                     <p className="whitespace-pre-wrap text-left flex-1 mr-2">
                       {projects[index].description}
