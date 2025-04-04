@@ -17,11 +17,11 @@ export default async function handler(req, res) {
     const result = rows.map((row) => {
       const { data: publicData } = supabase.storage
         .from("webpage")
-        .getPublicUrl(row.image); // 'image' is the filename/key in the bucket
+        .getPublicUrl(row.image || ""); // 'image' is the filename/key in the bucket
 
       return {
         link: row.link,
-        image: publicData.publicUrl,
+        image: publicData?.publicUrl || "",
       };
     });
 
