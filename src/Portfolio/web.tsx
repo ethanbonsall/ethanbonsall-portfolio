@@ -67,7 +67,7 @@ const Web = () => {
             // 1) Each card is its own group
             <div
               key={index}
-              className="group relative rounded-xl border-2 shadow-md overflow-hidden"
+              className="relative rounded-xl border-2 shadow-md overflow-hidden"
             >
               {/* 2) The image scales on hover, but only within this group */}
               <a
@@ -79,7 +79,7 @@ const Web = () => {
                 <img
                   src={photo}
                   alt={`Project ${index}`}
-                  className="w-full h-auto object-cover rounded-xl transition-transform duration-300 group-hover:scale-110"
+                  className="group w-full h-auto object-cover rounded-xl transition-transform duration-300 group-hover:scale-110"
                 />
               </a>
 
