@@ -66,9 +66,9 @@ const Web = () => {
           {photos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl border-2 shadow-md group-hover:scale-125 group-hover:z-10 group-hover:relative"
+              className="group relative rounded-xl border-2 shadow-md overflow-visible"
             >
-              <div className="relative z-0">
+              <div className="relative z-0 group-hover:scale-125 group-hover:z-10 group-hover:relative">
                 <a
                   href={projects[index].link}
                   target="_blank"
@@ -82,7 +82,7 @@ const Web = () => {
                   />
                 </a>
 
-                <div className="max-h-0 overflow-hidden hover:max-h-[300px] transition-all duration-300">
+                <div className="max-h-0 overflow-hidden group-hover:max-h-[300px] transition-all duration-300">
                   <div className="bg-[#f5efe7] text-[#213555] text-sm p-3 flex justify-between items-center mt-1 rounded-xl">
                     <p className="whitespace-pre-wrap text-left flex-1 mr-2">
                       {projects[index].description}
