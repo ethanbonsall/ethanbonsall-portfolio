@@ -82,9 +82,9 @@ const Web = () => {
                   />
                 </a>
 
-                <div className="relative max-h-0 overflow-hidden group-hover:max-h-[300px] transition-all duration-300">
+                <div className="relative max-h-0 overflow-hidden group-hover:max-h-[300px] duration-300">
                   <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center mt-1 rounded-b-xl">
-                    <p className="text-left mr-2">
+                    <p className="whitespace-pre-wrap text-left mr-2">
                       {projects[index].description}
                     </p>
                     <a
