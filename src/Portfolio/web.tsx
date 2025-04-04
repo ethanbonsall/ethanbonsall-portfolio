@@ -62,44 +62,42 @@ const Web = () => {
       {loading ? (
         <p className="text-xl">Loading projects...</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 relative z-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
           {photos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl border-2 shadow-md overflow-visible group-hover:rounded-t-xl"
+              className="group relative rounded-xl border-2 shadow-md overflow-hidden"
             >
-              <div className="relative z-0 group-hover:scale-125 group-hover:z-10 group-hover:relative">
-                <a
-                  href={projects[index].link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <img
-                    src={photo}
-                    alt={`Project ${index}`}
-                    className="w-full h-auto object-cover rounded-xl transition-transform duration-300"
-                  />
-                </a>
+              <a
+                href={projects[index].link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <img
+                  src={photo}
+                  alt={`Project ${index}`}
+                  className="w-full h-auto object-cover rounded-t-xl transition-transform duration-300 group-hover:scale-105"
+                />
+              </a>
 
-                <div className="max-h-0 overflow-hidden group-hover:max-h-[300px] transition-all duration-300">
-                  <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center mt-1 rounded-b-xl">
-                    <p className="whitespace-pre-wrap text-left flex-1 mr-2">
-                      {projects[index].description}
-                    </p>
-                    <a
-                      href={projects[index].git}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-shrink-0"
-                    >
-                      <img
-                        src={githubLogo}
-                        alt="GitHub"
-                        className="w-6 h-6 hover:scale-110 transition-transform"
-                      />
-                    </a>
-                  </div>
+              <div className="max-h-0 group-hover:max-h-[300px] transition-all duration-300 overflow-hidden">
+                <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center p-2 rounded-b-xl">
+                  <p className="whitespace-pre-wrap text-left flex-1 mr-2">
+                    {projects[index].description}
+                  </p>
+                  <a
+                    href={projects[index].git}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0"
+                  >
+                    <img
+                      src={githubLogo}
+                      alt="GitHub"
+                      className="w-6 h-6 hover:scale-110 transition-transform"
+                    />
+                  </a>
                 </div>
               </div>
             </div>
