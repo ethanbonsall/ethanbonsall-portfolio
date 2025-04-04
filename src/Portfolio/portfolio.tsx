@@ -1,9 +1,9 @@
-import Courses from "/workspaces/a01-personal-portfolio-ethanbonsall/src/Portfolio/courses.tsx";
-import Header from "/workspaces/a01-personal-portfolio-ethanbonsall/src/Portfolio/header.tsx";
-import About from "/workspaces/a01-personal-portfolio-ethanbonsall/src/Portfolio/about.tsx";
-import Web from "/workspaces/a01-personal-portfolio-ethanbonsall/src/Portfolio/web.tsx";
-import Education from "/workspaces/a01-personal-portfolio-ethanbonsall/src/Portfolio/classes.tsx";
-import Skills from "/workspaces/a01-personal-portfolio-ethanbonsall/src/Portfolio/skills.tsx";
+import Courses from "./courses";
+import Header from "./header";
+import About from "./about";
+import Web from "./web";
+import Education from "./classes";
+import Skills from "./skills";
 
 const Portfolio = () => {
   return (
