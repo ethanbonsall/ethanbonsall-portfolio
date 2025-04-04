@@ -70,18 +70,20 @@ const Web = () => {
               className="relative rounded-xl border-2 shadow-md overflow-hidden"
             >
               {/* 2) The image scales on hover, but only within this group */}
-              <a
-                href={projects[index].link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block overflow-hidden"
-              >
-                <img
-                  src={photo}
-                  alt={`Project ${index}`}
-                  className="group w-full h-auto object-cover rounded-xl transition-transform duration-300 group-hover:scale-110"
-                />
-              </a>
+              <div className="group">
+                <a
+                  href={projects[index].link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block overflow-hidden"
+                >
+                  <img
+                    src={photo}
+                    alt={`Project ${index}`}
+                    className="w-full h-auto object-cover rounded-xl transition-transform duration-300 group-hover:scale-110"
+                  />
+                </a>
+              </div>
 
               {/* 3) Only expand this description on hover within the same group */}
               <div className="max-h-0 overflow-hidden transition-all duration-300 group-hover:max-h-[300px]">
