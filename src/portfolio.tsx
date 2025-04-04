@@ -2,8 +2,45 @@ import linkedinLogo from "./assets/linkedin-logo.jpeg";
 import githubLogo from "./assets/github-logo.png";
 import profilePic from "./assets/image.jpeg";
 import Courses from "./courses";
+import { useEffect, useState } from "react";
 
 const Portfolio = () => {
+  interface Photo {
+    link: string;
+    image: string;
+  }
+
+  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      try {
+        const response = await fetch(
+          "https://www.ethanbonsall.com/api/webpage/"
+        );
+
+        if (!response.ok) {
+          throw new Error(`Server responded with ${response.status}`);
+        }
+
+        const data = await response.json();
+        setPhotos(data);
+        setLoading(false);
+
+        if (!Array.isArray(data)) {
+          throw new Error("Invalid response format");
+        }
+
+        setPhotos(Array.isArray(data) ? data.map((photo) => photo.url) : []);
+      } catch (error) {
+        console.error("Error fetching photos:", error);
+        setPhotos([]);
+      }
+    };
+
+    fetchPhotos();
+  }, []);
   return (
     <div className="bg-[#f5efe7] flex flex-col items-center font-roboto min-h-screen pt-6">
       {/* Header Section */}
@@ -12,6 +49,10 @@ const Portfolio = () => {
           <h1 className="m-1 text-4xl font-bold">Ethan Bonsall</h1>
           <h4 className="m-1 text-2xl">
             UNC Chapel Hill Sophomore | Software Developer
+          </h4>
+          <h4 className="m-1">
+            Philadelphia, Harrisburg & Pittsburgh, PA | Chapel Hill & Charlotte,
+            NC
           </h4>
         </div>
         <div className="flex gap-4 items-center pr-10">
@@ -59,10 +100,46 @@ const Portfolio = () => {
           learning algorithms, with a focus on creating practical and innovative
           solutions. Outside of academics, I’m a sports enthusiast who enjoys
           playing soccer and tennis, cheering on the Steelers, hiking, and
-          spending time with friends. I’m actively seeking an internship where I
-          can apply my skills and continue learning—let’s make something great
-          together!
+          spending time with friends. I am currently an Associate Programmer
+          Intern at Sheetz.
         </p>
+      </section>
+
+      <section className="bg-[#d8c4b6] text-[#213555] rounded-xl px-5 py-4 w-[93%] mt-5 border-2">
+        <h1 className="text-4xl font-bold">Projects</h1>
+        <hr className="border-black my-2" />
+        <h2 className="text-2xl font-semibold">Web Projects</h2>
+        {loading ? (
+          <p className="text-xl">Loading projects...</p>
+        ) : (
+          <div className="flex flex-wrap gap-4 mt-4">
+            {photos.map((photo, index) => (
+              <a
+                key={index}
+                href={photo.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-transform transform hover:scale-105"
+              >
+                <img
+                  src={photo.image}
+                  alt={`Project ${index + 1}`}
+                  className="w-64 h-40 object-cover rounded-xl border-2 shadow-md"
+                />
+              </a>
+            ))}
+          </div>
+        )}
+      </section>
+      <section className="bg-[#d8c4b6] text-[#213555] rounded-xl px-5 py-4 w-[93%] mt-5 border-2">
+        <h1 className="text-4xl font-bold">Education</h1>
+        <hr className="border-black my-2" />
+        <h2 className="text-2xl font-semibold">
+          University of North Carolina at Chapel Hill
+        </h2>
+        <p className="text-xl">Bachelor of Science in Computer Science</p>
+        <p className="text-xl">Expected Graduation: May 2026</p>
+        <p className="text-xl">GPA: 3.7/4.0</p>
       </section>
 
       <section className="bg-[#d8c4b6] text-[#213555] rounded-xl px-5 py-4 w-[93%] mt-5 border-2">
