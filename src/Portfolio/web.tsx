@@ -66,38 +66,39 @@ const Web = () => {
           {photos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl overflow-hidden border-2 shadow-md"
+              className="group rounded-xl overflow-hidden border-2 shadow-md transition-all duration-300"
             >
-              {/* Image linking to live project */}
               <a
                 href={projects[index].link}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="block transition-transform duration-300 group-hover:scale-110"
               >
                 <img
                   src={photo}
                   alt={`Project ${index}`}
-                  className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-auto object-cover"
                 />
               </a>
 
-              {/* Hover description and GitHub icon */}
-              <div className="absolute bottom-0 left-0 w-full bg-[#f5efe7]/90 text-[#213555] text-sm p-2 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <p className="whitespace-pre-wrap text-left flex-1 mr-2">
-                  {projects[index].description}
-                </p>
-                <a
-                  href={projects[index].git}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-shrink-0"
-                >
-                  <img
-                    src={githubLogo}
-                    alt="GitHub"
-                    className="w-6 h-6 hover:scale-110 transition-transform"
-                  />
-                </a>
+              <div className="max-h-0 overflow-hidden group-hover:max-h-[300px] transition-all duration-300">
+                <div className="bg-[#f5efe7] text-[#213555] text-sm p-3 flex justify-between items-center mt-1 rounded-b-xl">
+                  <p className="whitespace-pre-wrap text-left flex-1 mr-2">
+                    {projects[index].description}
+                  </p>
+                  <a
+                    href={projects[index].git}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0"
+                  >
+                    <img
+                      src={githubLogo}
+                      alt="GitHub"
+                      className="w-6 h-6 hover:scale-110 transition-transform"
+                    />
+                  </a>
+                </div>
               </div>
             </div>
           ))}
