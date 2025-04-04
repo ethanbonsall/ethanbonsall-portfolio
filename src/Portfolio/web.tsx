@@ -66,27 +66,25 @@ const Web = () => {
           {photos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl border-2 shadow-md overflow-visible"
+              className="group relative rounded-xl border-2 shadow-md overflow-hidden"
             >
-              {/* Image container */}
-              <div className="relative z-0 transition-transform duration-300 group-hover:scale-125 group-hover:z-10">
-                <a
-                  href={projects[index].link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <img
-                    src={photo}
-                    alt={`Project ${index}`}
-                    className="w-full h-auto object-cover rounded-xl"
-                  />
-                </a>
-              </div>
+              {/* Image with link */}
+              <a
+                href={projects[index].link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <img
+                  src={photo}
+                  alt={`Project ${index}`}
+                  className="w-full h-auto object-cover rounded-xl transition-transform duration-300 group-hover:scale-105"
+                />
+              </a>
 
-              {/* Description container — only opens for this hovered card */}
-              <div className="max-h-0 overflow-hidden group-hover:max-h-[300px] transition-all duration-300">
-                <div className="bg-[#f5efe7] text-[#213555] text-sm p-3 flex justify-between items-center mt-1 rounded-xl">
+              {/* Description overlay */}
+              <div className="absolute inset-0 bg-[#f5efe7]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end rounded-xl p-3">
+                <div className="text-[#213555] text-sm flex justify-between items-center">
                   <p className="whitespace-pre-wrap text-left flex-1 mr-2">
                     {projects[index].description}
                   </p>
