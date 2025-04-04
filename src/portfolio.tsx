@@ -5,11 +5,7 @@ import Courses from "./courses";
 import { useEffect, useState } from "react";
 
 const Portfolio = () => {
-  interface Photo {
-    image: string;
-  }
-
-  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [photos, setPhotos] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -112,7 +108,7 @@ const Portfolio = () => {
           <div className="flex flex-wrap gap-4 mt-4">
             {photos.map((photo, index) => (
               <img
-                src={photo.image}
+                src={photo}
                 alt={`Project ${index + 1}`}
                 className="w-64 h-40 object-cover rounded-xl border-2 shadow-md"
               />
