@@ -82,21 +82,21 @@ const Web = () => {
                   />
                 </a>
 
-                <div className="relative max-h-0 overflow-hidden group-hover:max-h-[300px] duration-300">
+                <div className="relative max-h-0 overflow-hidden group-hover:max-h-[300px] transition-all duration-300">
                   <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center mt-1 rounded-b-xl">
-                    <p className="whitespace-pre-wrap text-left mr-2">
+                    <p className="whitespace-pre-wrap text-left flex-1 mr-2">
                       {projects[index].description}
                     </p>
                     <a
                       href={projects[index].git}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className=""
+                      className="h-0 w-0 group-hover:h-auto group-hover-w-auto"
                     >
                       <img
                         src={githubLogo}
                         alt="GitHub"
-                        className="w-6 h-6 hover:scale-110 transition-transform"
+                        className="w-0 h-0 group-hover:w-6 group-hover:h-6 hover:scale-110 transition-transform"
                       />
                     </a>
                   </div>
