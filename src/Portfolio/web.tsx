@@ -62,13 +62,13 @@ const Web = () => {
       {loading ? (
         <p className="text-xl">Loading projects...</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+        <div className="grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
           {photos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl border-2 shadow-md overflow-visible group-hover:rounded-t-xl group-hover:rounded-b-none"
+              className=" relative rounded-xl border-2 shadow-md overflow-visible hover:rounded-t-xl hover:rounded-b-none"
             >
-              <div className="relative z-0 group-hover:scale-125 group-hover:z-10 group-hover:relative">
+              <div className="relative z-0 hover:scale-125 hover:z-10 hover:relative">
                 <a
                   href={projects[index].link}
                   target="_blank"
@@ -82,7 +82,7 @@ const Web = () => {
                   />
                 </a>
 
-                <div className="relative max-h-0 overflow-hidden group-hover:max-h-[300px] transition-all duration-300">
+                <div className="relative max-h-0 overflow-hidden hover:max-h-[300px] transition-all duration-300">
                   <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center mt-1 rounded-b-xl">
                     <p className="whitespace-pre-wrap text-left flex-1 mr-2">
                       {projects[index].description}
@@ -91,12 +91,12 @@ const Web = () => {
                       href={projects[index].git}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="h-0 w-0 group-hover:h-auto group-hover-w-auto"
+                      className=""
                     >
                       <img
                         src={githubLogo}
                         alt="GitHub"
-                        className="w-0 h-0 group-hover:w-6 group-hover:h-6 hover:scale-110 transition-transform"
+                        className="w-6 h-6 hover:scale-110 transition-transform"
                       />
                     </a>
                   </div>
