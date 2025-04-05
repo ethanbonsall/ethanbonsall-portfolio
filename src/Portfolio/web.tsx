@@ -66,7 +66,7 @@ const Web = () => {
           {photos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl border-2 shadow-md overflow-hidden hover:scale-105"
+              className="group relative rounded-xl shadow-md overflow-hidden hover:scale-105"
             >
               <a
                 href={projects[index].link}
@@ -81,7 +81,7 @@ const Web = () => {
                 />
               </a>
 
-              <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center mt-1 rounded-b-xl p-2">
+              <div className="bg-[#f5efe7] text-[#213555] h-0 w-0 text-sm flex justify-between items-center mt-1 rounded-b-xl p-2 group-hover:w-full group:hover:h-auto">
                 <p className="whitespace-pre-wrap text-left flex-1 mr-2">
                   {projects[index].description}
                 </p>
