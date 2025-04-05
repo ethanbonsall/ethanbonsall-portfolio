@@ -53,7 +53,7 @@ const Web = () => {
         "Frontend: React + Next.js + Tailwind + Vite\nBackend: Supabase + Spotify API\nStorage: Supabase File Storage\nDetails: Collaborative playlist app with Spotify login, song adding, image upload/view, and offline file fallback.",
     },
   ];
-  const customOrder = [7, 0, 1, 2, 3, 4, 5, 6];
+  const customOrder = [7, 5, 4, 3, 2, 1, 0, 6];
   const reversedPhotos = customOrder.map((i) => photos[i]);
   const reversedProjects = customOrder.map((i) => projects[i]);
   return (
@@ -69,9 +69,9 @@ const Web = () => {
           {reversedPhotos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl border-2 transition-transfor duration-300 hover:rounded-t-xl hover:rounded-b-none"
+              className="group relative rounded-xl transition-transfor duration-300 hover:rounded-t-xl hover:rounded-b-none"
             >
-              <div className="relative z-0 group-hover:z-20 group-hover:scale-110 transition-transform duration-300">
+              <div className="relative z-0 border-2 group-hover:z-20 group-hover:scale-110 transition-transform duration-300">
                 <a
                   href={reversedProjects[index].link}
                   target="_blank"
