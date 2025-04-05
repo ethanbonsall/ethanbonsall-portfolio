@@ -66,14 +66,14 @@ const Web = () => {
           {photos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl transition-transform duration-300"
+              className="group relative rounded-xl transition-transform duration-300 group-hover:rounded-t-xl group-hover:rounded-b-none"
             >
               <div className="relative z-0 group-hover:z-20 group-hover:scale-110 transition-transform duration-300">
                 <a
                   href={projects[index].link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block overflow-hidden rounded-xl"
+                  className="block overflow-hidden rounded-xl group-hover:rounded-t-xl group-hover:rounded-b-none"
                 >
                   <img
                     src={photo}
@@ -82,7 +82,7 @@ const Web = () => {
                   />
                 </a>
 
-                <div className="absolute left-0 right-0 top-full mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 pointer-events-none">
+                <div className="absolute left-0 right-0 top-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 pointer-events-none">
                   <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center rounded-b-xl p-2 shadow-xl">
                     <p className="whitespace-pre-wrap text-left flex-1 mr-2">
                       {projects[index].description}
