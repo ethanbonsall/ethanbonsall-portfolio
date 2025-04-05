@@ -78,11 +78,10 @@ const Web = () => {
                   <img
                     src={photo}
                     alt={`Project ${index}`}
-                    className="w-full h-60 object-cover rounded-xl"
+                    className="w-full h-auto object-cover rounded-xl group-hover:rounded-t-xl group:hover: rounded-b-none"
                   />
                 </a>
 
-                {/* Floating description below the image, hovering above others */}
                 <div className="absolute left-0 right-0 top-full mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 pointer-events-none">
                   <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center rounded-b-xl p-2 shadow-xl">
                     <p className="whitespace-pre-wrap text-left flex-1 mr-2">
