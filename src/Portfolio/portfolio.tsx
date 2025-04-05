@@ -4,6 +4,7 @@ import About from "./about";
 import Web from "./web";
 import Education from "./classes";
 import Skills from "./skills";
+import Experience from "./experience";
 
 const Portfolio = () => {
   return (
@@ -11,6 +12,7 @@ const Portfolio = () => {
       <Header />
       <About />
       <Web />
+      <Experience />
       <Education />
       <Courses />
       <Skills />

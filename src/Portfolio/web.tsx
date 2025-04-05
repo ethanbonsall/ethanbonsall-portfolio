@@ -71,7 +71,7 @@ const Web = () => {
               key={index}
               className="group relative rounded-xl transition-transfor duration-300 hover:rounded-t-xl hover:rounded-b-none"
             >
-              <div className="relative z-0 rounded-xl border-2 group-hover:z-20 group-hover:scale-110 transition-transform duration-300">
+              <div className="relative z-0 group-hover:z-20 group-hover:scale-110 transition-transform duration-300">
                 <a
                   href={reversedProjects[index].link}
                   target="_blank"
