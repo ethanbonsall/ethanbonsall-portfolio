@@ -66,28 +66,26 @@ const Web = () => {
           {photos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl overflow-hidden border-2 shadow-md"
+              className="group relative rounded-xl overflow-hidden"
             >
-              {/* Image always visible */}
               <a
                 href={projects[index].link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block"
+                className="block overflow-hidden"
               >
                 <img
                   src={photo}
                   alt={`Project ${index}`}
-                  className="w-full h-auto object-cover rounded-xl transition-transform duration-300 group-hover:scale-110"
+                  className="group w-full h-auto object-cover z-0 rounded-xl transition-transform duration-300 group-hover:z-1001 group-hover:scale-110"
                 />
               </a>
 
-              {/* Floating overlay on hover */}
-              <div className="absolute inset-0 z-10 bg-[#f5efe7] bg-opacity-95 text-[#213555] text-sm flex flex-col justify-between p-3 rounded-xl opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto">
-                <p className="whitespace-pre-wrap text-left flex-1 mr-2">
-                  {projects[index].description}
-                </p>
-                <div className="flex justify-end mt-2">
+              <div className="max-h-0 overflow-hidden z-0 will-change-transform duration-300 group-hover:z-1001 group-hover:max-h-[300px]">
+                <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center mt-1 rounded-b-xl p-2">
+                  <p className="whitespace-pre-wrap text-left flex-1 mr-2">
+                    {projects[index].description}
+                  </p>
                   <a
                     href={projects[index].git}
                     target="_blank"
@@ -96,7 +94,7 @@ const Web = () => {
                     <img
                       src={githubLogo}
                       alt="GitHub"
-                      className="w-6 h-6 transition-transform hover:scale-110"
+                      className="w-6 h-6 transition-transform group-hover:scale-110"
                     />
                   </a>
                 </div>
