@@ -68,7 +68,7 @@ const Web = () => {
           {reversedPhotos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl transition-transfor border-2 duration-300 group-hover:rounded-t-xl group-hover:rounded-b-none"
+              className="group relative rounded-xl transition-transfor duration-300 group-hover:rounded-t-xl group-hover:rounded-b-none"
             >
               <div className="relative z-0 group-hover:z-20 group-hover:scale-110 transition-transform duration-300">
                 <a
@@ -80,14 +80,24 @@ const Web = () => {
                   <img
                     src={photo}
                     alt={`Project ${index}`}
-                    className="w-full h-auto object-cover rounded-xl group-hover:rounded-t-xl group-hover:rounded-b-none"
+                    className="w-full h-auto object-cover border rounded-xl group-hover:rounded-t-xl group-hover:rounded-b-none"
                   />
                 </a>
 
                 <div className="absolute left-0 right-0 top-full opacity-0 hover:opacity-100 group-hover:opacity-100 transition-opacity duration-300 z-30 pointer-events-auto">
                   <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center rounded-b-xl p-2 shadow-xl">
                     <p className="whitespace-pre-wrap text-left flex-1 mr-2">
-                      {reversedProjects[index].description}
+                      {reversedProjects[index].description
+                        .split("\n")
+                        .map((line, i) => {
+                          const [label, ...rest] = line.split(":");
+                          return (
+                            <div key={i}>
+                              <strong>{label}:</strong>
+                              {rest.join(":")}
+                            </div>
+                          );
+                        })}
                     </p>
                     <a
                       href={reversedProjects[index].git}
