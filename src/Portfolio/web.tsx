@@ -53,8 +53,9 @@ const Web = () => {
         "Frontend: React + Next.js + Tailwind + Vite\nBackend: Supabase + Spotify API\nStorage: Supabase File Storage\nDetails: Collaborative playlist app with Spotify login, song adding, image upload/view, and offline file fallback.",
     },
   ];
-  const reversedPhotos = photos.slice(0, 8).reverse();
-  const reversedProjects = projects.slice(0, 8).reverse();
+  const customOrder = [7, 0, 1, 2, 3, 4, 5, 6];
+  const reversedPhotos = customOrder.map((i) => photos[i]);
+  const reversedProjects = customOrder.map((i) => projects[i]);
   return (
     <section className="bg-[#d8c4b6] text-[#213555] z-0 rounded-xl px-5 py-4 w-[93%] mt-5 border-2">
       <h1 className="text-4xl z-0 font-bold">Projects</h1>
@@ -68,7 +69,7 @@ const Web = () => {
           {reversedPhotos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl transition-transfor duration-300 group-hover:rounded-t-xl group-hover:rounded-b-none"
+              className="group relative rounded-xl border-2 transition-transfor duration-300 hover:rounded-t-xl hover:rounded-b-none"
             >
               <div className="relative z-0 group-hover:z-20 group-hover:scale-110 transition-transform duration-300">
                 <a
@@ -80,7 +81,7 @@ const Web = () => {
                   <img
                     src={photo}
                     alt={`Project ${index}`}
-                    className="w-full h-auto object-cover border rounded-xl group-hover:rounded-t-xl group-hover:rounded-b-none"
+                    className="w-full h-auto object-cover rounded-xl group-hover:rounded-t-xl group-hover:rounded-b-none"
                   />
                 </a>
 
