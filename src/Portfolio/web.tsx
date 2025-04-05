@@ -64,11 +64,11 @@ const Web = () => {
       {loading ? (
         <p className="text-xl">Loading projects...</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 relative">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10 relative">
           {reversedPhotos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl transition-transform duration-300 group-hover:rounded-t-xl group-hover:rounded-b-none"
+              className="group relative rounded-xl transition-transfor border-2 duration-300 group-hover:rounded-t-xl group-hover:rounded-b-none"
             >
               <div className="relative z-0 group-hover:z-20 group-hover:scale-110 transition-transform duration-300">
                 <a
