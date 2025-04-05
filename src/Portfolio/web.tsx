@@ -72,17 +72,18 @@ const Web = () => {
                 href={projects[index].link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block overflow-hidden"
+                className="block"
               >
                 <img
                   src={photo}
                   alt={`Project ${index}`}
-                  className="group w-full h-auto object-cover z-0 rounded-xl transition-transform duration-300 group-hover:z-1001 group-hover:scale-110"
+                  className="w-full h-60 object-cover z-0 rounded-xl transition-transform duration-300 group-hover:scale-110"
                 />
               </a>
 
-              <div className="max-h-0 overflow-hidden z-0 will-change-transform duration-300 group-hover:z-1001 group-hover:max-h-[300px]">
-                <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center mt-1 rounded-b-xl p-2">
+              {/* Overlay Description */}
+              <div className="absolute bottom-0 left-0 right-0 opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-10">
+                <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center rounded-b-xl p-2">
                   <p className="whitespace-pre-wrap text-left flex-1 mr-2">
                     {projects[index].description}
                   </p>
