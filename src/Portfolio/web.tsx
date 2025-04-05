@@ -82,7 +82,7 @@ const Web = () => {
                   />
                 </a>
 
-                <div className="absolute left-0 right-0 top-full opacity-0 hover:opacity-100 group-hover:opacity-100 transition-opacity duration-300 z-30 pointer-events-none">
+                <div className="absolute left-0 right-0 top-full opacity-0 hover:opacity-100 group-hover:opacity-100 transition-opacity duration-300 z-30 pointer-events-auto">
                   <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center rounded-b-xl p-2 shadow-xl">
                     <p className="whitespace-pre-wrap text-left flex-1 mr-2">
                       {projects[index].description}
