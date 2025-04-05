@@ -53,6 +53,8 @@ const Web = () => {
         "Frontend: React + Next.js + Tailwind + Vite\nBackend: Supabase + Spotify API\nStorage: Supabase File Storage\nDetails: Collaborative playlist app with Spotify login, song adding, image upload/view, and offline file fallback.",
     },
   ];
+  const reversedPhotos = photos.slice(0, 8).reverse();
+  const reversedProjects = projects.slice(0, 8).reverse();
   return (
     <section className="bg-[#d8c4b6] text-[#213555] z-0 rounded-xl px-5 py-4 w-[93%] mt-5 border-2">
       <h1 className="text-4xl z-0 font-bold">Projects</h1>
@@ -62,15 +64,15 @@ const Web = () => {
       {loading ? (
         <p className="text-xl">Loading projects...</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 relative">
-          {photos.slice(0, 8).map((photo, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 relative">
+          {reversedPhotos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
               className="group relative rounded-xl transition-transform duration-300 group-hover:rounded-t-xl group-hover:rounded-b-none"
             >
               <div className="relative z-0 group-hover:z-20 group-hover:scale-110 transition-transform duration-300">
                 <a
-                  href={projects[index].link}
+                  href={reversedProjects[index].link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block overflow-hidden rounded-xl group-hover:rounded-t-xl group-hover:rounded-b-none"
@@ -85,10 +87,10 @@ const Web = () => {
                 <div className="absolute left-0 right-0 top-full opacity-0 hover:opacity-100 group-hover:opacity-100 transition-opacity duration-300 z-30 pointer-events-auto">
                   <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center rounded-b-xl p-2 shadow-xl">
                     <p className="whitespace-pre-wrap text-left flex-1 mr-2">
-                      {projects[index].description}
+                      {reversedProjects[index].description}
                     </p>
                     <a
-                      href={projects[index].git}
+                      href={reversedProjects[index].git}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
