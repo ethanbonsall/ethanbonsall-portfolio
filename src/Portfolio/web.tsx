@@ -78,7 +78,7 @@ const Web = () => {
                   <img
                     src={photo}
                     alt={`Project ${index}`}
-                    className="w-full h-auto object-cover rounded-xl group-hover:rounded-t-xl group:hover:rounded-b-none"
+                    className="w-full h-auto object-cover rounded-xl group-hover:rounded-t-xl group-hover:rounded-b-none"
                   />
                 </a>
 
