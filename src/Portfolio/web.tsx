@@ -62,28 +62,28 @@ const Web = () => {
       {loading ? (
         <p className="text-xl">Loading projects...</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 relative">
           {photos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl overflow-hidden"
+              className="group relative rounded-xl overflow-visible"
             >
               <a
                 href={projects[index].link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block"
+                className="block overflow-hidden"
               >
                 <img
                   src={photo}
                   alt={`Project ${index}`}
-                  className="w-full h-60 object-cover z-0 rounded-xl transition-transform duration-300 group-hover:scale-110"
+                  className="w-full h-60 object-cover rounded-xl transition-transform duration-300 group-hover:scale-110"
                 />
               </a>
 
-              {/* Overlay Description */}
-              <div className="absolute bottom-0 left-0 right-0 opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-10">
-                <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center rounded-b-xl p-2">
+              {/* Floating description below, but over other items */}
+              <div className="absolute left-0 right-0 top-full mt-1 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center rounded-b-xl p-2 shadow-xl">
                   <p className="whitespace-pre-wrap text-left flex-1 mr-2">
                     {projects[index].description}
                   </p>
