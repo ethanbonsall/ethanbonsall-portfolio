@@ -64,7 +64,10 @@ const Web = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
           {photos.slice(0, 8).map((photo, index) => (
-            <div key={index} className="relative rounded-xl overflow-hidden">
+            <div
+              key={index}
+              className="group relative rounded-xl overflow-hidden"
+            >
               <a
                 href={projects[index].link}
                 target="_blank"
