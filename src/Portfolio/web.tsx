@@ -66,38 +66,40 @@ const Web = () => {
           {photos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl overflow-visible"
+              className="group relative rounded-xl transition-transform duration-300"
             >
-              <a
-                href={projects[index].link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block overflow-hidden"
-              >
-                <img
-                  src={photo}
-                  alt={`Project ${index}`}
-                  className="w-full h-60 object-cover rounded-xl transition-transform duration-300 group-hover:scale-110"
-                />
-              </a>
+              <div className="relative z-0 group-hover:z-20 group-hover:scale-110 transition-transform duration-300">
+                <a
+                  href={projects[index].link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block overflow-hidden rounded-xl"
+                >
+                  <img
+                    src={photo}
+                    alt={`Project ${index}`}
+                    className="w-full h-60 object-cover rounded-xl"
+                  />
+                </a>
 
-              {/* Floating description below, but over other items */}
-              <div className="absolute left-0 right-0 top-full mt-1 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center rounded-b-xl p-2 shadow-xl">
-                  <p className="whitespace-pre-wrap text-left flex-1 mr-2">
-                    {projects[index].description}
-                  </p>
-                  <a
-                    href={projects[index].git}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src={githubLogo}
-                      alt="GitHub"
-                      className="w-6 h-6 transition-transform group-hover:scale-110"
-                    />
-                  </a>
+                {/* Floating description below the image, hovering above others */}
+                <div className="absolute left-0 right-0 top-full mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 pointer-events-none">
+                  <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center rounded-b-xl p-2 shadow-xl">
+                    <p className="whitespace-pre-wrap text-left flex-1 mr-2">
+                      {projects[index].description}
+                    </p>
+                    <a
+                      href={projects[index].git}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        src={githubLogo}
+                        alt="GitHub"
+                        className="w-6 h-6 transition-transform group-hover:scale-110"
+                      />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
