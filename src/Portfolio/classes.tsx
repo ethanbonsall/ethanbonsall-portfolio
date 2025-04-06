@@ -8,7 +8,7 @@ const Education = () => {
       </h2>
       <p className="text-xl">Bachelor of Science in Computer Science</p>
       <p className="text-xl">Expected Graduation: May 2026</p>
-      <p className="text-xl">GPA: 3.7/4.0</p>
+      <p className="text-xl">GPA: 3.7</p>
     </section>
   );
 };
