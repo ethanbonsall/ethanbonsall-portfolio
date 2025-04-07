@@ -17,7 +17,7 @@ const Experience = () => {
     return [yearStr, monthStr].filter(Boolean).join(" ");
   };
   return (
-    <section className="bg-[#d8c4b6] text-[#213555] rounded-xl p-5 w-[93%] my-2 border-2">
+    <section className="bg-[#d8c4b6] text-[#213555] rounded-xl p-5 mt-6 w-[93%] mb-2 border-2">
       <h1 className="text-4xl font-bold">Experience</h1>
       <hr className="border-black my-2" />
 
