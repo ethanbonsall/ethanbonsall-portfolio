@@ -48,7 +48,9 @@ export default function RSVPModal({ onClose }: RSVPModalProps) {
           X
         </button>
 
-        <h2 className="text-lg font-bold mb-4 text-white">RSVP for Ethan's Party</h2>
+        <h2 className="text-lg font-bold mb-4 text-white">
+          RSVP for Ethan's Party
+        </h2>
 
         <label className="block text-white mb-2">Your Name:</label>
         <input
@@ -62,8 +64,19 @@ export default function RSVPModal({ onClose }: RSVPModalProps) {
         <input
           type="number"
           className="w-full p-2 border border-gray-600 bg-gray-900 text-white"
-          value={plusOne}
-          onChange={(e) => setPlusOne(Number(e.target.value))}
+          value={plusOne === 0 ? "" : plusOne}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (value === "") {
+              setPlusOne(0);
+            } else {
+              const numberValue = Number(value);
+              if (numberValue >= 0) {
+                setPlusOne(numberValue);
+              }
+            }
+          }}
+          min={0}
         />
 
         <div className="flex justify-end mt-4 space-x-2">
