@@ -8,12 +8,12 @@ export default async function handler(req, res) {
   }
   //Try to get all photos from supabase photos/uploads bucket. Catch errors. 
   try {
-    const { data, error } = await supabase.storage.from("photos").list("uploads");
+    const { data, error } = await supabase.storage.from("photos").list("recruit");
 
     if (error) throw error;
     // Map through the data to get the public URLs for each file
     const photoUrls = data.map((file) => {
-      const { data: urlData } = supabase.storage.from("photos").getPublicUrl(`uploads/${file.name}`);
+      const { data: urlData } = supabase.storage.from("photos").getPublicUrl(`recruit/${file.name}`);
       return {
         name: file.name,
         url: urlData.publicUrl, 

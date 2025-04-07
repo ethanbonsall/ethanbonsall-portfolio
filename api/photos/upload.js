@@ -12,7 +12,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: "No file provided" });
     }
 
-    const filePath = `uploads/${Date.now()}_${file.name}`;
+    const filePath = `recruit/${Date.now()}_${file.name}`;
     const { data, error } = await supabase.storage.from("photos").upload(filePath, file, {
       cacheControl: "3600",
       upsert: false,

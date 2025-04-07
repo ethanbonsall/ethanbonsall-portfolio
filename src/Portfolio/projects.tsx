@@ -1,5 +1,6 @@
 import useWebpagePhotos from "./useWebpagePhotos";
 import githubLogo from "../assets/github-logo.png";
+import { useEffect, useState } from "react";
 
 const Web = () => {
   const { photos, loading } = useWebpagePhotos();
@@ -53,6 +54,21 @@ const Web = () => {
         "Frontend: React + Next.js + Tailwind + Vite\nBackend: Supabase + Spotify API\nStorage: Supabase File Storage\nDetails: Collaborative playlist app with Spotify login, song adding, image upload/view, and offline file fallback.",
     },
   ];
+
+  const text = "Loading projects...";
+  const [displayedText, setDisplayedText] = useState("");
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (index < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText((prev) => prev + text[index]);
+        setIndex((prev) => prev + 1);
+      }, 100);
+      return () => clearTimeout(timeout);
+    }
+  }, [index, text]);
+
   const customOrder = [7, 5, 4, 3, 2, 1, 0, 6];
   const reversedPhotos = customOrder.map((i) => photos[i]);
   const reversedProjects = customOrder.map((i) => projects[i]);
@@ -63,7 +79,9 @@ const Web = () => {
       <h2 className="text-2xl z-0 font-semibold mb-4">Web Projects</h2>
 
       {loading ? (
-        <p className="text-xl">Loading projects...</p>
+        <div className="flex justify-center items-center">
+          <b className="text-3xl">{displayedText}</b>
+        </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 relative">
           {reversedPhotos.slice(0, 8).map((photo, index) => (

@@ -117,7 +117,7 @@ export default function BirthdayPage() {
   };
 
   const uploadPhoto = async (file: File) => {
-    const filePath = `uploads/${Date.now()}_${file.name}`;
+    const filePath = `recruit/${Date.now()}_${file.name}`;
 
     const { error } = await supabase.storage
       .from("photos")
@@ -270,8 +270,8 @@ export default function BirthdayPage() {
           <h1 className="text-3xl font-bold text-center text-red-600 drop-shadow-[3px_3px_0px_white]">
             You Know It's a Party If...
           </h1>
-          <p className="text-center text-xl  m-3">February 28, 8:00 PM</p>
-          <p className="text-center text-xl  mb-8">508 Chapel Street</p>
+          <p className="text-center text-xl  m-3">Event Passed</p>
+          <p className="text-center text-xl  mb-8">Address Redacted</p>
 
           {/* Search Box */}
           <div className="relative w-full max-w-lg mx-auto border border-black bg-gray-200 p-3">
@@ -338,7 +338,7 @@ export default function BirthdayPage() {
         active:shadow-[inset_3px_3px_0px_#555,inset_-3px_-3px_0px_#ddd] 
         active:translate-y-[2px] active:translate-x-[2px] w-full"
             >
-              <span className="text-base">Upload Photos</span>
+              <span className="text-base">Upload Photos Recruiters!</span>
               <input
                 type="file"
                 multiple
@@ -373,7 +373,7 @@ export default function BirthdayPage() {
               </button>
             </div>
           ) : (
-            <p className="text-center text-sm w-full max-w-md mx-auto">
+            <p className="text-center text-sm mt-4 w-full max-w-md mx-auto">
               No photos uploaded yet.
             </p>
           )}
