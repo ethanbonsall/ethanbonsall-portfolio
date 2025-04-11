@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import supabase from "../../supabaseClient";
 import RSVPModal from "../../components/rsvp";
+import Link from "next/link";
 
 export default function BirthdayPage() {
   const [, setSongs] = useState<any[]>([]);
@@ -384,15 +385,13 @@ export default function BirthdayPage() {
 
           {/* "See Playlist" Button */}
           <div className="mt-6 flex justify-center">
-            <a
-              href="https://www.ethanbonsall.com/birthday/spotify"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/birthday/spotify"
               className="px-5 py-3 border border-black bg-gray-300 shadow-[inset_-3px_-3px_0px_#ddd,inset_3px_3px_0px_#555] 
-                  hover:bg-gray-400 active:shadow-[inset_3px_3px_0px_#555,inset_-3px_-3px_0px_#ddd] active:translate-y-[2px] active:translate-x-[2px] text-lg"
+        hover:bg-gray-400 active:shadow-[inset_3px_3px_0px_#555,inset_-3px_-3px_0px_#ddd] active:translate-y-[2px] active:translate-x-[2px] text-lg"
             >
               See Playlist
-            </a>
+            </Link>
           </div>
         </div>
       </div>

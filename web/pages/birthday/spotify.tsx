@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 
 const CLIENT_ID = "a2e6aeb9971e4287a1985803be608d24";
-const REDIRECT_URI = "https://www.ethanbonsall.com/birthdaysubmit";
+const REDIRECT_URI = "https://www.ethanbonsall.com/birthday/spotify";
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const PLAYLIST_ID = "6yoTyxeEYmrn0GQ0rpATGv";
 
