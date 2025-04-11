@@ -1,8 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useRef } from "react";
 import supabase from "../../supabaseClient";
 import RSVPModal from "../../components/rsvp";
-import Image from "next/image";
 
 export default function BirthdayPage() {
   const [, setSongs] = useState<any[]>([]);
@@ -363,7 +363,7 @@ export default function BirthdayPage() {
                 ◀
               </button>
               <div className="w-full h-full flex items-center justify-center">
-                <Image
+                <img
                   src={photos[currentPhotoIndex]}
                   alt="Uploaded"
                   className="max-w-full max-h-full border border-black object-contain"

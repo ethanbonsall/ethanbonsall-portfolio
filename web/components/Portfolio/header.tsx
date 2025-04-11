@@ -1,7 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import linkedinLogo from "@/assets/linkedin-logo.jpeg";
 import githubLogo from "@/assets/github-logo.png";
 import profilePic from "@/assets/image.jpeg";
-import Image from "next/image";
 
 const Header = () => {
   return (
@@ -22,7 +22,7 @@ const Header = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
+          <img
             src={linkedinLogo.src}
             alt="LinkedIn"
             className="image-hover w-24 h-auto"
@@ -33,13 +33,13 @@ const Header = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
+          <img
             src={githubLogo.src}
             alt="GitHub"
             className="image-hover w-14 h-auto"
           />
         </a>
-        <Image
+        <img
           src={profilePic.src}
           alt="Profile"
           className="image-hover w-40 h-40 rounded-full ml-6 border-2"

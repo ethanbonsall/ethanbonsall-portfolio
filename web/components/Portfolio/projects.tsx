@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import useWebpagePhotos from "./useWebpagePhotos";
 import githubLogo from "@/assets/github-logo.png";
-import Image from "next/image";
+
 import { useEffect, useState } from "react";
 
 const Web = () => {
@@ -97,7 +98,7 @@ const Web = () => {
                   rel="noopener noreferrer"
                   className="block overflow-hidden rounded-xl group-hover:rounded-t-xl group-hover:rounded-b-none"
                 >
-                  <Image
+                  <img
                     src={photo}
                     alt={`Project ${index}`}
                     className="w-full h-auto object-cover rounded-xl group-hover:rounded-t-xl group-hover:rounded-b-none"
@@ -124,7 +125,7 @@ const Web = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Image
+                      <img
                         src={githubLogo.src}
                         alt="GitHub"
                         className="w-6 h-6 transition-transform group-hover:scale-110"
