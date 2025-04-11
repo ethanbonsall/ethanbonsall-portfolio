@@ -16,11 +16,18 @@ Welcome to my personal portfolio website — a showcase of my work, experience, 
 https://www.ethanbonsall.com/birthday
 
 ## Running Locally
-
-   git clone https://github.com/yourusername/a01-personal-portfolio-ethanbonsall.git
-   cd web
-   npm install
-   npm run dev
+   
+    git clone https://github.com/yourusername/a01-personal-portfolio-ethanbonsall.git
+    
+   ```
+cd web
+``` 
+   ```
+npm install
+   ```
+```
+npm run dev
+```     
 
 # Check it out live
 https://www.ethanbonsall.com/
