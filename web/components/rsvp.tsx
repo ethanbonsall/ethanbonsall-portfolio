@@ -49,7 +49,7 @@ export default function RSVPModal({ onClose }: RSVPModalProps) {
         </button>
 
         <h2 className="text-lg font-bold mb-4 text-white">
-          RSVP for Ethan's Party
+          RSVP for Ethan&apos;s Party
         </h2>
 
         <label className="block text-white mb-2">Your Name:</label>

@@ -1,5 +1,6 @@
 import useWebpagePhotos from "./useWebpagePhotos";
 import githubLogo from "@/assets/github-logo.png";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const Web = () => {
@@ -96,7 +97,7 @@ const Web = () => {
                   rel="noopener noreferrer"
                   className="block overflow-hidden rounded-xl group-hover:rounded-t-xl group-hover:rounded-b-none"
                 >
-                  <img
+                  <Image
                     src={photo}
                     alt={`Project ${index}`}
                     className="w-full h-auto object-cover rounded-xl group-hover:rounded-t-xl group-hover:rounded-b-none"
@@ -123,7 +124,7 @@ const Web = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <img
+                      <Image
                         src={githubLogo.src}
                         alt="GitHub"
                         className="w-6 h-6 transition-transform group-hover:scale-110"
