@@ -385,7 +385,7 @@ export default function BirthdayPage() {
           {/* "See Playlist" Button */}
           <div className="mt-6 flex justify-center">
             <a
-              href="https://www.ethanbonsall.com/birthdaysubmit"
+              href="https://www.ethanbonsall.com/birthday/spotify"
               target="_blank"
               rel="noopener noreferrer"
               className="px-5 py-3 border border-black bg-gray-300 shadow-[inset_-3px_-3px_0px_#ddd,inset_3px_3px_0px_#555] 
