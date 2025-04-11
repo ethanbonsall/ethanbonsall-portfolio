@@ -19,14 +19,13 @@ https://www.ethanbonsall.com/birthday
 
     git clone https://github.com/yourusername/a01-personal-portfolio-ethanbonsall.git
 
-   ```
-cd web
-``` 
-   ```
-npm install
-   ```
-```
-npm run dev
-```
+    cd web
+
+    npm install
+
+    npm run dev
+  
+
+
 # Check it out live
 https://www.ethanbonsall.com/
