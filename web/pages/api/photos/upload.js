@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     }
 
     const filePath = `recruit/${Date.now()}_${file.name}`;
-    const { data, error } = await supabase.storage.from("photos").upload(filePath, file, {
+    const { error } = await supabase.storage.from("photos").upload(filePath, file, {
       cacheControl: "3600",
       upsert: false,
     });

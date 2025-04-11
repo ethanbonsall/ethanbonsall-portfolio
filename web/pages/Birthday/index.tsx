@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useRef } from "react";
 import supabase from "../../supabaseClient";
 import RSVPModal from "../../components/rsvp";
+import Image from "next/image";
 
 export default function BirthdayPage() {
   const [, setSongs] = useState<any[]>([]);
@@ -258,7 +260,7 @@ export default function BirthdayPage() {
         {/* Title Bar */}
         <div className="flex items-center justify-between bg-gray-500 px-4 py-2 border-b border-black">
           <span className="text-md font-bold text-white">
-            Ethan's Birthday Rager
+            Ethan&apos;s Birthday Rager
           </span>
           <div className="flex space-x-2">
             <button className="w-4 h-4 bg-gray-800 border border-white"></button>
@@ -270,7 +272,7 @@ export default function BirthdayPage() {
         {/* Body */}
         <div className="p-6 font-[Arial] text-black">
           <h1 className="text-3xl font-bold text-center text-red-600 drop-shadow-[3px_3px_0px_white]">
-            You Know It's a Party If...
+            You Know It&apos;s a Party If...
           </h1>
           <p className="text-center text-xl  m-3">Event Passed</p>
           <p className="text-center text-xl  mb-8">Address Redacted</p>
@@ -361,7 +363,7 @@ export default function BirthdayPage() {
                 ◀
               </button>
               <div className="w-full h-full flex items-center justify-center">
-                <img
+                <Image
                   src={photos[currentPhotoIndex]}
                   alt="Uploaded"
                   className="max-w-full max-h-full border border-black object-contain"

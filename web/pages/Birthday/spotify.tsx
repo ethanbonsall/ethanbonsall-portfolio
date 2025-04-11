@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useRef } from "react";
 
 const CLIENT_ID = "a2e6aeb9971e4287a1985803be608d24";
@@ -218,7 +220,7 @@ export default function BirthdaySubmitPage() {
   return (
     <div className="min-h-screen bg-gray-800 text-white p-6 flex flex-col items-center font-mono">
       <h1 className="text-4xl font-bold mb-4 text-center bg-gray-300 text-black p-2 border-2 border-black shadow-md">
-        Ethan's Birthday Rager 🎶
+        Ethan&apos;s Birthday Rager 🎶
       </h1>
 
       {!token ? (
