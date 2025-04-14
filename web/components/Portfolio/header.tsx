@@ -2,10 +2,11 @@
 import linkedinLogo from "@/assets/linkedin-logo.jpeg";
 import githubLogo from "@/assets/github-logo.png";
 import profilePic from "@/assets/image.jpeg";
+import ThemeToggle from "@/components/toggle";
 
 const Header = () => {
   return (
-    <div className="flex justify-between items-center w-full bg-[#d8c4b6] text-[#213555] p-5 border-y-2">
+    <div className="flex justify-between items-center w-full bg-secondary text-text p-5 border-accent border-y-2">
       <div className="flex flex-col pl-5">
         <h1 className="m-1 text-4xl font-bold">Ethan Bonsall</h1>
         <h4 className="m-1 text-2xl">
@@ -15,6 +16,7 @@ const Header = () => {
           Philadelphia, Harrisburg & Pittsburgh, PA | Chapel Hill & Charlotte,
           NC
         </h4>
+        <ThemeToggle></ThemeToggle>
       </div>
       <div className="flex gap-4 items-center pr-10">
         <a
@@ -36,13 +38,13 @@ const Header = () => {
           <img
             src={githubLogo.src}
             alt="GitHub"
-            className="image-hover w-14 h-auto"
+            className="image-hover w-14 h-auto rounded-full"
           />
         </a>
         <img
           src={profilePic.src}
           alt="Profile"
-          className="image-hover w-40 h-40 rounded-full ml-6 border-2"
+          className="image-hover w-40 h-40 rounded-full ml-6 border-accent border-2"
         />
       </div>
     </div>

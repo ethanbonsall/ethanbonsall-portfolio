@@ -75,7 +75,10 @@ const Web = () => {
   const reversedPhotos = customOrder.map((i) => photos[i]);
   const reversedProjects = customOrder.map((i) => projects[i]);
   return (
-    <section className="bg-[#d8c4b6] text-[#213555] z-0 rounded-xl px-5 py-4 w-[93%] mt-5 border-2">
+    <section
+      className="bg-background text-text z-0 px-5 py-4 w-[100%] mt-5 scroll-mt-28"
+      id="projects"
+    >
       <h1 className="text-4xl z-0 font-bold">Projects</h1>
       <hr className="border-black z-0 my-2" />
       <h2 className="text-2xl z-0 font-semibold mb-4">Web Projects</h2>

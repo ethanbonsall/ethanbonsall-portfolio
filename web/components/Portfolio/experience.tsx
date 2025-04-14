@@ -33,7 +33,10 @@ const Experience = () => {
   }, []);
 
   return (
-    <section className="bg-[#d8c4b6] text-[#213555] rounded-xl p-5 mt-6 w-[93%] mb-2 border-2">
+    <section
+      className="bg-secondary text-text p-5 mt-6 w-[100%] mb-2 scroll-mt-24"
+      id="experience"
+    >
       <h1 className="text-4xl font-bold">Experience</h1>
       <hr className="border-black my-2" />
 

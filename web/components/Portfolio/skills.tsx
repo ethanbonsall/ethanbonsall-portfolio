@@ -1,8 +1,8 @@
 const Skills = () => {
   return (
-    <section className="bg-[#d8c4b6] text-[#213555] rounded-xl p-5 w-[93%] my-2 border-2">
+    <section className="bg-background text-text p-5 w-[100%] my-2">
       <h1 className="text-4xl font-bold">Skills & Technologies</h1>
-      <hr className="border-black my-2" />
+      <hr className="border-accent my-2" />
 
       <h2 className="underline text-2xl font-semibold">
         Programming Languages

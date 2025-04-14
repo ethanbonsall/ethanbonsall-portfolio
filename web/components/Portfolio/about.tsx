@@ -1,8 +1,10 @@
 const About = () => {
   return (
-    <section className="bg-[#d8c4b6] text-[#213555] rounded-xl p-5 w-[93%] mt-5 border-2">
-      <h1 className="text-4xl font-bold">About Me</h1>
-      <hr className="border-black my-2" />
+    <section className="bg-secondary text-text p-5">
+      <h1 className="text-4xl font-bold">About</h1>
+      <hr className="border-accent my-2" />
+      <h1 className="text-3xl font-bold mt-10">Description</h1>
+      <hr className="border-accent my-2" />
       <p className="text-2xl">
         Hi! I’m Ethan, originally from Camp Hill, PA, and currently an
         undergraduate studying Computer Science at UNC Chapel Hill. I’m a member
