@@ -61,7 +61,7 @@ const Courses = () => {
     }, []);
 
     return (
-      <div className="flex justify-center bg-secondary items-center w-[100%] gap-2 px-4 pb-4 pt-2">
+      <div className="flex justify-center bg-secondary items-center w-[100%] gap-2 px-4 pb-16 md:pb-24 l:pb-30 2xl:pb-36 pt-2">
         {courses.map((course, index) => {
           const isHovered = hoveredIndex === index;
           return (
@@ -69,7 +69,7 @@ const Courses = () => {
               key={index}
               className={`relative flex flex-col items-center text-center border-1
                                         bg-primary text-text rounded-xl transition-all duration-700 ease-in-out
-                                         min-w-0 max-w-500 will-change-transform px-3 py-1.5 overflow-clip
+                                         min-w-0 max-w-500 will-change-transform px-1 md:px-3 py-0.5 md:py-1.5 overflow-clip
                             ${isMobile ? (isHovered ? "flex-[2] scale-100 aspect-[36/25] justify-center" : "flex-[0.35] scale-100 aspect-[36/25] justify-center") : isHovered ? "flex-[1.5] scale-105 aspect-[6/3] justify-center" : "flex-[0.5] scale-100 aspect-[6/3] justify-center"}`}
               style={{
                 transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
