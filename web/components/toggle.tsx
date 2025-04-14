@@ -8,9 +8,12 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className=" border-2 border-accent w-10 h-10 md:w-14 md:h-14 items-center justify-items-center hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full"
+      className=" flex border-2 border-accent w-10 h-10 md:w-14 md:h-14 justify-center items-center text-center justify-items-center hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full"
     >
-      <Lightbulb size={30} className="text-accent" />
+      <Lightbulb
+        size={30}
+        className="text-accent justify-center text-center items-center"
+      />
     </button>
   );
 }
