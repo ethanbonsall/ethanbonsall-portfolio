@@ -16,7 +16,8 @@ const config = {
 				'primary': 'var(--primary)',
 				'secondary': 'var(--secondary)',
 				'accent': 'var(--accent)',
-				'reverse': 'var(--reverse)'
+				'reverse': 'var(--reverse)',
+				'pop': 'var(--pop)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

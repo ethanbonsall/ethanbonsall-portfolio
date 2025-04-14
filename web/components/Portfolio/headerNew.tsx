@@ -15,7 +15,7 @@ const Header = () => {
         <div className="flex mt-10 md:mt-20 lg:mt-30 2xl:mt-40 items-center justify-center px-10 m:px-40 l:px-64 2xl:px-80">
           <div className="flex-row items-center text-center justify-items-center text-2xl md:text-4xl lg:text-5xl font-sans font-extrabold">
             <span className="text-text">Hey, I&apos;m </span>
-            <span className="text-accent"> Ethan Bonsall. </span>
+            <span className="text-pop"> Ethan Bonsall. </span>
             <span className="text-text">
               Here, you can check out what I&apos;m working on and more about
               me. i &lt;3 coding and web dev.

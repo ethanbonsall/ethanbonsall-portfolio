@@ -51,7 +51,7 @@ const Courses = () => {
               key={index}
               className="flex-shrink-0 bg-primary text-text rounded-xl p-4 w-[80vw] md:w-[300px] shadow-lg transition-transform hover:scale-105"
             >
-              <h3 className="text-accent font-bold text-xl mb-2">
+              <h3 className="text-reverse font-bold text-xl mb-2">
                 {course.name}
               </h3>
               <p className="text-reverse">{course.description}</p>
