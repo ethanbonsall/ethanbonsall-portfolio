@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 const Courses = () => {
   const courses = [
     {
@@ -39,74 +37,27 @@ const Courses = () => {
     },
   ];
 
-  interface Course {
+  type Course = {
     name: string;
     description: string;
-  }
+  };
 
   const CourseList = ({ courses }: { courses: Course[] }) => {
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-      const checkAspectRatio = () => {
-        setTimeout(() => {
-          setIsMobile(window.innerWidth / window.innerHeight < 1);
-        }, 50);
-      };
-
-      checkAspectRatio();
-      window.addEventListener("resize", checkAspectRatio);
-      return () => window.removeEventListener("resize", checkAspectRatio);
-    }, []);
-
     return (
-      <div className="flex justify-center bg-secondary items-center w-[100%] gap-2 px-4 pb-16 md:pb-24 l:pb-30 2xl:pb-36 pt-2">
-        {courses.map((course, index) => {
-          const isHovered = hoveredIndex === index;
-          return (
+      <div className="w-full bg-secondary overflow-x-auto py-6 px-4">
+        <div className="flex overflow-y-visible pb-10 space-x-4">
+          {courses.map((course, index) => (
             <div
               key={index}
-              className={`relative flex flex-col items-center text-center border-1
-                                        bg-primary text-text rounded-xl transition-all duration-700 ease-in-out
-                                         min-w-0 max-w-500 will-change-transform px-1 md:px-3 py-0.5 md:py-1.5 overflow-clip
-                            ${isMobile ? (isHovered ? "flex-[2] scale-100 aspect-[36/25] justify-center" : "flex-[0.35] scale-100 aspect-[36/25] justify-center") : isHovered ? "flex-[1.5] scale-105 aspect-[6/3] justify-center" : "flex-[0.5] scale-100 aspect-[6/3] justify-center"}`}
-              style={{
-                transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-              }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              className="flex-shrink-0 bg-primary text-text rounded-xl p-4 w-[80vw] md:w-[300px] shadow-lg transition-transform hover:scale-105"
             >
-              <h3
-                className={`text-reverse bg-primary font-semibold transition-all duration-500 ease-in-out
-        ${hoveredIndex !== null ? (isHovered ? "underline" : "") : ""}`}
-                style={{
-                  fontSize:
-                    hoveredIndex !== null
-                      ? isHovered
-                        ? "clamp(0.8rem, 1.2vw, 1.6rem)"
-                        : "clamp(0.6rem, 0.8vw, 1rem)"
-                      : "clamp(0.2rem, 1.8vw, 1.4rem)",
-                }}
-              >
+              <h3 className="text-accent font-bold text-xl mb-2">
                 {course.name}
               </h3>
-
-              <p
-                className={`text-reverse transition-all ease-in-out
-    ${isHovered ? "opacity-100 translate-y-0 scale-100 max-h-[240px] duration-800 mt-3" : "opacity-0 translate-y-2 scale-90 max-h-0 duration-500 overflow-hidden"}`}
-                style={{
-                  fontSize: !isMobile
-                    ? "clamp(0.8rem, 1vw, 1.6rem)"
-                    : "clamp(0.6rem,1.6vw,1.8rem",
-                  maxWidth: "90%",
-                }}
-              >
-                {course.description}
-              </p>
+              <p className="text-reverse">{course.description}</p>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
     );
   };

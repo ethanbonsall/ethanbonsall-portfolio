@@ -92,9 +92,9 @@ const Web = () => {
           {reversedPhotos.slice(0, 8).map((photo, index) => (
             <div
               key={index}
-              className="group relative rounded-xl transition-transfor duration-300 hover:rounded-t-xl hover:rounded-b-none"
+              className="group relative rounded-xl w-full transition-transform duration-300 hover:rounded-t-xl hover:rounded-b-none overflow-visible"
             >
-              <div className="relative z-0 group-hover:z-20 group-hover:scale-110 transition-transform duration-300">
+              <div className="relative z-0 group-hover:z-10 group-hover:scale-105 transition-transform duration-300">
                 <a
                   href={reversedProjects[index].link}
                   target="_blank"
@@ -107,34 +107,33 @@ const Web = () => {
                     className="w-full h-auto object-cover rounded-xl group-hover:rounded-t-xl group-hover:rounded-b-none"
                   />
                 </a>
+              </div>
 
-                <div className="absolute left-0 right-0 top-full opacity-0 hover:opacity-100 group-hover:opacity-100 transition-opacity duration-300 z-30 pointer-events-auto">
-                  <div className="bg-[#f5efe7] text-[#213555] text-sm flex justify-between items-center rounded-b-xl p-2 shadow-xl">
-                    <div className="whitespace-pre-wrap text-left flex-1 mr-2">
-                      {reversedProjects[index].description
-                        .split("\n")
-                        .map((line, i) => {
-                          const [label, ...rest] = line.split(":");
-                          return (
-                            <div key={i}>
-                              <strong>{label}:</strong>
-                              {rest.join(":")}
-                            </div>
-                          );
-                        })}
-                    </div>
-                    <a
-                      href={reversedProjects[index].git}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        src={githubLogo.src}
-                        alt="GitHub"
-                        className="w-6 h-6 transition-transform group-hover:scale-110"
-                      />
-                    </a>
+              <div className="absolute left-0 right-0 w-full top-full z-50 opacity-0 group-hover:scale-105 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-300 translate-y-0 group-hover:translate-y-2">
+                <div className="bg-[#f5efe7] w-full text-[#213555] text-sm flex justify-between items-center rounded-b-xl p-2 shadow-xl">
+                  <div className="whitespace-pre-wrap text-left flex-1 mr-2">
+                    {reversedProjects[index].description
+                      .split("\n")
+                      .map((line, i) => {
+                        const [label, ...rest] = line.split(":");
+                        return (
+                          <div className="w-full" key={i}>
+                            <strong>{label}:</strong> {rest.join(":")}
+                          </div>
+                        );
+                      })}
                   </div>
+                  <a
+                    href={reversedProjects[index].git}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={githubLogo.src}
+                      alt="GitHub"
+                      className="w-6 h-6 transition-transform group-hover:scale-110"
+                    />
+                  </a>
                 </div>
               </div>
             </div>
