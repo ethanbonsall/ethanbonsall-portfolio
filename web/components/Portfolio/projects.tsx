@@ -80,7 +80,7 @@ const Web = () => {
       id="projects"
     >
       <h1 className="text-4xl z-0 font-bold">Projects</h1>
-      <hr className="border-black z-0 my-2" />
+      <hr className="border-accent z-0 my-2" />
       <h2 className="text-2xl z-0 font-semibold mb-4">Web Projects</h2>
 
       {loading ? (
