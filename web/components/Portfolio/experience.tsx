@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Briefcase, Code, MonitorSmartphone } from "lucide-react";
 
 const Experience = () => {
   const [durations, setDurations] = useState({
@@ -34,45 +36,97 @@ const Experience = () => {
 
   return (
     <section
-      className="bg-secondary text-text p-5 mt-6 w-[100%] mb-2 scroll-mt-24"
+      className="bg-gradient-to-b from-secondary via-secondary/90 to-background text-text p-5 mt-6 w-full mb-2 scroll-mt-24"
       id="experience"
     >
-      <h1 className="text-4xl font-bold">Experience</h1>
-      <hr className="border-black my-2" />
+      <h1 className="text-4xl font-bold mb-2">Experience</h1>
+      <hr className="border-accent mb-4" />
 
-      <div className="mb-6">
-        <h2 className="text-2xl font-semibold">Sheetz</h2>
-        <p className="text-lg font-medium italic">
-          Associate Programmer Intern
-        </p>
-        <p className="text-md">Apr 2025 – Present · {durations.sheetz}</p>
-        <p className="text-sm">Internship</p>
-      </div>
+      <div className="relative border-l-4 border-accent pl-6 ml-2 space-y-10">
+        {/* Sheetz */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="relative bg-white/5 backdrop-blur-lg rounded-xl p-4 border border-black"
+        >
+          <div className="absolute w-4 h-4 bg-accent rounded-full -left-[1.4rem] top-4" />
+          <div className="flex items-center gap-2 mb-1">
+            <Briefcase className="text-accent" />
+            <h2 className="text-2xl font-semibold">Sheetz</h2>
+          </div>
+          <p className="text-lg italic font-medium">
+            Associate Programmer Intern
+          </p>
+          <div className="flex items-center gap-2 text-sm mt-1">
+            <span>Apr 2025 – Present</span>
+            <span className="bg-accent text-background px-2 py-0.5 rounded-full text-xs font-bold">
+              {durations.sheetz}
+            </span>
+          </div>
+          <p className="text-sm text-muted mt-1">Internship</p>
+        </motion.div>
 
-      <div className="mb-6">
-        <h2 className="text-2xl font-semibold">UNC CS + Social Good</h2>
-        <p className="text-lg font-medium italic">Frontend Developer</p>
-        <p className="text-md">Sep 2024 – Present · {durations.cs}</p>
-        <p className="text-sm">Internship</p>
-        <ul className="list-disc pl-5 mt-1 text-md">
-          <li>Developed websites using Supabase, NW.js, and React</li>
-          <li>
-            Built Tinder-like platform to help an animal sanctuary find homes
-            for animals
-          </li>
-        </ul>
-      </div>
+        {/* UNC CS */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="relative bg-white/5 backdrop-blur-lg rounded-xl p-4 border border-black"
+        >
+          <div className="absolute w-4 h-4 bg-accent rounded-full -left-[1.4rem] top-4" />
+          <div className="flex items-center gap-2 mb-1">
+            <MonitorSmartphone className="text-accent" />
+            <h2 className="text-2xl font-semibold">UNC CS + Social Good</h2>
+          </div>
+          <p className="text-lg italic font-medium">Frontend Developer</p>
+          <div className="flex items-center gap-2 text-sm mt-1">
+            <span>Sep 2024 – Present</span>
+            <span className="bg-accent text-background px-2 py-0.5 rounded-full text-xs font-bold">
+              {durations.cs}
+            </span>
+          </div>
+          <p className="text-sm text-muted mt-1">Internship</p>
+          <ul className="list-disc pl-5 mt-2 text-md">
+            <li>Developed websites using Supabase, NW.js, and React</li>
+            <li>
+              Built Tinder-like platform to help an animal sanctuary find homes
+              for animals
+            </li>
+          </ul>
+        </motion.div>
 
-      <div className="mb-6">
-        <h2 className="text-2xl font-semibold">Magic Hour Portraits</h2>
-        <p className="text-lg font-medium italic">Web Developer</p>
-        <p className="text-md">Jul 2023 – Present · {durations.mhp}</p>
-        <p className="text-sm">Contract · Remote · Camp Hill, Pennsylvania</p>
-        <ul className="list-disc pl-5 mt-1 text-md">
-          <li>
-            Built and maintained website using React, Tailwind CSS, and NextJS
-          </li>
-        </ul>
+        {/* Magic Hour Portraits */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="relative bg-white/5 backdrop-blur-lg rounded-xl p-4 border border-black"
+        >
+          <div className="absolute w-4 h-4 bg-accent rounded-full -left-[1.4rem] top-4" />
+          <div className="flex items-center gap-2 mb-1">
+            <Code className="text-accent" />
+            <h2 className="text-2xl font-semibold">Magic Hour Portraits</h2>
+          </div>
+          <p className="text-lg italic font-medium">Web Developer</p>
+          <div className="flex items-center gap-2 text-sm mt-1">
+            <span>Jul 2023 – Present</span>
+            <span className="bg-accent text-background px-2 py-0.5 rounded-full text-xs font-bold">
+              {durations.mhp}
+            </span>
+          </div>
+          <p className="text-sm text-muted mt-1">
+            Contract · Remote · Camp Hill, Pennsylvania
+          </p>
+          <ul className="list-disc pl-5 mt-2 text-md">
+            <li>
+              Built and maintained website using React, Tailwind CSS, and NextJS
+            </li>
+          </ul>
+        </motion.div>
       </div>
     </section>
   );
