@@ -132,7 +132,7 @@ const Web = () => {
               </div>
 
               <div className="absolute left-0 right-0 w-full top-full z-50 opacity-0 group-hover:scale-105 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-300 translate-y-0 group-hover:translate-y-2">
-                <div className="bg-[#f5efe7] w-full text-[#213555] text-sm flex justify-between items-center rounded-b-xl p-2 shadow-xl">
+                <div className="bg-primary w-full text-reverse text-sm flex justify-between items-center rounded-b-xl p-2 shadow-xl">
                   <div className="whitespace-pre-wrap text-left flex-1 mr-2">
                     {normalProjects[index].description
                       .split("\n")
@@ -191,7 +191,7 @@ const Web = () => {
               </div>
 
               <div className="absolute left-0 right-0 w-full top-full z-50 opacity-0 group-hover:scale-105 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-300 translate-y-0 group-hover:translate-y-2">
-                <div className="bg-[#f5efe7] w-full text-[#213555] text-sm flex justify-between items-center rounded-b-xl p-2 shadow-xl">
+                <div className="bg-primary w-full text-reverse text-sm flex justify-between items-center rounded-b-xl p-2 shadow-xl">
                   <div className="whitespace-pre-wrap text-left flex-1 mr-2">
                     {reversedProjects[index].description
                       .split("\n")

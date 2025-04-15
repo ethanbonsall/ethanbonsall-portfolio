@@ -67,3 +67,18 @@ html {
 .nav-link:hover::after {
   @apply scale-x-100;
 }
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 1s ease-out forwards;
+}
