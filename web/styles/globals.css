@@ -10,15 +10,17 @@
   --accent: #636983;
   --reverse: #e2e9e7;
   --pop: #046e29;
+  --scroll: #046e294d;
 }
 .dark {
-  --text: #e2e9e7;
+  --text: rgb(226, 233, 231);
   --background: #0f1412;
   --primary: #abbfb8;
   --secondary: #4b5563;
-  --accent: #7c829c;
+  --accent: rgb(124, 130, 156);
   --reverse: #161d1b;
   --pop: #9bc0f3;
+  --scroll: #9bc0f34d;
 }
 
 .image-hover {
@@ -81,4 +83,18 @@ html {
 
 .animate-slide-up {
   animation: slide-up 1s ease-out forwards;
+}
+
+
+@media (min-width: 768px) {
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 16px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--scroll);
+    border-radius: 8px;
+  }
 }

@@ -44,20 +44,22 @@ const Courses = () => {
 
   const CourseList = ({ courses }: { courses: Course[] }) => {
     return (
-      <div className="w-full bg-secondary overflow-x-auto py-6 px-4">
-        <div className="flex overflow-y-visible pb-10 space-x-4">
+      <div className="pb-28 bg-secondary w-full  ">
+      <div className="w-full bg-secondary overflow-x-auto py-6 px-4 custom-scrollbar ">
+        <div className="flex overflow-y-visible space-x-4 w-fit mx-auto ">
           {courses.map((course, index) => (
             <div
               key={index}
-              className="flex-shrink-0 bg-primary text-text rounded-xl p-4 w-[80vw] md:w-[300px] shadow-lg transition-transform hover:scale-105"
+              className="flex-shrink-0 bg-primary text-text rounded-xl pb-1 pt-4 px-4 md:p-4 lg:p-6 w-[80vw] md:w-[350px] 2xl:w-[400px] shadow-lg transition-transform hover:scale-105"
             >
-              <h3 className="text-reverse font-bold text-xl mb-2">
+              <h3 className="text-reverse font-bold text-3xl 2xl:text-4xl mb-4">
                 {course.name}
               </h3>
-              <p className="text-reverse">{course.description}</p>
+              <p className="text-reverse text-xl 2xl:text-2xl">{course.description}</p>
             </div>
           ))}
         </div>
+      </div>
       </div>
     );
   };

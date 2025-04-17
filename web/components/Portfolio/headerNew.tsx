@@ -4,7 +4,7 @@ import profilePic from "@/assets/image.jpeg";
 const Header = () => {
   return (
     <div className="flex-col w-full">
-      <div className="flex-col bg-secondary w-full text-text pt-[50px] pb-[80px] md:pt-[75px] md:pb-[90px] xl:pt-[85px] xl:pb-[105px] 2xl:pt-[115px] 2xl:pb-[135px]">
+      <div className="flex-col bg-secondary w-full text-text pt-[50px] pb-[80px] md:pt-[75px] md:pb-[90px] xl:pt-[85px] xl:pb-[105px] 2xl:pt-[140px] 2xl:pb-[160px]">
         <div className="flex items-center text-center justify-center">
           <img
             src={profilePic.src}

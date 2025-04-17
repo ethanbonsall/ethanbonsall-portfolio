@@ -104,9 +104,9 @@ const Web = () => {
       className="bg-background text-text z-0 px-5 py-4 w-[100%] mt-5 scroll-mt-28"
       id="projects"
     >
-      <h1 className="text-4xl z-0 font-bold">Projects</h1>
-      <hr className="border-accent z-0 my-2" />
-      <h2 className="text-3xl z-0 font-semibold my-8">Current Projects</h2>
+      <h1 className="text-4xl 2xl:text-5xl z-0 font-bold">Projects</h1>
+      <hr className="border-accent z-0 my-6" />
+      <h2 className="text-3xl 2xl:text-4xl z-0 font-semibold my-8">Current Projects</h2>
       {loading ? (
         <div className="flex justify-center items-center">
           <b className="text-3xl">{displayedText}</b>
@@ -164,7 +164,7 @@ const Web = () => {
           ))}
         </div>
       )}
-      <h2 className="text-3xl z-0 font-semibold my-8">Web Projects</h2>
+      <h2 className="text-3xl 2xl:text-4xl z-0 font-semibold my-8">Web Projects</h2>
 
       {loading ? (
         <div className="flex justify-center items-center">

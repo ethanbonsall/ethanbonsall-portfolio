@@ -39,8 +39,8 @@ const Experience = () => {
       className="bg-gradient-to-b from-secondary via-secondary/90 to-background text-text p-5 mt-6 w-full mb-2 scroll-mt-24"
       id="experience"
     >
-      <h1 className="text-4xl font-bold mb-2">Experience</h1>
-      <hr className="border-accent mb-4" />
+      <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold mb-4">Experience</h1>
+      <hr className="border-accent mb-6" />
 
       <div className="relative border-l-4 border-accent pl-6 ml-2 space-y-10">
         {/* Sheetz */}
@@ -49,23 +49,21 @@ const Experience = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="relative bg-white/5 backdrop-blur-lg rounded-xl p-4 border border-black"
+          className="relative bg-white/5 backdrop-blur-lg rounded-xl p-4 md:p-5 lg:p-6 border border-black"
         >
           <div className="absolute w-4 h-4 bg-accent rounded-full -left-[1.4rem] top-4" />
-          <div className="flex items-center gap-2 mb-1">
-            <Briefcase className="text-accent" />
-            <h2 className="text-2xl font-semibold">Sheetz</h2>
+          <div className="flex items-center gap-2 mb-2">
+            <Briefcase className="text-accent w-5 h-5 md:w-6 md:h-6" />
+            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold">Sheetz</h2>
           </div>
-          <p className="text-lg italic font-medium">
-            Associate Programmer Intern
-          </p>
-          <div className="flex items-center gap-2 text-sm mt-1">
+          <p className="text-lg md:text-xl italic font-medium">Associate Programmer Intern</p>
+          <div className="flex items-center gap-2 text-sm md:text-base mt-2">
             <span>Apr 2025 – Present</span>
-            <span className="bg-accent text-background px-2 py-0.5 rounded-full text-xs font-bold">
+            <span className="bg-accent text-background px-2 py-0.5 rounded-full text-xs md:text-sm font-bold">
               {durations.sheetz}
             </span>
           </div>
-          <p className="text-sm text-muted mt-1">Internship</p>
+          <p className="text-sm md:text-base text-muted mt-2">Internship</p>
         </motion.div>
 
         {/* UNC CS */}
@@ -74,22 +72,22 @@ const Experience = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           viewport={{ once: true }}
-          className="relative bg-white/5 backdrop-blur-lg rounded-xl p-4 border border-black"
+          className="relative bg-white/5 backdrop-blur-lg rounded-xl p-4 md:p-5 lg:p-6 border border-black"
         >
           <div className="absolute w-4 h-4 bg-accent rounded-full -left-[1.4rem] top-4" />
-          <div className="flex items-center gap-2 mb-1">
-            <MonitorSmartphone className="text-accent" />
-            <h2 className="text-2xl font-semibold">UNC CS + Social Good</h2>
+          <div className="flex items-center gap-2 mb-2">
+            <MonitorSmartphone className="text-accent w-5 h-5 md:w-6 md:h-6" />
+            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold">UNC CS + Social Good</h2>
           </div>
-          <p className="text-lg italic font-medium">Frontend Developer</p>
-          <div className="flex items-center gap-2 text-sm mt-1">
+          <p className="text-lg md:text-xl italic font-medium">Frontend Developer</p>
+          <div className="flex items-center gap-2 text-sm md:text-base mt-2">
             <span>Sep 2024 – Present</span>
-            <span className="bg-accent text-background px-2 py-0.5 rounded-full text-xs font-bold">
+            <span className="bg-accent text-background px-2 py-0.5 rounded-full text-xs md:text-sm font-bold">
               {durations.cs}
             </span>
           </div>
-          <p className="text-sm text-muted mt-1">Internship</p>
-          <ul className="list-disc pl-5 mt-2 text-md">
+          <p className="text-sm md:text-base text-muted mt-2">Internship</p>
+          <ul className="list-disc pl-5 mt-3 text-md md:text-lg">
             <li>Developed websites using Supabase, NW.js, and React</li>
             <li>
               Built Tinder-like platform to help an animal sanctuary find homes
@@ -104,24 +102,24 @@ const Experience = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
-          className="relative bg-white/5 backdrop-blur-lg rounded-xl p-4 border border-black"
+          className="relative bg-white/5 backdrop-blur-lg rounded-xl p-4 md:p-5 lg:p-6 border border-black"
         >
           <div className="absolute w-4 h-4 bg-accent rounded-full -left-[1.4rem] top-4" />
-          <div className="flex items-center gap-2 mb-1">
-            <Code className="text-accent" />
-            <h2 className="text-2xl font-semibold">Magic Hour Portraits</h2>
+          <div className="flex items-center gap-2 mb-2">
+            <Code className="text-accent w-5 h-5 md:w-6 md:h-6" />
+            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold">Magic Hour Portraits</h2>
           </div>
-          <p className="text-lg italic font-medium">Web Developer</p>
-          <div className="flex items-center gap-2 text-sm mt-1">
+          <p className="text-lg md:text-xl italic font-medium">Web Developer</p>
+          <div className="flex items-center gap-2 text-sm md:text-base mt-2">
             <span>Jul 2023 – Present</span>
-            <span className="bg-accent text-background px-2 py-0.5 rounded-full text-xs font-bold">
+            <span className="bg-accent text-background px-2 py-0.5 rounded-full text-xs md:text-sm font-bold">
               {durations.mhp}
             </span>
           </div>
-          <p className="text-sm text-muted mt-1">
+          <p className="text-sm md:text-base text-muted mt-2">
             Contract · Remote · Camp Hill, Pennsylvania
           </p>
-          <ul className="list-disc pl-5 mt-2 text-md">
+          <ul className="list-disc pl-5 mt-3 text-md md:text-lg">
             <li>
               Built and maintained website using React, Tailwind CSS, and NextJS
             </li>
@@ -131,5 +129,6 @@ const Experience = () => {
     </section>
   );
 };
+
 
 export default Experience;
