@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import ardvark from "@/assets/ardvark.jpeg";
+import ardvark from "@/public/assets/ardvark.jpeg";
 
 const Sam = () => {
   return (
