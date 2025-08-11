@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { useEffect, useState } from "react";
-import linkedinLogo from "@/assets/linkedin-logo.jpeg";
-import githubLogo from "@/assets/github-logo.png";
+import linkedinLogo from "@/public/assets/linkedin-logo.jpeg";
+import githubLogo from "@/public/assets/github-logo.png";
 import ThemeToggle from "@/components/toggle";
 import Logo from "@/components/nameLogo";
 import clsx from "clsx";

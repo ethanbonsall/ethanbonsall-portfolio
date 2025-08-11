@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import profilePic from "@/assets/image.jpeg";
+import profilePic from "@/public/assets/image.jpeg";
 
 const Header = () => {
   return (

@@ -39,7 +39,9 @@ const Experience = () => {
       className="bg-gradient-to-b from-secondary via-secondary/90 to-background text-text p-5 mt-6 w-full mb-2 scroll-mt-24"
       id="experience"
     >
-      <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold mb-4">Experience</h1>
+      <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold mb-4">
+        Experience
+      </h1>
       <hr className="border-accent mb-6" />
 
       <div className="relative border-l-4 border-accent pl-6 ml-2 space-y-10">
@@ -54,9 +56,13 @@ const Experience = () => {
           <div className="absolute w-4 h-4 bg-accent rounded-full -left-[1.4rem] top-4" />
           <div className="flex items-center gap-2 mb-2">
             <Briefcase className="text-accent w-5 h-5 md:w-6 md:h-6" />
-            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold">Sheetz</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold">
+              Sheetz
+            </h2>
           </div>
-          <p className="text-lg md:text-xl italic font-medium">Associate Programmer Intern</p>
+          <p className="text-lg md:text-xl italic font-medium">
+            Associate Programmer Intern
+          </p>
           <div className="flex items-center gap-2 text-sm md:text-base mt-2">
             <span>Apr 2025 – Present</span>
             <span className="bg-accent text-background px-2 py-0.5 rounded-full text-xs md:text-sm font-bold">
@@ -64,6 +70,21 @@ const Experience = () => {
             </span>
           </div>
           <p className="text-sm md:text-base text-muted mt-2">Internship</p>
+          <ul className="list-disc pl-5 mt-3 text-md md:text-lg">
+            <li>
+              Ensured data quality by creating robust tests to prevent data
+              quality loss across systems.
+            </li>
+            <li>
+              Collaborated with a team in an agile environment to enhance data
+              pipelines and standards.
+            </li>
+            <li>
+              Successfully brought over 2000 tables up to company data quality
+              standards, significantly improving data integrity.
+            </li>
+            <li>Technologies used: Python, SQL, Databricks</li>
+          </ul>
         </motion.div>
 
         {/* UNC CS */}
@@ -77,9 +98,13 @@ const Experience = () => {
           <div className="absolute w-4 h-4 bg-accent rounded-full -left-[1.4rem] top-4" />
           <div className="flex items-center gap-2 mb-2">
             <MonitorSmartphone className="text-accent w-5 h-5 md:w-6 md:h-6" />
-            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold">UNC CS + Social Good</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold">
+              UNC CS + Social Good
+            </h2>
           </div>
-          <p className="text-lg md:text-xl italic font-medium">Frontend Developer</p>
+          <p className="text-lg md:text-xl italic font-medium">
+            Frontend Developer
+          </p>
           <div className="flex items-center gap-2 text-sm md:text-base mt-2">
             <span>Sep 2024 – Present</span>
             <span className="bg-accent text-background px-2 py-0.5 rounded-full text-xs md:text-sm font-bold">
@@ -93,6 +118,7 @@ const Experience = () => {
               Built Tinder-like platform to help an animal sanctuary find homes
               for animals
             </li>
+            <li>Technologies used: Typescript, React</li>
           </ul>
         </motion.div>
 
@@ -107,7 +133,9 @@ const Experience = () => {
           <div className="absolute w-4 h-4 bg-accent rounded-full -left-[1.4rem] top-4" />
           <div className="flex items-center gap-2 mb-2">
             <Code className="text-accent w-5 h-5 md:w-6 md:h-6" />
-            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold">Magic Hour Portraits</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold">
+              Magic Hour Portraits
+            </h2>
           </div>
           <p className="text-lg md:text-xl italic font-medium">Web Developer</p>
           <div className="flex items-center gap-2 text-sm md:text-base mt-2">
@@ -121,7 +149,8 @@ const Experience = () => {
           </p>
           <ul className="list-disc pl-5 mt-3 text-md md:text-lg">
             <li>
-              Built and maintained website using React, Tailwind CSS, and NextJS
+              Built and maintained website using Tailwind CSS, Supabase, and
+              NextJS
             </li>
           </ul>
         </motion.div>
@@ -129,6 +158,5 @@ const Experience = () => {
     </section>
   );
 };
-
 
 export default Experience;

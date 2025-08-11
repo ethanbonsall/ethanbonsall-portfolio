@@ -17,7 +17,7 @@ export default function PrivateRepoPage() {
           📬 Contact Me
         </a>
         <p>
-          Or email me directly at
+          Or email me directly at &nbsp;
           <span className="underline text-accent">
             ethanbonsall50@gmail.com
           </span>
