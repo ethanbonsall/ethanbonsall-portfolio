@@ -6,34 +6,24 @@ const Courses = () => {
         "Learned how to reason about how my code is structured, identify whether a given structure is effective in a given context, and look at ways of organizing units of code that support larger programs.",
     },
     {
-      name: "Computer Organization",
-      description:
-        "Learned the fundamentals of computer hardware design, transistors and logic gates, progressing through basic combinational and sequential components, culminating in the conceptual design CPU.",
-    },
-    {
       name: "Modern Web Programming",
       description:
-        "Developing applications for the World Wide Web including both client-side and server-side programming. Emphasis on Model-View-Controller architecture, AJAX, RESTful Web services, and database interaction.",
+        "Built full-stack web apps using Next.js, TypeScript, and Tailwind CSS. Gained hands-on experience with frontend and backend development, deploying multiple websites from scratch or starter code, and learning scalable web architecture and responsive design.",
     },
     {
       name: "Foundations of Software Engineering",
       description:
-        "Learned how to set up a Python Dev Container in VS Code, create a GitHub-hosted static site with Material for MkDocs, and deploy it using GitHub Actions, gaining insight into open-source tools and workflows.",
+        "Completed multiple software projects in an Agile environment, learning collaboration, version control, testing, and software design principles. Gained experience with team workflows, coding standards, and writing maintainable, well-documented code.",
     },
     {
-      name: "Introduction to Probability",
+      name: "Software Engineering Lab",
       description:
-        "Learned the mathematical theory of probability covering random variables; moments; binomial, Poisson, and normal distributions; generating functions; sums of random variables; and statistical applications.",
+        "Collaborated with a company to design, build, and deliver a complete software product. Gained experience in requirement analysis, architecture design, implementation, testing, deployment, and stakeholder communication.",
     },
     {
-      name: "Discrete Mathematics",
+      name: "Mobile Computing Systems",
       description:
-        "Learned the foundations of mathematics: logic, set theory, relations and functions, induction, permutations and combinations, recurrence.",
-    },
-    {
-      name: "Linear Algebra",
-      description:
-        "Algebra of matrices with applications: determinants, solution of linear systems by Gaussian elimination, Gram-Schmidt procedure, and eigenvalues.",
+        "Developed Android apps using Java in Android Studio, gaining experience with UI design, activity lifecycle, data storage, API integration, and debugging. Completed multiple projects emphasizing collaboration, agile workflows, and user-friendly app development.",
     },
   ];
 
@@ -45,21 +35,23 @@ const Courses = () => {
   const CourseList = ({ courses }: { courses: Course[] }) => {
     return (
       <div className="pb-28 bg-secondary w-full  ">
-      <div className="w-full bg-secondary overflow-x-auto py-6 px-4 custom-scrollbar ">
-        <div className="flex overflow-y-visible space-x-4 w-fit mx-auto ">
-          {courses.map((course, index) => (
-            <div
-              key={index}
-              className="flex-shrink-0 bg-primary text-text rounded-xl pb-1 pt-4 px-4 md:p-4 lg:p-6 w-[80vw] md:w-[350px] 2xl:w-[400px] shadow-lg transition-transform hover:scale-105"
-            >
-              <h3 className="text-reverse font-bold text-3xl 2xl:text-4xl mb-4">
-                {course.name}
-              </h3>
-              <p className="text-reverse text-xl 2xl:text-2xl">{course.description}</p>
-            </div>
-          ))}
+        <div className="w-full bg-secondary overflow-x-auto py-6 px-4 custom-scrollbar ">
+          <div className="flex overflow-y-visible space-x-4 w-fit mx-auto ">
+            {courses.map((course, index) => (
+              <div
+                key={index}
+                className="flex-shrink-0 bg-primary text-text rounded-xl pb-1 pt-4 px-4 md:p-4 lg:p-6 w-[80vw] md:w-[350px] 2xl:w-[400px] shadow-lg transition-transform hover:scale-105"
+              >
+                <h3 className="text-reverse font-bold text-3xl 2xl:text-4xl mb-4">
+                  {course.name}
+                </h3>
+                <p className="text-reverse text-xl 2xl:text-2xl">
+                  {course.description}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
       </div>
     );
   };

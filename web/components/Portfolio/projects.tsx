@@ -15,7 +15,7 @@ const Web = () => {
   const projects = [
     {
       link: "https://magichourportraits.com/",
-      git: "https://github.com/ethanbonsall/magicHour",
+      git: "https://github.com/ethanbonsall/Magic-Hour-Portraits",
       description:
         "A full-stack website built for a photography business. The frontend is developed with Next.js and Tailwind CSS, and deployed via Vercel. The backend is powered by Supabase, serving as both the database and API layer, enabling seamless data retrieval and submission",
     },
@@ -26,38 +26,38 @@ const Web = () => {
         "A website built for the animal sanctuary Beautiful Together, featuring a React frontend and a Supabase backend. Includes a Tinder-style interface to streamline pet adoption decisions. Contributed to the preferences page, pet ranking system, and design of animal profile cards.",
     },
     {
-      git: "/git",
+      git: "https://github.com/comp423-25s/csxl-a2",
       description:
         "A chatbot developed for the UNC Computer Science website, built with Angular. Integrates ChatGPT to interpret user input and convert it into API requests, enabling users to check class availability, reserve study rooms, and schedule time with TAs.",
     },
     {
-      link: "https://final-project-team-23.vercel.app/login",
-      git: "https://github.com/ethanbonsall/final-project-team-23",
+      link: "https://study-buddy-center.vercel.app/login",
+      git: "https://github.com/ethanbonsall/study-buddy",
       description:
         "An all-in-one study platform similar to Discord but designed for school, featuring shared notes, live collaborative documents, study channels, and virtual study rooms. Built with Next.js, Supabase, and Supabase Realtime for real-time collaboration. Contact me if you’d like to see a demo.",
     },
     {
-      link: "https://a06-oriole-ethanbonsall.vercel.app/",
-      git: "/git",
+      link: "https://not-twitter-chi.vercel.app/login",
+      git: "https://github.com/ethanbonsall/not-twitter",
       description:
         "A Twitter-like application built for practice using Next.js, Supabase, and Supabase Realtime. Contact me if you’d like to see a demo.",
     },
     {
       link: "https://www.ethanbonsall.com/birthday",
-      git: "https://github.com/ethanbonsall/a01-personal-portfolio-ethanbonsall",
+      git: "https://github.com/ethanbonsall/ethanbonsall-portfolio",
       description:
         "A birthday celebration website with RSVP submissions, photo uploads, and a shared Spotify playlist. Built with a React and Next.js frontend styled with Tailwind CSS, and a Supabase backend integrating the Spotify API. Uses Supabase for database and file storage. Guests can log in to add songs and enjoy the evolving party soundtrack.",
     },
 
     {
-      link: "https://a05-pokedex-ethanbonsall.vercel.app/",
-      git: "https://github.com/cssgunc/beautiful-together-next",
+      link: "https://pokedex-rose-rho.vercel.app/",
+      git: "https://github.com/ethanbonsall/pokedex.git",
       description:
         "A practice project that calls the Pokémon API to create a Pokédex of all Pokémon. Built with a React frontend styled using Tailwind CSS.",
     },
     {
-      link: "https://a04-wordle-ethanbonsall.vercel.app/",
-      git: "/git",
+      link: "https://not-wordle-mu.vercel.app/",
+      git: "/https://github.com/ethanbonsall/not-wordle",
       description:
         "A Wordle clone built with React and styled using Tailwind CSS.",
     },
@@ -71,16 +71,13 @@ const Web = () => {
   const reversedProjects = minorProjects.map((i) => projects[i]);
   return (
     <section
-      className="bg-background text-text z-0 px-5 py-4 w-[100%] mt-5 scroll-mt-28"
+      className="bg-background text-text z-0 px-5 py-4 w-[100%] mt-5 min-h-screen mb-10 scroll-mt-28"
       id="projects"
     >
-      <h1 className="text-4xl 2xl:text-5xl z-0 font-bold">Projects</h1>
-      <hr className="border-accent z-0 my-6" />
-      <h2 className="text-3xl 2xl:text-4xl z-0 font-semibold my-8">
-        Current Projects
-      </h2>
+      <h1 className="text-5xl 2xl:text-6xl z-0 font-bold">Projects</h1>
+      <hr className="border-accent z-0 mt-6 mb-12" />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 relative">
+      <div className="grid mb-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4 gap-y-10 relative">
         {normalPhotos.map((photo, index) => (
           <div
             key={index}
@@ -130,12 +127,6 @@ const Web = () => {
           </div>
         ))}
       </div>
-
-      <h2 className="text-3xl 2xl:text-4xl z-0 font-semibold my-8">
-        Web Projects
-      </h2>
-
-      <div className="flex justify-center items-center"></div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 relative">
         {reversedPhotos.slice(0, 8).map((photo, index) => (
