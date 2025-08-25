@@ -17,7 +17,7 @@ https://www.ethanbonsall.com/birthday
 
 ## Running Locally
 
-    git clone https://github.com/yourusername/a01-personal-portfolio-ethanbonsall.git
+    git clone https://github.com/ethanbonsall/ethanbonsall-portfolio.git
 ```
 cd web
 ```
