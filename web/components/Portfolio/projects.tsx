@@ -4,12 +4,12 @@ import githubLogo from "@/public/assets/github-logo-alt.png";
 const Web = () => {
   const photos = [
     "/assets/uploads/1magic-hour.png",
-    "/assets/uploads/2beautiful.png",
+    "/assets/uploads/2bonsai-property-care.png",
     "/assets/uploads/3chad-gpt.png",
     "/assets/uploads/4study-buddy.png",
     "/assets/uploads/5oriole.png",
     "/assets/uploads/6party.png",
-    "/assets/uploads/7pokemon.png",
+    "/assets/uploads/7beautiful.png",
     "/assets/uploads/8wordle.png",
   ];
   const projects = [
@@ -20,10 +20,10 @@ const Web = () => {
         "A full-stack website built for a photography business. The frontend is developed with Next.js and Tailwind CSS, and deployed via Vercel. The backend is powered by Supabase, serving as both the database and API layer, enabling seamless data retrieval and submission",
     },
     {
-      link: "https://beautiful-together-next.vercel.app/tinder-page",
-      git: "https://github.com/cssgunc/beautiful-together-next",
+      link: "https://bonsaipropertycare.com/",
+      git: "https://github.com/ethanbonsall/bonsai-property-care",
       description:
-        "A website built for the animal sanctuary Beautiful Together, featuring a React frontend and a Supabase backend. Includes a Tinder-style interface to streamline pet adoption decisions. Contributed to the preferences page, pet ranking system, and design of animal profile cards.",
+        "A full-stack website built for a property care business. The frontend is developed with Next.js and Tailwind CSS, and deployed via Vercel. The backend is powered by Supabase, serving as both the database and API layer, enabling seamless data retrieval and submission",
     },
     {
       git: "https://github.com/comp423-25s/csxl-a2",
@@ -46,14 +46,14 @@ const Web = () => {
       link: "https://www.ethanbonsall.com/birthday",
       git: "https://github.com/ethanbonsall/ethanbonsall-portfolio",
       description:
-        "A birthday celebration website with RSVP submissions, photo uploads, and a shared Spotify playlist. Built with a React and Next.js frontend styled with Tailwind CSS, and a Supabase backend integrating the Spotify API. Uses Supabase for database and file storage. Guests can log in to add songs and enjoy the evolving party soundtrack.",
+        "A birthday celebration website with RSVP submissions, photo uploads, and a shared Spotify playlist. Built with a Next.js frontend styled with Tailwind, and a Supabase backend integrating the Spotify API. Supabase for database and file storage.",
     },
 
     {
-      link: "https://pokedex-rose-rho.vercel.app/",
-      git: "https://github.com/ethanbonsall/pokedex.git",
+      link: "https://beautiful-together-next.vercel.app/tinder-page",
+      git: "https://github.com/cssgunc/beautiful-together-next",
       description:
-        "A practice project that calls the Pokémon API to create a Pokédex of all Pokémon. Built with a React frontend styled using Tailwind CSS.",
+        "A website built for the animal sanctuary Beautiful Together, React frontend and Supabase backend. Includes a Tinder-like interface to streamline pet adoption. Contributed to preferences, pet ranking system, and design of animal profile cards.",
     },
     {
       link: "https://not-wordle-mu.vercel.app/",

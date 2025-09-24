@@ -6,7 +6,7 @@ import githubLogo from "@/public/assets/github-logo.png";
 import ThemeToggle from "@/components/toggle";
 import Logo from "@/components/nameLogo";
 import clsx from "clsx";
-import { GraduationCap, FolderKanban, Briefcase } from "lucide-react";
+import { GraduationCap, FolderKanban, Briefcase, Download } from "lucide-react";
 
 const sections = ["education", "projects", "experience"];
 
@@ -69,6 +69,16 @@ const NavBar = () => {
             ))}
           </div>
           <div className="flex items-center gap-1 md:gap-4">
+            <a
+              href="/Ethan-Bonsall-Resume.pdf"
+              download
+              className="flex border-2 md:mr-4 border-accent w-10 h-10 md:w-14 md:h-14 justify-center items-center text-center justify-items-center hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full"
+            >
+              <Download
+                size={30}
+                className="text-accent justify-center text-center items-center"
+              />
+            </a>
             <ThemeToggle />
             <a
               href="https://www.linkedin.com/in/ethanbonsall/"
