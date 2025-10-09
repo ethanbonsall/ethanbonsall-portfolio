@@ -31,16 +31,16 @@ const Web = () => {
         "A chatbot developed for the UNC Computer Science website, built with Angular. Integrates ChatGPT to interpret user input and convert it into API requests, enabling users to check class availability, reserve study rooms, and schedule time with TAs.",
     },
     {
+      link: "https://pediatricbluebook.com",
+      git: "https://github.com/ethanbonsall/Pediatric-Blue-Book",
+      description:
+        "A web app for dietitians to calculate patient nutrient needs and create formula recipes that meet those requirements. Built with Next.js and TypeScript, using Supabase to manage user profiles, saved recipes, nutrient data, and weight benchmarks.",
+    },
+    {
       link: "https://study-buddy-center.vercel.app/login",
       git: "https://github.com/ethanbonsall/study-buddy",
       description:
         "An all-in-one study platform similar to Discord but designed for school, featuring shared notes, live collaborative documents, study channels, and virtual study rooms. Built with Next.js, Supabase, and Supabase Realtime for real-time collaboration. Contact me if you’d like to see a demo.",
-    },
-    {
-      link: "https://not-twitter-chi.vercel.app/login",
-      git: "https://github.com/ethanbonsall/not-twitter",
-      description:
-        "A Twitter-like application built for practice using Next.js, Supabase, and Supabase Realtime. Contact me if you’d like to see a demo.",
     },
     {
       link: "https://www.ethanbonsall.com/birthday",
