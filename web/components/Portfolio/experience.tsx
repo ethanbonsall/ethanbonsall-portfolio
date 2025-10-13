@@ -42,8 +42,7 @@ const Experience = () => {
       <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold mb-4">
         <span className="gradient-text">Experience</span>
       </h1>
-      <p className="text-text/70 text-base sm:text-lg md:text-xl mb-8 md:mb-12">My professional journey</p>
-
+  
       <div className="relative border-l-2 md:border-l-4 border-primary pl-4 md:pl-6 ml-2 space-y-6 md:space-y-10 w-full max-w-full">
         {/* Sheetz - Associate Software Developer */}
         <motion.div

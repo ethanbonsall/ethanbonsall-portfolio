@@ -22,8 +22,7 @@ const Skills = () => {
       <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold mb-4">
         <span className="gradient-text">Skills & Technologies</span>
       </h1>
-      <p className="text-text/70 text-base sm:text-lg md:text-xl mb-8 md:mb-12">My tech stack</p>
-
+   
       {/* Programming Languages */}
       <div className="mb-8 md:mb-12 w-full">
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-4 md:mb-6">
