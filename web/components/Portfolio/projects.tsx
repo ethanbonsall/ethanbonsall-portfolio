@@ -160,7 +160,7 @@ const Web = () => {
 
             <div className="p-4">
               <div className="flex justify-between items-center mb-2">
-                <h3 className="text-sm font-bold text-primary">Project #{index + 5}</h3>
+                <h3 className="text-sm font-bold text-primary">reversedProjects[index].name</h3>
                 <a
                   href={reversedProjects[index].git}
                   target="_blank"
