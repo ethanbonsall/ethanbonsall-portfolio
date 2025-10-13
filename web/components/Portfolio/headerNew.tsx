@@ -64,7 +64,7 @@ const Header = () => {
           <div className="flex-row items-center text-center justify-items-center text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-sans font-extrabold animate-slide-up w-full max-w-full">
             <div className="mb-3 md:mb-4 text-primary text-base sm:text-lg md:text-xl lg:text-2xl font-mono">Software Developer</div>
             <div className="break-words">
-              <span className="text-text">Hello I'm </span>
+              <span className="text-text">Hello I&apos;m </span>
               <span className="gradient-text">Ethan Bonsall</span>
             </div>
             <p className="text-text/80 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-normal mt-4 sm:mt-6 max-w-3xl mx-auto break-words px-2">

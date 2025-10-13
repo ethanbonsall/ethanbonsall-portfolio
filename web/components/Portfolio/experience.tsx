@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Code, MonitorSmartphone } from "lucide-react";
+import { Briefcase, Code } from "lucide-react";
 
 const Experience = () => {
   const [durations, setDurations] = useState({
