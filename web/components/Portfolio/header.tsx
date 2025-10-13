@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import linkedinLogo from "@/assets/linkedin-logo.jpeg";
-import githubLogo from "@/assets/github-logo.png";
-import profilePic from "@/assets/image.jpeg";
+import linkedinLogo from "@/public/assets/logos/linkedin-logo.jpeg";
+import githubLogo from "@/public/assets/logos/github-logo.png";
+import profilePic from "@/public/assets/image.jpeg";
 import ThemeToggle from "@/components/toggle";
 
 const Header = () => {

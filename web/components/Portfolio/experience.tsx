@@ -4,9 +4,9 @@ import { Briefcase, Code, MonitorSmartphone } from "lucide-react";
 
 const Experience = () => {
   const [durations, setDurations] = useState({
-    sheetz: "",
-    cs: "",
-    mhp: "",
+    sheetzDev: "",
+    sheetzIntern: "",
+    freelance: "",
   });
 
   const getDuration = (startDate: Date, endDate: Date = new Date()) => {
@@ -28,131 +28,141 @@ const Experience = () => {
 
   useEffect(() => {
     setDurations({
-      sheetz: getDuration(new Date("2025-04-01")),
-      cs: getDuration(new Date("2024-09-01")),
-      mhp: getDuration(new Date("2023-07-01")),
+      sheetzDev: getDuration(new Date("2025-08-01")),
+      sheetzIntern: getDuration(new Date("2025-05-01"), new Date("2025-08-01")),
+      freelance: getDuration(new Date("2023-07-01")),
     });
   }, []);
 
   return (
     <section
-      className="bg-gradient-to-b from-secondary via-secondary/90 to-background text-text p-5 mt-6 w-full mb-2 scroll-mt-24"
+      className="bg-background text-text px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-12 md:py-16 w-full max-w-full overflow-hidden scroll-mt-24"
       id="experience"
     >
-      <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold mb-4">
-        Experience
+      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold mb-4">
+        <span className="gradient-text">Experience</span>
       </h1>
-      <hr className="border-accent mb-6" />
+      <p className="text-text/70 text-base sm:text-lg md:text-xl mb-8 md:mb-12">My professional journey</p>
 
-      <div className="relative border-l-4 border-accent pl-6 ml-2 space-y-10">
-        {/* Sheetz */}
+      <div className="relative border-l-2 md:border-l-4 border-primary pl-4 md:pl-6 ml-2 space-y-6 md:space-y-10 w-full max-w-full">
+        {/* Sheetz - Associate Software Developer */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="relative bg-white/5 backdrop-blur-lg rounded-xl p-4 md:p-5 lg:p-6 border border-black"
+          className="relative glass-card rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 lg:p-6 w-full max-w-full"
         >
-          <div className="absolute w-4 h-4 bg-accent rounded-full -left-[1.4rem] top-4" />
+          <div className="absolute w-3 h-3 md:w-4 md:h-4 bg-primary rounded-full -left-[1.15rem] md:-left-[1.4rem] top-4" />
           <div className="flex items-center gap-2 mb-2">
-            <Briefcase className="text-accent w-5 h-5 md:w-6 md:h-6" />
-            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold">
+            <Briefcase className="text-primary w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0" />
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary break-words">
               Sheetz
             </h2>
           </div>
-          <p className="text-lg md:text-xl italic font-medium">
-            Associate Programmer Intern
+          <p className="text-base sm:text-lg md:text-xl font-medium">
+            Associate Software Developer
           </p>
-          <div className="flex items-center gap-2 text-sm md:text-base mt-2">
-            <span>Apr 2025 – Present</span>
-            <span className="bg-accent text-background px-2 py-0.5 rounded-full text-xs md:text-sm font-bold">
-              {durations.sheetz}
+          <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm md:text-base mt-2">
+            <span>Aug 2025 – Present</span>
+            <span className="bg-primary text-background px-2 py-0.5 rounded-full text-xs md:text-sm font-bold whitespace-nowrap">
+              {durations.sheetzDev}
             </span>
           </div>
-          <p className="text-sm md:text-base text-muted mt-2">Internship</p>
-          <ul className="list-disc pl-5 mt-3 text-md md:text-lg">
+          <ul className="list-disc pl-4 sm:pl-5 mt-3 text-sm sm:text-base md:text-lg text-text/80 space-y-1 md:space-y-2">
             <li>
-              Ensured data quality by creating robust tests to prevent data
-              quality loss across systems.
+              Improved data quality across more than 2,000 database tables by identifying and removing corrupted or incomplete records and using AI-assisted documentation to enhance data discoverability company-wide.
             </li>
             <li>
-              Collaborated with a team in an agile environment to enhance data
-              pipelines and standards.
+              Built an automated Python QA framework that runs after each pull request to validate data integrity and ensure long-term reliability across production releases.
             </li>
             <li>
-              Successfully brought over 2000 tables up to company data quality
-              standards, significantly improving data integrity.
+              Redesigned and optimized data pipelines to eliminate duplication, improve analytics accuracy, and strengthen business insights.
             </li>
-            <li>Technologies used: Python, SQL, Databricks</li>
+            <li>
+              Collaborated in an Agile environment, performing peer code reviews and maintaining best practices for scalable, maintainable data solutions.
+            </li>
+            <li>
+              Partnered with cross-functional teams to standardize validation procedures and documentation, reducing data incidents and improving accessibility.
+            </li>
+            <li className="font-semibold text-primary mt-2 break-words">Skills: Python, SQL, Databricks, Git, Agile Development</li>
           </ul>
         </motion.div>
 
-        {/* UNC CS */}
+        {/* Sheetz - Associate Software Developer Intern */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           viewport={{ once: true }}
-          className="relative bg-white/5 backdrop-blur-lg rounded-xl p-4 md:p-5 lg:p-6 border border-black"
+          className="relative glass-card rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 lg:p-6 w-full max-w-full"
         >
-          <div className="absolute w-4 h-4 bg-accent rounded-full -left-[1.4rem] top-4" />
+          <div className="absolute w-3 h-3 md:w-4 md:h-4 bg-primary rounded-full -left-[1.15rem] md:-left-[1.4rem] top-4" />
           <div className="flex items-center gap-2 mb-2">
-            <MonitorSmartphone className="text-accent w-5 h-5 md:w-6 md:h-6" />
-            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold">
-              UNC CS + Social Good
+            <Briefcase className="text-primary w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0" />
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary break-words">
+              Sheetz
             </h2>
           </div>
-          <p className="text-lg md:text-xl italic font-medium">
-            Frontend Developer
+          <p className="text-base sm:text-lg md:text-xl font-medium">
+            Associate Software Developer Intern
           </p>
-          <div className="flex items-center gap-2 text-sm md:text-base mt-2">
-            <span>Sep 2024 – Present</span>
-            <span className="bg-accent text-background px-2 py-0.5 rounded-full text-xs md:text-sm font-bold">
-              {durations.cs}
+          <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm md:text-base mt-2">
+            <span>May 2025 – Aug 2025</span>
+            <span className="bg-primary text-background px-2 py-0.5 rounded-full text-xs md:text-sm font-bold whitespace-nowrap">
+              {durations.sheetzIntern}
             </span>
           </div>
-          <p className="text-sm md:text-base text-muted mt-2">Internship</p>
-          <ul className="list-disc pl-5 mt-3 text-md md:text-lg">
-            <li>Developed websites using Supabase, NW.js, and React</li>
+          <ul className="list-disc pl-4 sm:pl-5 mt-3 text-sm sm:text-base md:text-lg text-text/80 space-y-1 md:space-y-2">
             <li>
-              Built Tinder-like platform to help an animal sanctuary find homes
-              for animals
+              Automated SQL/Python scripts to validate pipelines and enforce enterprise data quality standards.
             </li>
-            <li>Technologies used: Typescript, React</li>
+            <li>
+              Optimized analytics workflows and improved data reliability across multiple business domains.
+            </li>
+            <li className="font-semibold text-primary mt-2 break-words">Skills: SQL, Python, Databricks</li>
           </ul>
         </motion.div>
 
-        {/* Magic Hour Portraits */}
+        {/* Freelance Software Developer */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
-          className="relative bg-white/5 backdrop-blur-lg rounded-xl p-4 md:p-5 lg:p-6 border border-black"
+          className="relative glass-card rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 lg:p-6 w-full max-w-full"
         >
-          <div className="absolute w-4 h-4 bg-accent rounded-full -left-[1.4rem] top-4" />
+          <div className="absolute w-3 h-3 md:w-4 md:h-4 bg-primary rounded-full -left-[1.15rem] md:-left-[1.4rem] top-4" />
           <div className="flex items-center gap-2 mb-2">
-            <Code className="text-accent w-5 h-5 md:w-6 md:h-6" />
-            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold">
-              Magic Hour Portraits
+            <Code className="text-primary w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0" />
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary break-words">
+              Freelance Software Developer
             </h2>
           </div>
-          <p className="text-lg md:text-xl italic font-medium">Web Developer</p>
-          <div className="flex items-center gap-2 text-sm md:text-base mt-2">
+          <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm md:text-base mt-2">
             <span>Jul 2023 – Present</span>
-            <span className="bg-accent text-background px-2 py-0.5 rounded-full text-xs md:text-sm font-bold">
-              {durations.mhp}
+            <span className="bg-primary text-background px-2 py-0.5 rounded-full text-xs md:text-sm font-bold whitespace-nowrap">
+              {durations.freelance}
             </span>
           </div>
-          <p className="text-sm md:text-base text-muted mt-2">
-            Contract · Remote · Camp Hill, Pennsylvania
-          </p>
-          <ul className="list-disc pl-5 mt-3 text-md md:text-lg">
-            <li>
-              Built and maintained website using Tailwind CSS, Supabase, and
-              NextJS
-            </li>
-          </ul>
+          <div className="mt-4">
+            <h3 className="text-base sm:text-lg md:text-xl font-bold text-primary/80 mb-2 break-words">Bonsai Property Care</h3>
+            <ul className="list-disc pl-4 sm:pl-5 text-sm sm:text-base md:text-lg text-text/80 space-y-1 md:space-y-2">
+              <li>
+                Designed and deployed a full-stack property care platform using TypeScript, Next.js, and Tailwind CSS with appointment scheduling, responsive design, and SEO optimization.
+              </li>
+              <li className="font-semibold text-primary mt-2 break-words">Skills: TypeScript, Next.js, Tailwind CSS, Project Planning</li>
+            </ul>
+          </div>
+          <div className="mt-4">
+            <h3 className="text-base sm:text-lg md:text-xl font-bold text-primary/80 mb-2 break-words">Magic Hour Portraits</h3>
+            <ul className="list-disc pl-4 sm:pl-5 text-sm sm:text-base md:text-lg text-text/80 space-y-1 md:space-y-2">
+              <li>
+                Built a full-stack photography portfolio website with admin tools for uploading projects and managing blog posts.
+              </li>
+              <li className="font-semibold text-primary mt-2 break-words">Skills: TypeScript, Next.js, Tailwind CSS, API Development</li>
+            </ul>
+          </div>
         </motion.div>
       </div>
     </section>

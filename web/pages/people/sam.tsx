@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import sam from "@/public/assets/sam.jpeg";
+import sam from "@/public/assets/people/sam.jpeg";
 
 const Sam = () => {
   return (

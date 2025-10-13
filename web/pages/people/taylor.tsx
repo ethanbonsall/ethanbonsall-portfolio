@@ -1,4 +1,4 @@
-import taylor from "@/public/assets/taylor.jpeg";
+import taylor from "@/public/assets/people/taylor.jpeg";
 
 const Taylor = () => {
   return (

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import saksham from "@/public/assets/saksham.jpeg";
+import saksham from "@/public/assets/people/saksham.jpeg";
 
 const Saksham = () => {
   return (

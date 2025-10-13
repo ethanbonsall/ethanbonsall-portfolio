@@ -1,172 +1,103 @@
 /* eslint-disable @next/next/no-img-element */
-import java from "@/public/assets/java.png";
-import python from "@/public/assets/python.png";
-import javascript from "@/public/assets/javaScript.png";
-import typescript from "@/public/assets/typeScript.png";
-import cpp from "@/public/assets/cpp.png";
-import sql from "@/public/assets/sql.png";
-import react from "@/public/assets/react-1.svg";
-import angular from "@/public/assets/angular.png";
-import expressjs from "@/public/assets/expressjs.png";
-import nextjs from "@/public/assets/nextjs.png";
-import pandas from "@/public/assets/pandas.svg";
-import postgres from "@/public/assets/postgres.png";
-import supabase from "@/public/assets/supabase.jpg";
-import tableau from "@/public/assets/tableau.png";
-import tensorflow from "@/public/assets/tensorflow.png";
-import css from "@/public/assets/css.svg";
-import html from "@/public/assets/html.png";
+import java from "@/public/assets/logos/java.png";
+import python from "@/public/assets/logos/python.png";
+import javascript from "@/public/assets/logos/javaScript.png";
+import typescript from "@/public/assets/logos/typeScript.png";
+import cpp from "@/public/assets/logos/cpp.png";
+import sql from "@/public/assets/logos/sql.png";
+import react from "@/public/assets/logos/react-1.svg";
+import angular from "@/public/assets/logos/angular.png";
+import expressjs from "@/public/assets/logos/expressjs.png";
+import nextjs from "@/public/assets/logos/nextjs.png";
+import pandas from "@/public/assets/logos/pandas.svg";
+import postgres from "@/public/assets/logos/postgres.png";
+import supabase from "@/public/assets/logos/supabase.jpg";
+import tableau from "@/public/assets/logos/tableau.png";
+import tensorflow from "@/public/assets/logos/tensorflow.png";
+import css from "@/public/assets/logos/css.svg";
+import html from "@/public/assets/logos/html.png";
 const Skills = () => {
   return (
-    <section className="bg-background text-text p-5 2xl:p-8 w-full my-2">
-      <h1 className="text-4xl md:text-5xl 2xl:text-6xl font-bold mb-4">
-        Skills & Technologies
+    <section className="bg-background text-text px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-12 md:py-16 w-full max-w-full overflow-hidden">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold mb-4">
+        <span className="gradient-text">Skills & Technologies</span>
       </h1>
-      <hr className="border-accent my-2" />
+      <p className="text-text/70 text-base sm:text-lg md:text-xl mb-8 md:mb-12">My tech stack</p>
 
       {/* Programming Languages */}
-      <div className="flex flex-col items-center justify-center">
-        <h2 className="underline text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl pb-4 font-semibold">
+      <div className="mb-8 md:mb-12 w-full">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-4 md:mb-6">
           Programming Languages
         </h2>
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
-          <div className="flex justify-center items-center">
-            <img
-              src={java.src}
-              alt="Java"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2"
-            />
-          </div>
-          <div className="flex justify-center items-center">
-            <img
-              src={python.src}
-              alt="Python"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2"
-            />
-          </div>
-          <div className="flex justify-center items-center">
-            <img
-              src={javascript.src}
-              alt="JavaScript"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2"
-            />
-          </div>
-          <div className="flex justify-center items-center">
-            <img
-              src={typescript.src}
-              alt="TypeScript"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2"
-            />
-          </div>
-          <div className="flex justify-center items-center">
-            <img
-              src={cpp.src}
-              alt="C++"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2"
-            />
-          </div>
-          <div className="flex justify-center items-center">
-            <img
-              src={sql.src}
-              alt="SQL"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2"
-            />
-          </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 md:gap-4 w-full">
+          {[
+            { src: java, name: "Java" },
+            { src: python, name: "Python" },
+            { src: javascript, name: "JavaScript" },
+            { src: typescript, name: "TypeScript" },
+            { src: cpp, name: "C++" },
+            { src: sql, name: "SQL" },
+          ].map((tech, index) => (
+            <div key={index} className="glass-card rounded-lg md:rounded-xl p-3 md:p-4 flex flex-col items-center justify-center group w-full max-w-full">
+              <img
+                src={tech.src.src}
+                alt={tech.name}
+                className="w-10 sm:w-12 md:w-16 lg:w-20 h-auto transition-transform duration-300 group-hover:scale-110"
+              />
+              <span className="text-xs sm:text-sm mt-2 text-text/70 text-center break-words">{tech.name}</span>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Frameworks & Libraries */}
-      <div className="flex flex-col items-center justify-center mt-6">
-        <h2 className="underline text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl pb-4 font-semibold">
+      <div className="mb-8 md:mb-12 w-full">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-4 md:mb-6">
           Frameworks & Libraries
         </h2>
-        <div className="grid grid-cols-4 lg:grid-cols-8 gap-4">
-          <div className="flex justify-center items-center">
-            <img
-              src={react.src}
-              alt="React"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2"
-            />
-          </div>
-          <div className="flex justify-center items-center">
-            <img
-              src={nextjs.src}
-              alt="Next.js"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2 bg-[#ebf0ee]"
-            />
-          </div>
-          <div className="flex justify-center items-center">
-            <img
-              src={angular.src}
-              alt="Angular"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2"
-            />
-          </div>
-          <div className="flex justify-center items-center">
-            <img
-              src={supabase.src}
-              alt="Supabase"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2"
-            />
-          </div>
-          <div className="flex justify-center items-center">
-            <img
-              src={tensorflow.src}
-              alt="TensorFlow"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2"
-            />
-          </div>
-          <div className="flex justify-center items-center">
-            <img
-              src={expressjs.src}
-              alt="Express.js"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2"
-            />
-          </div>
-          <div className="flex justify-center items-center">
-            <img
-              src={postgres.src}
-              alt="PostgreSQL"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2"
-            />
-          </div>
-          <div className="flex justify-center items-center">
-            <img
-              src={pandas.src}
-              alt="Pandas"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2 bg-[#ebf0ee]"
-            />
-          </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 md:gap-4 w-full">
+          {[
+            { src: react, name: "React" },
+            { src: nextjs, name: "Next.js", bg: true },
+            { src: angular, name: "Angular" },
+            { src: supabase, name: "Supabase" },
+            { src: tensorflow, name: "TensorFlow" },
+            { src: expressjs, name: "Express.js" },
+            { src: postgres, name: "PostgreSQL" },
+            { src: pandas, name: "Pandas", bg: true },
+          ].map((tech, index) => (
+            <div key={index} className="glass-card rounded-lg md:rounded-xl p-3 md:p-4 flex flex-col items-center justify-center group w-full max-w-full">
+              <img
+                src={tech.src.src}
+                alt={tech.name}
+                className={`w-10 sm:w-12 md:w-16 lg:w-20 h-auto transition-transform duration-300 group-hover:scale-110 ${tech.bg ? 'bg-white/10 rounded-lg p-1' : ''}`}
+              />
+              <span className="text-xs sm:text-sm mt-2 text-text/70 text-center break-words">{tech.name}</span>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Tools, Platforms & Others */}
-      <div className="flex-column items-center justify-center justify-items-center mt-6">
-        <h2 className="underline text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl pb-4 font-semibold">
-          Tools, Platforms & Others
+      <div className="w-full">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-4 md:mb-6">
+          Tools & Others
         </h2>
-        <div className="grid grid-cols-3 gap-4">
-          <div className="flex justify-center items-center">
-            <img
-              src={tableau.src}
-              alt="Tableau"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2"
-            />
-          </div>
-          <div className="flex justify-center items-center">
-            <img
-              src={css.src}
-              alt="CSS"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2"
-            />
-          </div>
-          <div className="flex justify-center items-center">
-            <img
-              src={html.src}
-              alt="HTML"
-              className="w-16 md:w-24 lg:w-28 2xl:w-32 h-auto m-2 bg-[#ebf0ee] p-1"
-            />
-          </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 w-full">
+          {[
+            { src: tableau, name: "Tableau" },
+            { src: css, name: "CSS" },
+            { src: html, name: "HTML", bg: true },
+          ].map((tech, index) => (
+            <div key={index} className="glass-card rounded-lg md:rounded-xl p-3 md:p-4 flex flex-col items-center justify-center group w-full max-w-full">
+              <img
+                src={tech.src.src}
+                alt={tech.name}
+                className={`w-10 sm:w-12 md:w-16 lg:w-20 h-auto transition-transform duration-300 group-hover:scale-110 ${tech.bg ? 'bg-white/10 rounded-lg p-1' : ''}`}
+              />
+              <span className="text-xs sm:text-sm mt-2 text-text/70 text-center break-words">{tech.name}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>

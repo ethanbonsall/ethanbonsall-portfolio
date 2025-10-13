@@ -8,8 +8,7 @@ import NavBar from "../components/Portfolio/navbar";
 
 const Portfolio = () => {
   return (
-    <div className="bg-background flex flex-col items-center font-roboto min-h-screen">
-      <div className="h-6 flex w-full bg-accent" id="home"></div>
+    <div className="bg-background flex flex-col items-center font-roboto min-h-screen" id="home">
       <NavBar />
       <Header />
       <Education />

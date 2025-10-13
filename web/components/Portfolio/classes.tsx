@@ -34,18 +34,22 @@ const Courses = () => {
 
   const CourseList = ({ courses }: { courses: Course[] }) => {
     return (
-      <div className="pb-28 bg-secondary w-full  ">
-        <div className="w-full bg-secondary overflow-x-auto py-6 px-4 custom-scrollbar ">
-          <div className="flex overflow-y-visible space-x-4 w-fit mx-auto ">
+      <div className="pb-12 md:pb-16 lg:pb-20 bg-background w-full max-w-full overflow-hidden px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold mb-4">
+          <span className="gradient-text">Coursework</span>
+        </h1>
+        <p className="text-text/70 text-base sm:text-lg md:text-xl mb-6 md:mb-8">Key courses shaping my expertise</p>
+        <div className="w-full overflow-x-auto py-4 md:py-6 custom-scrollbar">
+          <div className="flex overflow-y-visible space-x-3 md:space-x-4 w-fit">
             {courses.map((course, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 bg-primary text-text rounded-xl pb-1 pt-4 px-4 md:p-4 lg:p-6 w-[80vw] md:w-[350px] 2xl:w-[400px] shadow-lg transition-transform hover:scale-105"
+                className="flex-shrink-0 glass-card rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 lg:p-8 w-[85vw] sm:w-[70vw] md:w-[350px] 2xl:w-[400px] transition-all duration-300 group"
               >
-                <h3 className="text-reverse font-bold text-3xl 2xl:text-4xl mb-4">
+                <h3 className="text-primary font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl 2xl:text-4xl mb-3 md:mb-4 group-hover:gradient-text transition-all break-words">
                   {course.name}
                 </h3>
-                <p className="text-reverse text-xl 2xl:text-2xl">
+                <p className="text-text text-sm sm:text-base md:text-lg 2xl:text-xl leading-relaxed">
                   {course.description}
                 </p>
               </div>
