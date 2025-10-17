@@ -38,7 +38,6 @@ const Courses = () => {
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold mb-4">
           <span className="gradient-text">Coursework</span>
         </h1>
-        <p className="text-text/70 text-base sm:text-lg md:text-xl mb-6 md:mb-8">Key courses shaping my expertise</p>
         <div className="w-full overflow-x-auto py-4 md:py-6 custom-scrollbar">
           <div className="flex overflow-y-visible space-x-3 md:space-x-4 w-fit">
             {courses.map((course, index) => (

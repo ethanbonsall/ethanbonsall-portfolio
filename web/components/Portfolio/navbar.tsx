@@ -60,7 +60,7 @@ const NavBar = () => {
 
   return (
     <nav 
-      className="sticky z-50 w-full transition-all duration-300 ease-out flex justify-center"
+      className="sticky z-50  w-full transition-all duration-300 ease-out flex justify-center"
       style={{
         top: `${topOffset}px`
       }}
@@ -83,7 +83,7 @@ const NavBar = () => {
         }}
       >
         <div className={clsx(
-          "flex max-w-full overflow-hidden justify-between items-center transition-all duration-300",
+          "flex max-w-full  justify-between items-center transition-all duration-300",
           isMobile ? "px-[5%]" : ""
         )}>
           <div 
@@ -195,7 +195,7 @@ const NavBar = () => {
                 src={githubLogo.src}
                 alt="GitHub"
                 className={clsx(
-                  "image-hover h-auto rounded-full transition-all duration-300",
+                  "image-hover h-auto rounded-full transition-all duration-300 z-50",
                   isMobile && "w-8 md:w-14"
                 )}
                 style={{

@@ -16,13 +16,12 @@ const Education = () => {
               University of North Carolina at Chapel Hill
             </h2>
             <p className="text-base sm:text-lg md:text-xl 2xl:text-2xl mb-2 break-words">
-              Bachelor of Science in Computer Science
+              Bachelor of Science in Computer Science & Data Science
             </p>
             <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-4 mt-4 text-text/80 text-sm sm:text-base">
               
               <div className="flex items-center gap-2">
-                <span className="text-primary flex-shrink-0">🎓</span>
-                <span className="font-semibold">GPA: 3.7</span>
+                <span className="font-semibold">GPA: 3.72</span>
               </div>
             </div>
           </div>
