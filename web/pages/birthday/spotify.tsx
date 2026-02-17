@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import Head from "next/head";
 import { useState, useEffect, useRef } from "react";
 
 const CLIENT_ID = "a2e6aeb9971e4287a1985803be608d24";
@@ -173,7 +174,9 @@ export default function BirthdaySubmitPage() {
   const handleSearch = async () => {
     if (!token) return;
     const response = await fetch(
-      `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=track`,
+      `https://api.spotify.com/v1/search?q=${encodeURIComponent(
+        searchQuery
+      )}&type=track`,
       {
         headers: { Authorization: `Bearer ${accessToken || token}` },
       }
@@ -222,6 +225,9 @@ export default function BirthdaySubmitPage() {
       <h1 className="text-4xl font-bold mb-4 text-center bg-gray-300 text-black p-2 border-2 border-black shadow-md">
         Ethan&apos;s Birthday Rager 🎶
       </h1>
+      <Head>
+        <title>Birthday Music</title>
+      </Head>
 
       {!token ? (
         <button

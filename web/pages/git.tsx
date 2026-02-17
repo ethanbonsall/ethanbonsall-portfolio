@@ -1,6 +1,11 @@
+import Head from "next/head";
+
 export default function PrivateRepoPage() {
   return (
     <main className="flex items-center justify-center min-h-screen bg-background text-text px-6">
+      <Head>
+        <title>Git</title>
+      </Head>
       <div className="text-center max-w-md space-y-6">
         <h1 className="text-4xl font-bold text-accent">
           🔒 Private Repository

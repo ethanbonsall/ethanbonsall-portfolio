@@ -7,7 +7,7 @@ const Education = () => {
       <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold mb-4">
         <span className="gradient-text">Education</span>
       </h1>
-      
+
       <div className="glass-card rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-8 max-w-4xl w-full">
         <div className="flex items-start gap-3 md:gap-4">
           <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
@@ -19,9 +19,8 @@ const Education = () => {
               Bachelor of Science in Computer Science & Data Science
             </p>
             <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-4 mt-4 text-text/80 text-sm sm:text-base">
-              
               <div className="flex items-center gap-2">
-                <span className="font-semibold">GPA: 3.72</span>
+                <span className="font-semibold">GPA: 3.8</span>
               </div>
             </div>
           </div>

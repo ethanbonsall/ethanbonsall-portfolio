@@ -6,6 +6,11 @@ const Courses = () => {
         "Learned how to reason about how my code is structured, identify whether a given structure is effective in a given context, and look at ways of organizing units of code that support larger programs.",
     },
     {
+      name: "Introduction to Machine Learning",
+      description:
+        "Studied machine learning methods applied to speech recognition, tracking, collaborative filtering, and recommendation systems. Covered classification, regression, support vector machines, hidden Markov models, principal component analysis, and deep learning.",
+    },
+    {
       name: "Modern Web Programming",
       description:
         "Built full-stack web apps using Next.js, TypeScript, and Tailwind CSS. Gained hands-on experience with frontend and backend development, deploying multiple websites from scratch or starter code, and learning scalable web architecture and responsive design.",

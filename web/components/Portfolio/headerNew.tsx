@@ -11,8 +11,8 @@ const Header = () => {
     const duration = 2000;
     const steps = 60;
     const interval = duration / steps;
-    
-    const targets = { projects: 8, experience: 2, tech: 15 };
+
+    const targets = { projects: 10, experience: 2, tech: 15 };
     let current = { projects: 0, experience: 0, tech: 0 };
 
     const timer = setInterval(() => {
@@ -23,8 +23,14 @@ const Header = () => {
       };
 
       current = {
-        projects: Math.min(current.projects + increment.projects, targets.projects),
-        experience: Math.min(current.experience + increment.experience, targets.experience),
+        projects: Math.min(
+          current.projects + increment.projects,
+          targets.projects
+        ),
+        experience: Math.min(
+          current.experience + increment.experience,
+          targets.experience
+        ),
         tech: Math.min(current.tech + increment.tech, targets.tech),
       };
 
@@ -62,19 +68,24 @@ const Header = () => {
         </div>
         <div className="flex mt-8 sm:mt-10 md:mt-20 lg:mt-30 2xl:mt-40 items-center justify-center px-4 sm:px-10 md:px-20 lg:px-40 xl:px-64 2xl:px-80">
           <div className="flex-row items-center text-center justify-items-center text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-sans font-extrabold animate-slide-up w-full max-w-full">
-            <div className="mb-3 md:mb-4 text-primary text-base sm:text-lg md:text-xl lg:text-2xl font-mono">Software Developer</div>
+            <div className="mb-3 md:mb-4 text-primary text-base sm:text-lg md:text-xl lg:text-2xl font-mono">
+              Software Developer
+            </div>
             <div className="break-words">
               <span className="text-text">Hello I&apos;m </span>
               <span className="gradient-text">Ethan Bonsall</span>
             </div>
-            <p className="text-text/80 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-normal mt-4 sm:mt-6 max-w-3xl mx-auto break-words px-2">
-              Full-Stack Developer | Data Engineer | Building innovative solutions with modern tech
+            <p className="text-[#e8e8e8]/70 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-normal mt-4 sm:mt-6 mx-auto break-words px-2">
+              Full-Stack Developer | Data Engineer
+            </p>
+            <p className="text-[#e8e8e8]/70 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-normal mt-4 sm:mt-6 mx-auto break-words px-2">
+              UNC Chapel Hill | 3.8 GPA | Computer Science | Data Science
             </p>
           </div>
         </div>
 
         {/* Stats Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
@@ -84,19 +95,25 @@ const Header = () => {
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold gradient-text counter-animate">
               {stats.projects}+
             </div>
-            <div className="text-xs sm:text-sm md:text-base text-text/70 mt-1 md:mt-2 whitespace-nowrap">Projects</div>
+            <div className="text-xs sm:text-sm md:text-base text-text/70 mt-1 md:mt-2 whitespace-nowrap">
+              Projects
+            </div>
           </div>
           <div className="glass-card px-4 py-3 sm:px-6 sm:py-4 md:px-8 md:py-6 rounded-lg md:rounded-xl text-center min-w-[100px] sm:min-w-[120px]">
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold gradient-text counter-animate">
               {stats.experience}+
             </div>
-            <div className="text-xs sm:text-sm md:text-base text-text/70 mt-1 md:mt-2 whitespace-nowrap">Years Experience</div>
+            <div className="text-xs sm:text-sm md:text-base text-text/70 mt-1 md:mt-2 whitespace-nowrap">
+              Years Experience
+            </div>
           </div>
           <div className="glass-card px-4 py-3 sm:px-6 sm:py-4 md:px-8 md:py-6 rounded-lg md:rounded-xl text-center min-w-[100px] sm:min-w-[120px]">
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold gradient-text counter-animate">
               {stats.tech}+
             </div>
-            <div className="text-xs sm:text-sm md:text-base text-text/70 mt-1 md:mt-2 whitespace-nowrap">Technologies</div>
+            <div className="text-xs sm:text-sm md:text-base text-text/70 mt-1 md:mt-2 whitespace-nowrap">
+              Technologies
+            </div>
           </div>
         </motion.div>
       </div>

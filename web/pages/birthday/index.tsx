@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import supabase from "../../supabaseClient";
 import RSVPModal from "../../components/rsvp";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function BirthdayPage() {
   const [, setSongs] = useState<any[]>([]);
@@ -164,7 +165,9 @@ export default function BirthdayPage() {
     }
 
     const response = await fetch(
-      `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=track`,
+      `https://api.spotify.com/v1/search?q=${encodeURIComponent(
+        searchQuery
+      )}&type=track`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -255,6 +258,9 @@ export default function BirthdayPage() {
 
   return (
     <div className="min-h-screen bg-gray-700 flex items-center justify-center p-8">
+      <Head>
+        <title>Birthday</title>
+      </Head>
       {/* Window Frame */}
       {showRSVP && <RSVPModal onClose={() => setShowRSVP(false)} />}
       <div className="border border-black w-4/5 max-w-[700px] bg-gray-300 shadow-[6px_6px_0px_black]">
