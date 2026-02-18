@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
@@ -81,14 +80,8 @@ export default function GoalsPage() {
   const [draftDateHit, setDraftDateHit] = useState("");
   const [deleteConfirm, setDeleteConfirm] = useState<GoalRow | null>(null);
 
-  const hitGoals = useMemo(
-    () => goals.filter((g) => g.hit),
-    [goals]
-  );
-  const notHitGoals = useMemo(
-    () => goals.filter((g) => !g.hit),
-    [goals]
-  );
+  const hitGoals = useMemo(() => goals.filter((g) => g.hit), [goals]);
+  const notHitGoals = useMemo(() => goals.filter((g) => !g.hit), [goals]);
 
   const canEdit = userId !== null && selectedUserId === userId;
 
@@ -124,7 +117,9 @@ export default function GoalsPage() {
     setErrMsg(null);
     supabase
       .from("goals")
-      .select("id, created_at, goal_title, curr_num_value, goal_num_val, hit, date_hit, year, user_id")
+      .select(
+        "id, created_at, goal_title, curr_num_value, goal_num_val, hit, date_hit, year, user_id"
+      )
       .eq("user_id", selectedUserId)
       .eq("year", year)
       .order("hit", { ascending: true })
@@ -133,7 +128,10 @@ export default function GoalsPage() {
         if (error) setErrMsg(error.message);
         else setGoals((data as GoalRow[]) ?? []);
       })
-      .then(() => setLoading(false), () => setLoading(false));
+      .then(
+        () => setLoading(false),
+        () => setLoading(false)
+      );
   }, [selectedUserId, year]);
 
   function openCreate() {
@@ -151,7 +149,9 @@ export default function GoalsPage() {
     setEditing(goal);
     setDraftTitle(goal.goal_title);
     setDraftGoalVal(goal.goal_num_val != null ? String(goal.goal_num_val) : "");
-    setDraftCurrVal(goal.curr_num_value != null ? String(goal.curr_num_value) : "");
+    setDraftCurrVal(
+      goal.curr_num_value != null ? String(goal.curr_num_value) : ""
+    );
     setDraftHit(goal.hit);
     setDraftDateHit(goal.date_hit ?? "");
   }
@@ -287,9 +287,7 @@ export default function GoalsPage() {
                       {displayUser(u)}
                     </option>
                   ))}
-                  {users.length === 0 && (
-                    <option value="">—</option>
-                  )}
+                  {users.length === 0 && <option value="">—</option>}
                 </select>
               </label>
               <div className="flex items-center gap-1">
@@ -353,10 +351,14 @@ export default function GoalsPage() {
                             <span className="font-medium text-text">
                               {g.goal_title}
                             </span>
-                            {(g.goal_num_val != null || g.curr_num_value != null) && (
+                            {(g.goal_num_val != null ||
+                              g.curr_num_value != null) && (
                               <span className="ml-2 text-text/70">
-                                {g.curr_num_value != null ? g.curr_num_value : "—"}
-                                {g.goal_num_val != null && ` / ${g.goal_num_val}`}
+                                {g.curr_num_value != null
+                                  ? g.curr_num_value
+                                  : "—"}
+                                {g.goal_num_val != null &&
+                                  ` / ${g.goal_num_val}`}
                               </span>
                             )}
                             {g.date_hit && (
@@ -365,29 +367,31 @@ export default function GoalsPage() {
                               </span>
                             )}
                           </button>
-                          {(g.goal_num_val != null || g.curr_num_value != null) && canEdit && (
-                            <div className="flex items-center gap-0 rounded-lg border border-primary/30 bg-background/80">
-                              <button
-                                type="button"
-                                onClick={() => adjustCurrValue(g, -1)}
-                                className="px-2 py-1 text-text hover:bg-primary/20"
-                                aria-label="Decrease"
-                              >
-                                −
-                              </button>
-                              <span className="min-w-[2rem] px-1 text-center text-sm text-text/80">
-                                {g.curr_num_value ?? 0}
-                              </span>
-                              <button
-                                type="button"
-                                onClick={() => adjustCurrValue(g, 1)}
-                                className="px-2 py-1 text-text hover:bg-primary/20"
-                                aria-label="Increase"
-                              >
-                                +
-                              </button>
-                            </div>
-                          )}
+                          {(g.goal_num_val != null ||
+                            g.curr_num_value != null) &&
+                            canEdit && (
+                              <div className="flex items-center gap-0 rounded-lg border border-primary/30 bg-background/80">
+                                <button
+                                  type="button"
+                                  onClick={() => adjustCurrValue(g, -1)}
+                                  className="px-2 py-1 text-text hover:bg-primary/20"
+                                  aria-label="Decrease"
+                                >
+                                  −
+                                </button>
+                                <span className="min-w-[2rem] px-1 text-center text-sm text-text/80">
+                                  {g.curr_num_value ?? 0}
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => adjustCurrValue(g, 1)}
+                                  className="px-2 py-1 text-text hover:bg-primary/20"
+                                  aria-label="Increase"
+                                >
+                                  +
+                                </button>
+                              </div>
+                            )}
                           {canEdit && (
                             <button
                               type="button"
@@ -430,36 +434,42 @@ export default function GoalsPage() {
                             <span className="font-medium text-text">
                               {g.goal_title}
                             </span>
-                            {(g.goal_num_val != null || g.curr_num_value != null) && (
+                            {(g.goal_num_val != null ||
+                              g.curr_num_value != null) && (
                               <span className="ml-2 text-text/70">
-                                {g.curr_num_value != null ? g.curr_num_value : "—"}
-                                {g.goal_num_val != null && ` / ${g.goal_num_val}`}
+                                {g.curr_num_value != null
+                                  ? g.curr_num_value
+                                  : "—"}
+                                {g.goal_num_val != null &&
+                                  ` / ${g.goal_num_val}`}
                               </span>
                             )}
                           </button>
-                          {(g.goal_num_val != null || g.curr_num_value != null) && canEdit && (
-                            <div className="flex items-center gap-0 rounded-lg border border-primary/30 bg-background/80">
-                              <button
-                                type="button"
-                                onClick={() => adjustCurrValue(g, -1)}
-                                className="px-2 py-1 text-text hover:bg-primary/20"
-                                aria-label="Decrease"
-                              >
-                                −
-                              </button>
-                              <span className="min-w-[2rem] px-1 text-center text-sm text-text/80">
-                                {g.curr_num_value ?? 0}
-                              </span>
-                              <button
-                                type="button"
-                                onClick={() => adjustCurrValue(g, 1)}
-                                className="px-2 py-1 text-text hover:bg-primary/20"
-                                aria-label="Increase"
-                              >
-                                +
-                              </button>
-                            </div>
-                          )}
+                          {(g.goal_num_val != null ||
+                            g.curr_num_value != null) &&
+                            canEdit && (
+                              <div className="flex items-center gap-0 rounded-lg border border-primary/30 bg-background/80">
+                                <button
+                                  type="button"
+                                  onClick={() => adjustCurrValue(g, -1)}
+                                  className="px-2 py-1 text-text hover:bg-primary/20"
+                                  aria-label="Decrease"
+                                >
+                                  −
+                                </button>
+                                <span className="min-w-[2rem] px-1 text-center text-sm text-text/80">
+                                  {g.curr_num_value ?? 0}
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => adjustCurrValue(g, 1)}
+                                  className="px-2 py-1 text-text hover:bg-primary/20"
+                                  aria-label="Increase"
+                                >
+                                  +
+                                </button>
+                              </div>
+                            )}
                           {canEdit && (
                             <button
                               type="button"
@@ -545,7 +555,8 @@ export default function GoalsPage() {
         {deleteConfirm && (
           <div className="space-y-4">
             <p className="text-text">
-              Are you sure you want to delete &quot;{deleteConfirm.goal_title}&quot;?
+              Are you sure you want to delete &quot;{deleteConfirm.goal_title}
+              &quot;?
             </p>
             <div className="flex justify-end gap-2">
               <button
