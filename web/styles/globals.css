@@ -10,7 +10,7 @@
   --accent: 172 84% 40%;      
   --reverse: 0 0% 100%;      
   --pop: 160 84% 39%;          
-  --scroll: 160 84% 39% / 0.3; 
+  --scroll: #10b9814d; 
 }
 
 .dark {
@@ -21,7 +21,7 @@
   --accent: 172 84% 40%;
   --reverse: 0 0% 100%;
   --pop: 160 84% 39%;
-  --scroll: 160 84% 39% / 0.3;
+  --scroll: #10b9814d;
 }
 
 .image-hover {
