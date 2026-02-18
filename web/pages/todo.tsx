@@ -20,7 +20,8 @@ import {
   useSortable,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import NavBar from "@/components/Portfolio/navbar";
+import NavBar from "@/components/navabar_2";
+import Head from "next/head";
 
 /**
  * Week Todo Calendar (Google Calendar-ish week view)
@@ -46,6 +47,8 @@ type TodoRow = {
   due_date: string | null; // YYYY-MM-DD
   title: string;
   content: string | null;
+  user_id: string; // UUID
+  completed: boolean;
 };
 
 function supabaseClient(): SupabaseClient {
@@ -139,7 +142,9 @@ function DroppableDayBody({
   return (
     <div
       ref={setNodeRef}
-      className={[className, isOver ? "bg-primary/10" : ""].filter(Boolean).join(" ")}
+      className={[className, isOver ? "bg-primary/10" : ""]
+        .filter(Boolean)
+        .join(" ")}
     >
       {children}
     </div>
@@ -164,10 +169,12 @@ function SortableTodoCard({
   todo,
   onEdit,
   onDelete,
+  onComplete,
 }: {
   todo: TodoRow;
   onEdit: (t: TodoRow) => void;
   onDelete: (t: TodoRow) => void;
+  onComplete: (t: TodoRow) => void;
 }) {
   const {
     attributes,
@@ -190,26 +197,39 @@ function SortableTodoCard({
       className={[
         "group relative rounded-xl border border-primary/20 bg-secondary/70 p-3 shadow-sm",
         "hover:border-primary/40 hover:bg-secondary/90 hover:shadow transition cursor-grab active:cursor-grabbing",
-        isDragging ? "opacity-50" : "",
+        isDragging ? "opacity/50" : "",
       ].join(" ")}
       {...attributes}
       {...listeners}
     >
-      <div className="flex items-start gap-2">
-        <button
-          className="shrink-0 flex h-6 w-6 items-center justify-center text-sm text-text/60 hover:text-red-400 transition"
-          onClick={(e) => {
-            e.stopPropagation();
-            onDelete(todo);
-          }}
-          type="button"
-          aria-label="Delete"
-        >
-          ×
-        </button>
+      <div className="flex flex-col items-start gap-2">
+        <div className="flex flex-row shrink-0 gap-1 justify-between w-full">
+          <button
+            className="flex h-3 w-3 items-center justify-center text-sm text-text/60 hover:text-red-400 transition"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete(todo);
+            }}
+            type="button"
+            aria-label="Delete"
+          >
+            ×
+          </button>
+          <button
+            className="flex h-3 w-3 items-center justify-center text-sm text-text/60 hover:text-green-400 transition"
+            onClick={(e) => {
+              e.stopPropagation();
+              onComplete(todo);
+            }}
+            type="button"
+            aria-label="Complete"
+          >
+            ✓
+          </button>
+        </div>
 
         <button
-          className="min-w-0 flex-1 text-left"
+          className="min-w-0 flex-1 text-left font-normal"
           onClick={(e) => {
             e.stopPropagation();
             onEdit(todo);
@@ -217,15 +237,29 @@ function SortableTodoCard({
           type="button"
         >
           <div className="flex flex-col items-start gap-2">
-            <span className="text-sm font-medium normal-case text-text">{todo.title}</span>
+            <span
+              className={`text-xs font-normal normal-case text-text line-clamp-1 ${
+                todo.completed ? "line-through" : ""
+              }`}
+            >
+              {todo.title}
+            </span>
             {todo.due_date ? (
-              <span className="shrink-0 rounded-full border border-primary/30 px-2 py-0.5 text-xs text-text/80 normal-case">
-                due {todo.due_date}
+              <span
+                className={`shrink-0 rounded-full text-xs font-medium text-text/80 normal-case ${
+                  todo.completed ? "line-through" : ""
+                }`}
+              >
+                Due {todo.due_date}
               </span>
             ) : null}
           </div>
           {todo.content ? (
-            <p className="mt-1 line-clamp-2 text-xs text-text/70 whitespace-pre-line normal-case">
+            <p
+              className={`mt-1 line-clamp-5 text-xs text-text/70 whitespace-pre-line normal-case ${
+                todo.completed ? "line-through" : ""
+              }`}
+            >
               {todo.content}
             </p>
           ) : null}
@@ -238,9 +272,13 @@ function SortableTodoCard({
 function OverlayCard({ todo }: { todo: TodoRow }) {
   return (
     <div className="w-[260px] rounded-xl border border-primary/30 bg-secondary p-3 shadow-lg">
-      <div className="truncate text-sm font-medium normal-case text-text">{todo.title}</div>
+      <div className="truncate text-sm font-medium normal-case text-text">
+        {todo.title}
+      </div>
       {todo.due_date ? (
-        <div className="mt-1text-xs text-text/80 normal-case">due {todo.due_date}</div>
+        <div className="mt-1 text-xs text-text/80 normal-case">
+          due {todo.due_date}
+        </div>
       ) : null}
       {todo.content ? (
         <div className="mt-2 line-clamp-2 whitespace-pre-line text-xs text-text/70 normal-case">
@@ -281,7 +319,9 @@ function Modal({
             Close
           </button>
         </div>
-        <div className="min-h-0 min-w-0 overflow-y-auto overflow-x-hidden p-4">{children}</div>
+        <div className="min-h-0 min-w-0 overflow-y-auto overflow-x-hidden p-4">
+          {children}
+        </div>
       </div>
     </div>
   );
@@ -289,6 +329,9 @@ function Modal({
 
 export default function WeekTodoCalendarPage() {
   const supabase = useMemo(() => supabaseClient(), []);
+
+  const [userId, setUserId] = useState<string | null>(null);
+  const [showCompleted, setShowCompleted] = useState(false);
 
   const [weekAnchor, setWeekAnchor] = useState<Date>(() =>
     startOfWeekSunday(clampYear2100(new Date()))
@@ -332,19 +375,39 @@ export default function WeekTodoCalendarPage() {
     for (const day of weekDays) map.set(toISODate(day), []);
     for (const t of todos) {
       if (!map.has(t.task_date)) continue;
+      // Filter out completed tasks unless showCompleted is true
+      if (!showCompleted && t.completed) continue;
       map.get(t.task_date)!.push(t);
     }
     for (const [k, v] of map) map.set(k, sortByPriority(v));
     return map;
-  }, [todos, weekDays]);
+  }, [todos, weekDays, showCompleted]);
+
+  // Get current user on mount
+  useEffect(() => {
+    async function getCurrentUser() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user) {
+        setUserId(user.id);
+      }
+    }
+    getCurrentUser();
+  }, [supabase]);
 
   async function loadWeek() {
+    if (!userId) return;
+
     setLoading(true);
     setErrMsg(null);
     try {
       const { data, error } = await supabase
         .from("todos")
-        .select("id,created_at,task_date,priority,due_date,title,content")
+        .select(
+          "id,created_at,task_date,priority,due_date,title,content,user_id,completed"
+        )
+        .eq("user_id", userId)
         .gte("task_date", rangeStartISO)
         .lt("task_date", rangeEndISOExclusive)
         .order("task_date", { ascending: true })
@@ -360,9 +423,11 @@ export default function WeekTodoCalendarPage() {
   }
 
   useEffect(() => {
-    loadWeek();
+    if (userId) {
+      loadWeek();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rangeStartISO, rangeEndISOExclusive]);
+  }, [rangeStartISO, rangeEndISOExclusive, userId]);
 
   function openCreate(dayISO: string) {
     setEditing(null);
@@ -382,7 +447,33 @@ export default function WeekTodoCalendarPage() {
     setModalOpen(true);
   }
 
+  async function toggleComplete(todo: TodoRow) {
+    try {
+      const { error } = await supabase
+        .from("todos")
+        .update({ completed: !todo.completed })
+        .eq("id", todo.id);
+
+      if (error) throw error;
+
+      // Optimistic update
+      setTodos((prev) =>
+        prev.map((t) =>
+          t.id === todo.id ? { ...t, completed: !t.completed } : t
+        )
+      );
+    } catch (e: any) {
+      setErrMsg(e?.message ?? "Failed to toggle completion.");
+      await loadWeek();
+    }
+  }
+
   async function saveTodo() {
+    if (!userId) {
+      setErrMsg("Please log in to create tasks.");
+      return;
+    }
+
     const title = draft.title.trim();
     if (!title) return;
 
@@ -451,7 +542,10 @@ export default function WeekTodoCalendarPage() {
           const oldDayRemaining = (todosByDay.get(oldDay) ?? []).filter(
             (t) => t.id !== editing.id
           );
-          await persistDayPriorities(oldDay, withReprioritized(oldDayRemaining));
+          await persistDayPriorities(
+            oldDay,
+            withReprioritized(oldDayRemaining)
+          );
           const newDayList = [
             ...(todosByDay.get(modalDayISO) ?? []).filter(
               (t) => t.id !== editing.id
@@ -473,12 +567,16 @@ export default function WeekTodoCalendarPage() {
           due_date: draft.due_date ? draft.due_date : null,
           title,
           content: draft.content.trim() ? draft.content.trim() : null,
+          user_id: userId,
+          completed: false,
         };
 
         const { data, error } = await supabase
           .from("todos")
           .insert(insertRow)
-          .select("id,created_at,task_date,priority,due_date,title,content")
+          .select(
+            "id,created_at,task_date,priority,due_date,title,content,user_id,completed"
+          )
           .single();
 
         if (error) throw error;
@@ -712,6 +810,9 @@ export default function WeekTodoCalendarPage() {
 
   return (
     <div className="min-h-screen bg-background text-text">
+      <Head>
+        <title>Todo Calendar</title>
+      </Head>
       <NavBar />
       <div className="flex flex-col mx-auto items-center px-4 py-6">
         {errMsg ? (
@@ -803,7 +904,7 @@ export default function WeekTodoCalendarPage() {
                             "flex flex-col gap-2",
                             "min-h-[160px] rounded-xl",
                             "p-2 -m-2",
-                            "transition hover:bg-primary/5",
+                            "transition",
                           ].join(" ")}
                         >
                           {dayTodos.length === 0 ? (
@@ -818,6 +919,7 @@ export default function WeekTodoCalendarPage() {
                               todo={t}
                               onEdit={openEdit}
                               onDelete={deleteTodo}
+                              onComplete={toggleComplete}
                             />
                           ))}
 
@@ -843,15 +945,28 @@ export default function WeekTodoCalendarPage() {
 
           <div className="mt-4 flex items-center justify-between gap-3 text-sm text-text/75">
             <div>
-              {loading ? "Loading…" : `${todos.length} task(s) this week`}
+              {loading
+                ? "Loading…"
+                : `${
+                    todos.filter((t) => !t.completed || showCompleted).length
+                  } task(s) this week`}
             </div>
-            <button
-              onClick={loadWeek}
-              className="rounded-xl border border-primary/40 px-3 py-2 text-sm text-text hover:bg-primary/20 transition"
-              type="button"
-            >
-              Refresh
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowCompleted(!showCompleted)}
+                className="rounded-xl border border-primary/40 px-3 py-2 text-sm text-text hover:bg-primary/20 transition"
+                type="button"
+              >
+                {showCompleted ? "Hide" : "Show"} Completed
+              </button>
+              <button
+                onClick={loadWeek}
+                className="rounded-xl border border-primary/40 px-3 py-2 text-sm text-text hover:bg-primary/20 transition"
+                type="button"
+              >
+                Refresh
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -864,7 +979,9 @@ export default function WeekTodoCalendarPage() {
       >
         <div className="space-y-4 min-w-0">
           <div className="space-y-2 min-w-0">
-            <label className="block text-sm font-medium text-text">Task date*</label>
+            <label className="block text-sm font-medium text-text">
+              Task date*
+            </label>
             <input
               type="date"
               value={modalDayISO}
@@ -876,7 +993,9 @@ export default function WeekTodoCalendarPage() {
           </div>
 
           <div className="space-y-2 min-w-0">
-            <label className="block text-sm font-medium text-text">Title*</label>
+            <label className="block text-sm font-medium text-text">
+              Title*
+            </label>
             <input
               value={draft.title}
               onChange={(e) =>
@@ -889,7 +1008,7 @@ export default function WeekTodoCalendarPage() {
 
           <div className="space-y-2 min-w-0">
             <label className="block text-sm font-medium text-text">
-              Details 
+              Details
             </label>
             <textarea
               value={draft.content}
@@ -903,7 +1022,7 @@ export default function WeekTodoCalendarPage() {
 
           <div className="space-y-2 min-w-0">
             <label className="block text-sm font-medium text-text">
-              Due date 
+              Due date
             </label>
             <input
               type="date"
@@ -915,7 +1034,6 @@ export default function WeekTodoCalendarPage() {
               min="1900-01-01"
               max="2100-12-31"
             />
-          
           </div>
 
           <div className="flex items-center justify-end gap-2 pt-2">
@@ -929,7 +1047,7 @@ export default function WeekTodoCalendarPage() {
             <button
               onClick={saveTodo}
               disabled={saving || !draft.title.trim()}
-              className="rounded-xl bg-primary px-4 py-2 text-sm font-medium text-reverse disabled:opacity-50"
+              className="rounded-xl bg-primary px-4 py-2 text-sm font-medium text-reverse disabled:opacity/50"
               type="button"
             >
               {saving ? "Saving…" : "Save"}

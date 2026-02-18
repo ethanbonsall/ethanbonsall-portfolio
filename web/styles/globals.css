@@ -3,24 +3,25 @@
 @tailwind utilities;
 
 :root {
-  --text: #e8e8e8;
-  --background: #0a0a0a;
-  --primary: #10b981;
-  --secondary: #1a1a1a;
-  --accent: #14b8a6;
-  --reverse: #ffffff;
-  --pop: #10b981;
-  --scroll: #10b9814d;
+  --text: 0 0% 91%;            
+  --background: 0 0% 4%;       
+  --primary: 160 84% 39%;      
+  --secondary: 0 0% 10%;      
+  --accent: 172 84% 40%;      
+  --reverse: 0 0% 100%;      
+  --pop: 160 84% 39%;          
+  --scroll: 160 84% 39% / 0.3; 
 }
+
 .dark {
-  --text: #e8e8e8;
-  --background: #0a0a0a;
-  --primary: #10b981;
-  --secondary: #1a1a1a;
-  --accent: #14b8a6;
-  --reverse: #ffffff;
-  --pop: #10b981;
-  --scroll: #10b9814d;
+  --text: 0 0% 91%;
+  --background: 0 0% 4%;
+  --primary: 160 84% 39%;
+  --secondary: 0 0% 10%;
+  --accent: 172 84% 40%;
+  --reverse: 0 0% 100%;
+  --pop: 160 84% 39%;
+  --scroll: 160 84% 39% / 0.3;
 }
 
 .image-hover {
@@ -231,4 +232,25 @@ html {
 
 .float-animation {
   animation: float 6s ease-in-out infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 1; }
+  30% { opacity: 0.85; }
+  45% { opacity: 0.4; }
+  50% { opacity: 0.85; }
+  100% { opacity: 1; }
+}
+
+.flicker {
+  animation: flicker 2s infinite;
+}
+@keyframes hacker-flicker {
+  0% { opacity: 1; }
+  40% { opacity: 0.9; }
+  45% { opacity: 0.4; }
+  50% { opacity: 1; }
+  55% { opacity: 0.6; }
+  60% { opacity: 1; }
+  100% { opacity: 1; }
 }

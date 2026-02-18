@@ -8,12 +8,11 @@ import NavBar from "../components/Portfolio/navbar";
 import Head from "next/head";
 import TerminalChat from "@/components/Portfolio/chatbot";
 import MarcyChatbotOverlay from "@/components/Portfolio/marcy";
-import Link from "next/link";
 
 const Portfolio = () => {
   return (
     <div
-      className="bg-background flex flex-col items-center font-roboto min-h-screen"
+      className="bg-background flex flex-col items-center font-robot min-h-screen"
       id="home"
     >
       <Head>
@@ -53,23 +52,6 @@ const Portfolio = () => {
           return data.content as string;
         }}
       />
-      <div className="flex flex-col text-primary mb-2">
-        <p>Are you Ethan?</p>
-        <div className="flex flex-row gap-4 text-center items-center justify-center">
-          <Link
-            href="/login"
-            className="text-primary underline transition-all hover:text-yellow-500 duration-300 hover:drop-shadow-[0_0_6px_rgba(255,255,150,0.8)]"
-          >
-            Yes
-          </Link>
-          <button
-            onClick={() => alert("Oh ok, go look somewhere else then")}
-            className="hover:text-amber-900"
-          >
-            No
-          </button>
-        </div>
-      </div>
       <MarcyChatbotOverlay />
     </div>
   );

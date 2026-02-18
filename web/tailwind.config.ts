@@ -11,13 +11,14 @@ const config = {
 	theme: {
 		extend: {
 			colors: {
-				'text': 'var(--text)',
-				'background': 'var(--background)',
-				'primary': 'var(--primary)',
-				'secondary': 'var(--secondary)',
-				'accent': 'var(--accent)',
-				'reverse': 'var(--reverse)',
-				'pop': 'var(--pop)',
+				text: "hsl(var(--text) / <alpha-value>)",
+				background: "hsl(var(--background) / <alpha-value>)",
+				primary: "hsl(var(--primary) / <alpha-value>)",
+				secondary: "hsl(var(--secondary) / <alpha-value>)",
+				accent: "hsl(var(--accent) / <alpha-value>)",
+				reverse: "hsl(var(--reverse) / <alpha-value>)",
+				pop: "hsl(var(--pop) / <alpha-value>)",
+				scroll: "hsl(var(--scroll))",		  
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
