@@ -37,15 +37,6 @@ const projects: Project[] = [
       "A full-stack website built for a photography business. The frontend is developed with Next.js and Tailwind CSS, and deployed via Vercel. The backend is powered by Supabase, serving as both the database and API layer, enabling seamless data retrieval and submission",
   },
   {
-    name: "Bonsai Property Care",
-    link: "https://bonsaipropertycare.com/",
-    git: "https://github.com/ethanbonsall/bonsai-property-care",
-    photo: "/assets/uploads/2bonsai-property-care.png",
-    tags: ["web"],
-    description:
-      "A full-stack website built for a property care business. The frontend is developed with Next.js and Tailwind CSS, and deployed via Vercel. The backend is powered by Supabase, serving as both the database and API layer, enabling seamless data retrieval and submission",
-  },
-  {
     name: "Chad GPT",
     git: "https://github.com/comp423-25s/csxl-a2",
     photo: "/assets/uploads/3chad-gpt.png",
@@ -62,6 +53,43 @@ const projects: Project[] = [
     featured: true,
     description:
       "A web app for dietitians to calculate patient nutrient needs and create formula recipes that meet those requirements. Built with Next.js and TypeScript, using Supabase to manage user profiles, saved recipes, nutrient data, and weight benchmarks.",
+  },
+  {
+    name: "Bonsai Property Care",
+    link: "https://bonsaipropertycare.com/",
+    git: "https://github.com/ethanbonsall/bonsai-property-care",
+    photo: "/assets/uploads/2bonsai-property-care.png",
+    tags: ["web"],
+    description:
+      "A full-stack website built for a property care business. The frontend is developed with Next.js and Tailwind CSS, and deployed via Vercel. The backend is powered by Supabase, serving as both the database and API layer, enabling seamless data retrieval and submission",
+  },
+  {
+    name: "Postprofundus",
+    link: "https://postprofundus.org",
+    git: "https://github.com/ethanbonsall/Postprofundus",
+    photo: "/assets/uploads/9postprofundus.png",
+    tags: ["web"],
+    featured: true,
+    description:
+      "A designer and lifestyle website built for a client, featuring immersive 3D renderings and a fully integrated online shop for apparel purchases. The frontend is developed with Next.js, React, Three.js, and TypeScript, delivering an interactive, performance-optimized experience.",
+  },
+  {
+    name: "AuditTrail",
+    git: "https://github.com/ethanbonsall/audit-trail",
+    photo: "/assets/uploads/91audittrail.png",
+    tags: ["ai", "data"],
+    featured: true,
+    description:
+      "An open-source Python library for creating tamper-proof audit logs of API activity. Built as plug-and-play middleware for FastAPI, it cryptographically chains log entries, encrypts payloads at rest, and provides CLI verification tools, compliance reporting, and optional enterprise-grade security features.",
+  },
+  {
+    name: "Main Frame",
+    link: "https://www.ethanbonsall.com/main-frame",
+    git: "https://github.com/ethanbonsall/ethanbonsall-portfolio",
+    photo: "/assets/uploads/92mainframe.png",
+    tags: ["web"],
+    description:
+      "A retro-styled interactive dashboard featuring a themed login experience, todo chart, and shared goals table. Built with React, TypeScript, and Tailwind CSS, it blends playful 'hacking' aesthetics with real user-driven functionality.",
   },
   {
     name: "Study Buddy",
@@ -98,25 +126,6 @@ const projects: Project[] = [
     tags: ["web"],
     description:
       "A Wordle clone built with React and styled using Tailwind CSS.",
-  },
-  {
-    name: "Postprofundus",
-    link: "https://postprofundus.org",
-    git: "https://github.com/ethanbonsall/Postprofundus",
-    photo: "/assets/uploads/9postprofundus.png",
-    tags: ["web"],
-    featured: true,
-    description:
-      "A designer and lifestyle website built for a client, featuring immersive 3D renderings and a fully integrated online shop for apparel purchases. The frontend is developed with Next.js, React, Three.js, and TypeScript, delivering an interactive, performance-optimized experience.",
-  },
-  {
-    name: "AuditTrail",
-    git: "https://github.com/ethanbonsall/audit-trail",
-    photo: "/assets/uploads/91audittrail.png",
-    tags: ["ai", "data"],
-    featured: true,
-    description:
-      "An open-source Python library for creating tamper-proof audit logs of API activity. Built as plug-and-play middleware for FastAPI, it cryptographically chains log entries, encrypts payloads at rest, and provides CLI verification tools, compliance reporting, and optional enterprise-grade security features.",
   },
 ];
 
