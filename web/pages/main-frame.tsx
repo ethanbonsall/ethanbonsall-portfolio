@@ -45,6 +45,7 @@ const SERVER_OPTIONS = [
   { label: "todo.server", href: "/todo" },
   { label: "goals.server", href: "/goals" },
   { label: "expenses.server", href: "/expenses" },
+  { label: "subscriptions.server", href: "/subscriptions" },
 ] as const;
 
 const FIRST_TIME_OPTIONS = [
