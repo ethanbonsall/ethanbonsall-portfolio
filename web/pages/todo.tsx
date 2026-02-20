@@ -877,7 +877,11 @@ export default function WeekTodoCalendarPage() {
                     className="flex min-h-[220px] flex-col rounded-2xl border border-primary/20 bg-secondary/40"
                   >
                     {/* Day header */}
-                    <div className="flex items-center justify-between gap-2 border-b border-primary/20 px-3 py-2">
+                    <div
+                      className={`${
+                        dayISO === toISODate(new Date()) ? "bg-primary/40" : ""
+                      }  flex items-center justify-between rounded-t-2xl gap-2 border-b border-primary/20 px-3 py-2`}
+                    >
                       <div className="min-w-0">
                         <div className="text-xs tracking-wide text-text/70 normal-case">
                           {prettyDow(day)}
