@@ -515,6 +515,7 @@ export default function ExpensesPage() {
     }
 
     let balanceAmount = newBalanceAmount;
+    let finalPurchaseRows = purchaseRows;
 
     const today = new Date();
     if (weeklyBudget && userId && weeklyBudget.recurring_time != null) {
@@ -531,6 +532,25 @@ export default function ExpensesPage() {
         !budgetFirstWeekStart || currentWeekStart >= budgetFirstWeekStart;
 
       if (isWeekOnOrAfterStart && !chargedWeekMap.has(currentWeekStartISO)) {
+        const prevWeekStart = addDays(currentWeekStart, -7);
+        const prevWeekStartISO = weekStartToISODate(prevWeekStart);
+        const prevWeekEndISO = toISODate(addDays(prevWeekStart, 6));
+        const prevWeekPurchases = purchaseRows.filter(
+          (p) =>
+            p.date &&
+            p.date >= prevWeekStartISO &&
+            p.date <= prevWeekEndISO
+        );
+        for (const p of prevWeekPurchases) {
+          if (p.id) await supabase.from("expenses").delete().eq("id", p.id);
+        }
+        finalPurchaseRows = purchaseRows.filter(
+          (p) =>
+            !p.date ||
+            p.date < prevWeekStartISO ||
+            p.date > prevWeekEndISO
+        );
+
         balanceAmount -= budgetLimit;
         if (balance) {
           await supabase
@@ -601,22 +621,40 @@ export default function ExpensesPage() {
         );
         const spent = weekPurchases.reduce((s, p) => s + (p.amount ?? 0), 0);
         const record = chargedWeekMap.get(weekStartISO);
-        if (record && record.amount === 0 && spent > budgetLimit) {
-          const overage = spent - budgetLimit;
-          balanceAmount -= overage;
-          if (balance) {
-            await supabase
-              .from("expenses")
-              .update({ amount: balanceAmount })
-              .eq("id", balance.id);
+        if (record && record.amount === 0) {
+          if (spent > budgetLimit) {
+            const overage = spent - budgetLimit;
+            balanceAmount -= overage;
+            if (balance) {
+              await supabase
+                .from("expenses")
+                .update({ amount: balanceAmount })
+                .eq("id", balance.id);
+            }
+            if (record.id) {
+              await supabase
+                .from("expenses")
+                .update({ amount: overage })
+                .eq("id", record.id);
+            }
+            chargedWeekMap.set(weekStartISO, { ...record, amount: overage });
+          } else if (spent < budgetLimit) {
+            const remaining = budgetLimit - spent;
+            balanceAmount += remaining;
+            if (balance) {
+              await supabase
+                .from("expenses")
+                .update({ amount: balanceAmount })
+                .eq("id", balance.id);
+            }
+            if (record.id) {
+              await supabase
+                .from("expenses")
+                .update({ amount: -remaining })
+                .eq("id", record.id);
+            }
+            chargedWeekMap.set(weekStartISO, { ...record, amount: -remaining });
           }
-          if (record.id) {
-            await supabase
-              .from("expenses")
-              .update({ amount: overage })
-              .eq("id", record.id);
-          }
-          chargedWeekMap.set(weekStartISO, { ...record, amount: overage });
         }
         weekStart = addDays(weekStart, -7);
       }
@@ -628,7 +666,7 @@ export default function ExpensesPage() {
         : null
     );
     setWeeklyBudgetRow(weeklyBudget);
-    setWeeklyPurchases(purchaseRows);
+    setWeeklyPurchases(finalPurchaseRows);
     setRecurrenceExceptions(
       newExceptions.length > 0
         ? [...recurrenceExceptions, ...newExceptions]

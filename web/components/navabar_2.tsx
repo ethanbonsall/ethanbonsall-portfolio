@@ -6,7 +6,7 @@ import linkedinLogo from "@/public/assets/logos/linkedin-logo.svg";
 import githubLogo from "@/public/assets/logos/github-logo.png";
 import Logo from "@/components/nameLogo";
 import clsx from "clsx";
-import { Download, Terminal, ListTodo, Target, Wallet } from "lucide-react";
+import { Download, Terminal, ListTodo, Target, Wallet, CreditCard } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -73,6 +73,16 @@ const NavBar = () => {
             >
               <Wallet className="w-5 h-5" />
               <span className="hidden sm:inline">Expenses</span>
+            </Link>
+            <Link
+              href="/subscriptions"
+              className={clsx(
+                "nav-link flex items-center gap-2 text-lg",
+                pathname === "/subscriptions" && "text-primary font-medium"
+              )}
+            >
+              <CreditCard className="w-5 h-5" />
+              <span className="hidden sm:inline">Subscriptions</span>
             </Link>
           </div>
           <div
