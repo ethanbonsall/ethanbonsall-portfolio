@@ -808,6 +808,13 @@ export default function WeekTodoCalendarPage() {
     return `${prettyMD(weekStart)} – ${prettyMD(end)}, ${end.getFullYear()}`;
   }, [weekStart]);
 
+  const [todayISO, setTodayISO] = useState<string>("");
+
+  useEffect(() => {
+    const now = new Date();
+    setTodayISO(toISODate(now)); // user’s computer time
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-text">
       <Head>
@@ -879,7 +886,7 @@ export default function WeekTodoCalendarPage() {
                     {/* Day header */}
                     <div
                       className={`${
-                        dayISO === toISODate(new Date()) ? "bg-primary/40" : ""
+                        todayISO && dayISO === todayISO ? "bg-primary/40" : ""
                       }  flex items-center justify-between rounded-t-2xl gap-2 border-b border-primary/20 px-3 py-2`}
                     >
                       <div className="min-w-0">
