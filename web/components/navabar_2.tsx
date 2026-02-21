@@ -6,7 +6,14 @@ import linkedinLogo from "@/public/assets/logos/linkedin-logo.svg";
 import githubLogo from "@/public/assets/logos/github-logo.png";
 import Logo from "@/components/nameLogo";
 import clsx from "clsx";
-import { Download, Terminal, ListTodo, Target, Wallet, CreditCard } from "lucide-react";
+import {
+  Download,
+  Terminal,
+  ListTodo,
+  Target,
+  Wallet,
+  CreditCard,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -40,7 +47,7 @@ const NavBar = () => {
           <div
             className={clsx(
               "flex items-center",
-              isMobile ? "gap-4 sm:gap-x-8" : "gap-10"
+              isMobile ? "gap-[10px]" : "gap-10"
             )}
           >
             <Logo />
@@ -95,16 +102,17 @@ const NavBar = () => {
               href="/main-frame"
               className={clsx(
                 "group relative flex items-center justify-center overflow-hidden rounded-full border-2 border-green-500",
-                "transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,197,94,0.8)] hover:bg-green-500/10", 
+                "transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,197,94,0.8)] hover:bg-green-500/10",
                 isMobile ? "w-10 h-10" : "w-12 h-12"
               )}
             >
-                <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute inset-0 bg-[repeating-linear-gradient(to_bottom,rgba(0,255,0,0.08)_0px,rgba(0,255,0,0.08)_1px,transparent_1px,transparent_3px)]" />
               </div>
               <Terminal
                 className={clsx(
-                  "text-green-400 group-hover:text-green-300 group-hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.9)]", "group-hover:animate-[hacker-flicker_1.2s_infinite]",
+                  "text-green-400 group-hover:text-green-300 group-hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.9)]",
+                  "group-hover:animate-[hacker-flicker_1.2s_infinite]",
                   isMobile ? "w-5 h-5" : "w-6 h-6"
                 )}
               />
@@ -118,7 +126,10 @@ const NavBar = () => {
               )}
             >
               <Download
-                className={clsx("text-primary", isMobile ? "w-5 h-5" : "w-6 h-6")}
+                className={clsx(
+                  "text-primary",
+                  isMobile ? "w-5 h-5" : "w-6 h-6"
+                )}
               />
             </a>
             <a

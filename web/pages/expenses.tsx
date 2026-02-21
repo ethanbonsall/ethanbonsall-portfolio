@@ -11,6 +11,8 @@ const WEEKLY_BUDGET_CATEGORY_LEGACY = "_weekly_budget";
 const WEEKLY_PURCHASE_CATEGORY = "_weekly_purchase";
 const WEEKLY_CHARGE_CATEGORY = "_weekly_charge";
 const RECURRENCE_EXCEPTION_CATEGORY = "_recurrence_exception";
+const HIDDEN_CATEGORY = "_hidden";
+const OVERAGE_CATEGORY = "_overage";
 
 const CHARGE_DAY_OPTIONS = [
   { value: 0, label: "Sunday" },
@@ -56,6 +58,7 @@ function displayCategory(row: ExpenseRow): string {
     row.category === WEEKLY_BUDGET_CATEGORY_LEGACY
   )
     return "Weekly Budget";
+  if (row.category === HIDDEN_CATEGORY) return "(past)";
   return row.category ?? "—";
 }
 
@@ -128,10 +131,28 @@ type DisplayEventRow = {
   source: ExpenseRow;
   occurrenceDate: string;
   isExpanded: boolean;
+  /** For recurring: base amount + sum of overages for this occurrence. */
+  effectiveAmount?: number;
 };
 
 /** Exception: skip one occurrence of a recurring event. Stored as name "exception:eventId", date = occurrence date. */
 type RecurrenceException = { eventId: number; date: string };
+
+/** Map key "eventId:occurrenceDate" -> total overage amount. */
+function buildOverageMap(overageRows: ExpenseRow[]): Map<string, number> {
+  const map = new Map<string, number>();
+  for (const r of overageRows) {
+    if (r.category !== OVERAGE_CATEGORY || !r.name?.startsWith("overage:")) continue;
+    const parts = r.name.slice("overage:".length).split(":");
+    if (parts.length >= 2) {
+      const eventId = parts[0];
+      const occurrenceDate = parts[1];
+      const key = `${eventId}:${occurrenceDate}`;
+      map.set(key, (map.get(key) ?? 0) + (r.amount ?? 0));
+    }
+  }
+  return map;
+}
 
 /** Expand recurring events (and weekly budget) into one row per occurrence until end_date. */
 function expandToDisplayRows(
@@ -139,12 +160,15 @@ function expandToDisplayRows(
   weeklyBudgetRow: ExpenseRow | null,
   chargeDay: number,
   todayISO: string,
-  recurrenceExceptions: RecurrenceException[] = []
+  recurrenceExceptions: RecurrenceException[] = [],
+  showPastEvents = false,
+  overageMap: Map<string, number> = new Map()
 ): DisplayEventRow[] {
   const out: DisplayEventRow[] = [];
   const exceptionSet = new Set(
     recurrenceExceptions.map((ex) => `${ex.eventId}:${ex.date}`)
   );
+  const includeDate = (iso: string) => showPastEvents || iso >= todayISO;
 
   if (weeklyBudgetRow?.end_date && weeklyBudgetRow.recurring_time != null) {
     const startDate = weeklyBudgetRow.date
@@ -155,7 +179,7 @@ function expandToDisplayRows(
     let d = new Date(start);
     while (d <= end) {
       const iso = toISODate(d);
-      if (iso >= todayISO && !exceptionSet.has(`${weeklyBudgetRow.id}:${iso}`))
+      if (includeDate(iso) && !exceptionSet.has(`${weeklyBudgetRow.id}:${iso}`))
         out.push({
           source: weeklyBudgetRow,
           occurrenceDate: iso,
@@ -170,10 +194,13 @@ function expandToDisplayRows(
     const recur = parseRecurring(e.recuring_length, e.recurring_time);
     const isWeeklyBudget =
       e.category === WEEKLY_BUDGET_CATEGORY || e.category === WEEKLY_BUDGET_CATEGORY_LEGACY;
+    const isHidden = e.category === HIDDEN_CATEGORY;
 
     if (isWeeklyBudget) continue;
+    if (isHidden && !showPastEvents) continue;
 
-    if (!e.date || e.date < todayISO) continue;
+    if (!e.date) continue;
+    if (!showPastEvents && e.date < todayISO) continue;
 
     if (!endDate || !recur) {
       if (!exceptionSet.has(`${e.id}:${e.date}`))
@@ -188,12 +215,16 @@ function expandToDisplayRows(
 
     while (d <= end) {
       const iso = toISODate(d);
-      if (iso >= todayISO && !exceptionSet.has(`${e.id}:${iso}`))
+      if (includeDate(iso) && !exceptionSet.has(`${e.id}:${iso}`)) {
+        const overage = overageMap.get(`${e.id}:${iso}`) ?? 0;
+        const baseAmount = e.amount ?? 0;
         out.push({
           source: e,
           occurrenceDate: iso,
           isExpanded: true,
+          effectiveAmount: baseAmount + overage,
         });
+      }
       if (unit === "days") d = addDays(d, every);
       else if (unit === "weeks") d = addDays(d, every * 7);
       else if (unit === "months") d = addMonths(d, every);
@@ -251,6 +282,8 @@ export default function ExpensesPage() {
   const [recurrenceExceptions, setRecurrenceExceptions] = useState<
     RecurrenceException[]
   >([]);
+  const [overageRows, setOverageRows] = useState<ExpenseRow[]>([]);
+  const [showPastEvents, setShowPastEvents] = useState(false);
   const [loading, setLoading] = useState(true);
   const [errMsg, setErrMsg] = useState<string | null>(null);
 
@@ -288,6 +321,8 @@ export default function ExpensesPage() {
     field: "amount" | "date" | "end_date";
     value: string;
   } | null>(null);
+  const [draftOverage, setDraftOverage] = useState("0");
+  const [recurrenceSectionOpen, setRecurrenceSectionOpen] = useState(false);
 
   const currentBalance = useMemo(() => {
     if (balanceRow?.amount != null) return balanceRow.amount;
@@ -307,6 +342,8 @@ export default function ExpensesPage() {
     [weeklyBudgetRow]
   );
 
+  const overageMap = useMemo(() => buildOverageMap(overageRows), [overageRows]);
+
   const eventsDisplayRows = useMemo(
     () =>
       expandToDisplayRows(
@@ -314,21 +351,35 @@ export default function ExpensesPage() {
         weeklyBudgetRow,
         chargeDay,
         todayISO,
-        recurrenceExceptions
+        recurrenceExceptions,
+        showPastEvents,
+        overageMap
       ),
-    [events, weeklyBudgetRow, chargeDay, todayISO, recurrenceExceptions]
+    [events, weeklyBudgetRow, chargeDay, todayISO, recurrenceExceptions, showPastEvents, overageMap]
   );
 
   const balanceAfterEachRow = useMemo(() => {
     const out: number[] = [];
     let running = currentBalance;
     for (const row of eventsDisplayRows) {
-      const amt = row.source.amount ?? 0;
+      const amt = row.effectiveAmount ?? row.source.amount ?? 0;
       running += row.source.income ? amt : -amt;
       out.push(running);
     }
     return out;
   }, [eventsDisplayRows, currentBalance]);
+
+  /** For each recurring event (source id), the date of the next occurrence (first in series). Only that row gets an editable date. */
+  const nextOccurrenceDateBySourceId = useMemo(() => {
+    const m = new Map<number, string>();
+    for (const row of eventsDisplayRows) {
+      if (!row.isExpanded) continue;
+      const current = m.get(row.source.id);
+      if (current === undefined || row.occurrenceDate < current)
+        m.set(row.source.id, row.occurrenceDate);
+    }
+    return m;
+  }, [eventsDisplayRows]);
 
   const currentWeekStart = useMemo(
     () => getWeekStartByChargeDay(new Date(), chargeDay),
@@ -394,6 +445,7 @@ export default function ExpensesPage() {
       })
       .filter((x): x is RecurrenceException => x != null);
 
+    const overageRowsData = rows.filter((r) => r.category === OVERAGE_CATEGORY);
     const eventRows = rows.filter(
       (r) =>
         r.category !== BALANCE_CATEGORY &&
@@ -401,7 +453,8 @@ export default function ExpensesPage() {
         r.category !== WEEKLY_BUDGET_CATEGORY_LEGACY &&
         r.category !== WEEKLY_PURCHASE_CATEGORY &&
         r.category !== WEEKLY_CHARGE_CATEGORY &&
-        r.category !== RECURRENCE_EXCEPTION_CATEGORY
+        r.category !== RECURRENCE_EXCEPTION_CATEGORY &&
+        r.category !== OVERAGE_CATEGORY
     );
 
     const exceptionSet = new Set(
@@ -429,7 +482,8 @@ export default function ExpensesPage() {
       if (!e.date || e.date > todayISO) continue;
       const amt = e.amount ?? 0;
       newBalanceAmount += e.income ? amt : -amt;
-      await supabase.from("expenses").delete().eq("id", e.id);
+      await supabase.from("expenses").update({ category: HIDDEN_CATEGORY }).eq("id", e.id);
+      e.category = HIDDEN_CATEGORY;
     }
 
     for (const e of recurringRows) {
@@ -672,12 +726,8 @@ export default function ExpensesPage() {
         ? [...recurrenceExceptions, ...newExceptions]
         : recurrenceExceptions
     );
-    const deletedOneTimeIds = new Set(
-      oneTimeRows.filter((e) => e.date && e.date <= todayISO).map((e) => e.id)
-    );
-    setEvents(
-      eventRows.filter((e) => !deletedOneTimeIds.has(e.id))
-    );
+    setOverageRows(overageRowsData);
+    setEvents(eventRows);
     setLoading(false);
   }, [userId, todayISO]);
 
@@ -789,6 +839,7 @@ export default function ExpensesPage() {
     setDraftCategory("");
     setDraftIncome(false);
     setDraftRecurring(false);
+    setRecurrenceSectionOpen(false);
     setDraftTimes("1");
     setDraftEvery("1");
     setDraftRecurUnit("weeks");
@@ -804,6 +855,7 @@ export default function ExpensesPage() {
     setDraftDate(row.occurrenceDate);
     setDraftCategory(src.category ?? "");
     setDraftIncome(src.income ?? false);
+    setDraftOverage("0");
     const hasRecur = !!(src.end_date && (src.recuring_length || src.recurring_time != null));
     const isWeekly =
       src.category === WEEKLY_BUDGET_CATEGORY ||
@@ -821,6 +873,7 @@ export default function ExpensesPage() {
       setDraftRecurUnit("weeks");
       setDraftEndDate("");
     }
+    setRecurrenceSectionOpen(false);
     setEditingEventRow(row);
   }
 
@@ -899,6 +952,38 @@ export default function ExpensesPage() {
       ]);
     }
     closeEditEvent();
+  }
+
+  async function addOverage() {
+    if (!editingEventRow?.isExpanded || !userId || !balanceRow) return;
+    const overageNum = parseFloat(draftOverage.trim());
+    if (Number.isNaN(overageNum) || overageNum === 0) return;
+    const src = editingEventRow.source;
+    setSaving(true);
+    setErrMsg(null);
+    const { data, error } = await supabase
+      .from("expenses")
+      .insert({
+        user_id: userId,
+        name: `overage:${src.id}:${editingEventRow.occurrenceDate}`,
+        amount: overageNum,
+        date: editingEventRow.occurrenceDate,
+        category: OVERAGE_CATEGORY,
+        income: src.income ?? false,
+      })
+      .select()
+      .single();
+    setSaving(false);
+    if (error) {
+      setErrMsg(error.message);
+      return;
+    }
+    const newRow = data as ExpenseRow;
+    setOverageRows((prev) => [...prev, newRow]);
+    const newBalance = currentBalance + (src.income ? overageNum : -overageNum);
+    await supabase.from("expenses").update({ amount: newBalance }).eq("id", balanceRow.id);
+    setBalanceRow((r) => (r ? { ...r, amount: newBalance } : null));
+    setDraftOverage("0");
   }
 
   async function saveNewEvent() {
@@ -1167,13 +1252,26 @@ export default function ExpensesPage() {
               <h2 className="text-sm font-medium uppercase tracking-wide text-text/80">
                 Scheduled events
               </h2>
-              <button
-                type="button"
-                onClick={openAddEvent}
-                className="rounded-lg border border-primary/40 px-3 py-1.5 text-sm text-text hover:bg-primary/20"
-              >
-                + Add event
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowPastEvents((v) => !v)}
+                  className={`rounded-lg border px-3 py-1.5 text-sm hover:bg-primary/20 ${
+                    showPastEvents
+                      ? "border-primary bg-primary/20 text-text"
+                      : "border-primary/40 text-text"
+                  }`}
+                >
+                  {showPastEvents ? "Hide past events" : "Show past events"}
+                </button>
+                <button
+                  type="button"
+                  onClick={openAddEvent}
+                  className="rounded-lg border border-primary/40 px-3 py-1.5 text-sm text-text hover:bg-primary/20"
+                >
+                  + Add event
+                </button>
+              </div>
             </div>
 
             {loading ? (
@@ -1216,7 +1314,7 @@ export default function ExpensesPage() {
                         >
                           No scheduled events. Add one to see it here; when the
                           date is reached it will deduct from your balance and
-                          be removed.
+                          be hidden (toggle &quot;Show past events&quot; to see them).
                         </td>
                       </tr>
                     ) : (
@@ -1226,6 +1324,10 @@ export default function ExpensesPage() {
                           ? `exp-${src.id}-${row.occurrenceDate}`
                           : src.id;
                         const balanceAfter = balanceAfterEachRow[idx];
+                        const isNextOccurrence =
+                          row.isExpanded &&
+                          nextOccurrenceDateBySourceId.get(src.id) === row.occurrenceDate;
+                        const canEditDate = !row.isExpanded || isNextOccurrence;
                         return (
                         <tr
                           key={rowKey}
@@ -1274,12 +1376,12 @@ export default function ExpensesPage() {
                             ) : (
                               <span className="block w-full text-right px-1 py-0.5">
                                 {src.income ? "+" : "-"}
-                                ${(src.amount ?? 0).toFixed(2)}
+                                ${(row.effectiveAmount ?? src.amount ?? 0).toFixed(2)}
                               </span>
                             )}
                           </td>
                           <td className="py-2 px-2">
-                            {row.isExpanded ? (
+                            {!canEditDate ? (
                               <span className="text-text/80">{row.occurrenceDate}</span>
                             ) : isEditing(src.id, "date") ? (
                               <input
@@ -1308,12 +1410,12 @@ export default function ExpensesPage() {
                                   setEditingCell({
                                     id: src.id,
                                     field: "date",
-                                    value: src.date ?? "",
+                                    value: row.isExpanded ? row.occurrenceDate : (src.date ?? ""),
                                   })
                                 }
                                 className="w-full text-left hover:bg-primary/10 rounded px-1 py-0.5 -mx-1"
                               >
-                                {src.date ?? "—"}
+                                {row.isExpanded ? row.occurrenceDate : (src.date ?? "—")}
                               </button>
                             )}
                           </td>
@@ -1334,8 +1436,9 @@ export default function ExpensesPage() {
                               type="button"
                               onClick={() => openEditEvent(row)}
                               className="rounded border border-primary/40 px-2 py-0.5 text-xs text-text hover:bg-primary/20"
+                              title={row.isExpanded ? "Edit this occurrence (overage) or recurring series" : "Edit event"}
                             >
-                              Edit
+                              {row.isExpanded ? "Edit" : "Edit"}
                             </button>
                           </td>
                         </tr>
@@ -1524,14 +1627,32 @@ export default function ExpensesPage() {
               type="checkbox"
               id="draft-recurring"
               checked={draftRecurring}
-              onChange={(e) => setDraftRecurring(e.target.checked)}
+              onChange={(e) => {
+                const next = e.target.checked;
+                if (next) setRecurrenceSectionOpen(true);
+                setDraftRecurring(next);
+              }}
               className="rounded border-primary/40"
             />
             <label htmlFor="draft-recurring" className="text-sm text-text">
               Recurring event
             </label>
+            {draftRecurring && (
+              <button
+                type="button"
+                onClick={() => setRecurrenceSectionOpen((v) => !v)}
+                className="rounded border border-primary/40 p-0.5 text-text hover:bg-primary/20"
+                aria-label={recurrenceSectionOpen ? "Collapse recurrence" : "Expand recurrence"}
+              >
+                {recurrenceSectionOpen ? (
+                  <span className="inline-block text-xs">&#9650;</span>
+                ) : (
+                  <span className="inline-block text-xs">&#9660;</span>
+                )}
+              </button>
+            )}
           </div>
-          {draftRecurring && (
+          {draftRecurring && recurrenceSectionOpen && (
             <>
               <div className="flex flex-wrap items-center gap-2 rounded-xl border border-primary/20 bg-background/50 p-3">
                 <label className="text-sm text-text/80">Recurrence:</label>
@@ -1606,7 +1727,7 @@ export default function ExpensesPage() {
         onClose={closeEditEvent}
       >
         {editingEventRow && (
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div>
               <label className="block text-sm font-medium text-text">Name</label>
               <input
@@ -1639,6 +1760,35 @@ export default function ExpensesPage() {
                 className="mt-1 w-full rounded-xl border border-primary/30 bg-background px-3 py-2 text-text outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-70"
               />
             </div>
+            {editingEventRow.isExpanded && (
+              <div>
+                <label className="block text-sm font-medium text-text">Overage *</label>
+                <div className="mt-1 flex items-center gap-2">
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={draftOverage}
+                    onChange={(e) => setDraftOverage(e.target.value)}
+                    className="min-w-0 flex-1 rounded-xl border border-primary/30 bg-background px-3 py-2 text-text outline-none focus:ring-2 focus:ring-primary/40"
+                    placeholder="0.00"
+                  />
+                  <button
+                    type="button"
+                    onClick={addOverage}
+                    disabled={
+                      saving ||
+                      !draftOverage.trim() ||
+                      Number.isNaN(parseFloat(draftOverage)) ||
+                      parseFloat(draftOverage) === 0 ||
+                      !balanceRow
+                    }
+                    className="shrink-0 rounded-lg border border-primary/40 px-3 py-1.5 text-sm text-text hover:bg-primary/20 disabled:opacity-50"
+                  >
+                    Add overage
+                  </button>
+                </div>
+              </div>
+            )}
             <div>
               <label className="block text-sm font-medium text-text">Category</label>
               <input
@@ -1670,14 +1820,32 @@ export default function ExpensesPage() {
                     type="checkbox"
                     id="edit-draft-recurring"
                     checked={draftRecurring}
-                    onChange={(e) => setDraftRecurring(e.target.checked)}
+                    onChange={(e) => {
+                      const next = e.target.checked;
+                      if (next) setRecurrenceSectionOpen(true);
+                      setDraftRecurring(next);
+                    }}
                     className="rounded border-primary/40"
                   />
                   <label htmlFor="edit-draft-recurring" className="text-sm text-text">
                     Recurring event
                   </label>
+                  {draftRecurring && (
+                    <button
+                      type="button"
+                      onClick={() => setRecurrenceSectionOpen((v) => !v)}
+                      className="rounded border border-primary/40 p-0.5 text-text hover:bg-primary/20"
+                      aria-label={recurrenceSectionOpen ? "Collapse recurrence" : "Expand recurrence"}
+                    >
+                      {recurrenceSectionOpen ? (
+                        <span className="inline-block text-xs">&#9650;</span>
+                      ) : (
+                        <span className="inline-block text-xs">&#9660;</span>
+                      )}
+                    </button>
+                  )}
                 </div>
-                {draftRecurring && (
+                {draftRecurring && recurrenceSectionOpen && (
                   <>
                     <div className="flex flex-wrap items-center gap-2 rounded-xl border border-primary/20 bg-background/50 p-3">
                       <label className="text-sm text-text/80">Recurrence:</label>
@@ -1743,7 +1911,6 @@ export default function ExpensesPage() {
               </button>
             </div>
             <div className="border-t border-primary/20 pt-4">
-              <p className="mb-2 text-sm font-medium text-text/80">Delete</p>
               <div className="flex flex-wrap gap-2">
                 {editingEventRow.isExpanded ? (
                   <>
