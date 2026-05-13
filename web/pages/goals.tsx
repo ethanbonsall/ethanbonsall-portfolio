@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Head from "next/head";
 import { supabase } from "@/lib/supabaseClient";
 import NavBar from "@/components/navabar_2";
+import PageColorPicker from "@/components/PageColorPicker";
 
 type GoalRow = {
   id: number;
@@ -275,6 +276,7 @@ export default function GoalsPage() {
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
             <h1 className="text-xl font-semibold text-text">Goals</h1>
             <div className="flex flex-wrap items-center gap-2">
+              <PageColorPicker />
               <label className="flex items-center gap-2 text-sm text-text">
                 <span>User</span>
                 <select

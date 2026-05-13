@@ -22,6 +22,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import NavBar from "@/components/navabar_2";
 import Head from "next/head";
+import PageColorPicker from "@/components/PageColorPicker";
 
 /**
  * Week Todo Calendar (Google Calendar-ish week view)
@@ -837,6 +838,7 @@ export default function WeekTodoCalendarPage() {
               <p className="mt-1 text-sm text-text/75">{weekLabel}</p>
             </div>
             <div className="flex shrink-0 items-center gap-2">
+              <PageColorPicker />
               <button
                 onClick={gotoPrevWeek}
                 className="rounded-xl border border-primary/40 px-3 py-2 text-sm text-text hover:bg-primary/20 transition"

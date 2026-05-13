@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Head from "next/head";
 import { supabase } from "@/lib/supabaseClient";
 import NavBar from "@/components/navabar_2";
+import PageColorPicker from "@/components/PageColorPicker";
 
 type SubscriptionRow = {
   id: number;
@@ -250,13 +251,16 @@ export default function SubscriptionsPage() {
         <div className="w-full max-w-2xl rounded-2xl border border-primary/30 bg-background/90 shadow-xl shadow-primary/10 p-5 md:p-6">
           <div className="flex items-center justify-between gap-4 mb-5">
             <h1 className="text-2xl font-semibold">Subscriptions</h1>
-            <button
-              type="button"
-              onClick={openAddModal}
-              className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 shrink-0"
-            >
-              Add
-            </button>
+            <div className="flex shrink-0 items-center gap-2">
+              <PageColorPicker />
+              <button
+                type="button"
+                onClick={openAddModal}
+                className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90"
+              >
+                Add
+              </button>
+            </div>
           </div>
 
           {showAddModal && (

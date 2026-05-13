@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Head from "next/head";
 import { supabase } from "@/lib/supabaseClient";
 import NavBar from "@/components/navabar_2";
+import PageColorPicker from "@/components/PageColorPicker";
 
 const BALANCE_CATEGORY = "_balance";
 const WEEKLY_BUDGET_CATEGORY = "Weekly Budget";
@@ -1122,6 +1123,10 @@ export default function ExpensesPage() {
         ) : null}
 
         <div className="w-full max-w-6xl space-y-6">
+          <div className="flex justify-end">
+            <PageColorPicker />
+          </div>
+
           {/* Starting balance */}
           <section className="rounded-2xl border border-primary/20 bg-secondary/50 p-6">
             <h2 className="mb-2 text-sm font-medium uppercase tracking-wide text-text/80">
