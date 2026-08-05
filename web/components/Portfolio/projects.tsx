@@ -84,7 +84,7 @@ const projects: Project[] = [
   },
   {
     name: "Main Frame",
-    link: "https://www.ethanbonsall.com/main-frame",
+    link: "https://tools.ethanbonsall.com",
     git: "https://github.com/ethanbonsall/ethanbonsall-portfolio",
     photo: "/assets/uploads/92mainframe.png",
     tags: ["web"],

@@ -188,7 +188,7 @@ const NavBar = () => {
             }}
           >
             <Link
-              href="/main-frame"
+              href="https://tools.ethanbonsall.com"
               className={clsx(
                 "group relative flex items-center justify-center overflow-hidden rounded-full border-2 border-green-500",
                 "transition-all duration-300",
