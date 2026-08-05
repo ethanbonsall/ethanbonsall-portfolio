@@ -18,6 +18,10 @@ const Education = () => {
             <p className="text-base sm:text-lg md:text-xl 2xl:text-2xl mb-2 break-words">
               Bachelor of Science in Computer Science & Data Science
             </p>
+            <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm md:text-base mt-2 text-text/80">
+              <span>Aug 2023 – May 2027</span>
+             
+            </div>
             <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-4 mt-4 text-text/80 text-sm sm:text-base">
               <div className="flex items-center gap-2">
                 <span className="font-semibold">GPA: 3.8</span>

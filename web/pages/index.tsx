@@ -6,8 +6,6 @@ import Skills from "../components/Portfolio/skills";
 import Experience from "../components/Portfolio/experience";
 import NavBar from "../components/Portfolio/navbar";
 import Head from "next/head";
-import TerminalChat from "@/components/Portfolio/chatbot";
-import MarcyChatbotOverlay from "@/components/Portfolio/marcy";
 
 const Portfolio = () => {
   return (
@@ -25,34 +23,11 @@ const Portfolio = () => {
       </Head>
       <NavBar />
       <Header />
-      <Web />
       <Experience />
+      <Web />
       <Education />
       <Courses />
       <Skills />
-      <TerminalChat
-        placeholder="hi i'm marcy, ethan's cat, ask me anything!"
-        onSendAction={async (message, history, mode) => {
-          const res = await fetch("/api/chat", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              topic: message,
-              history: history.slice(-4),
-              mode,
-            }),
-          });
-
-          const data = await res.json();
-
-          if (!res.ok || !data?.success) {
-            throw new Error(data?.message || "Chat request failed");
-          }
-
-          return data.content as string;
-        }}
-      />
-      <MarcyChatbotOverlay />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import linkedinLogo from "@/public/assets/logos/linkedin-logo.svg";
 import githubLogo from "@/public/assets/logos/github-logo.png";
 import Logo from "@/components/nameLogo";
@@ -14,12 +14,33 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-const sections = ["education", "projects", "experience"];
+const sections = ["experience", "projects", "education"];
 
 const NavBar = () => {
   const [activeSection, setActiveSection] = useState<string>("");
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+
+  // Publish the resting nav height so the hero can fill the rest of the
+  // viewport. Deliberately not tracked on scroll, since the pill shrinks as the
+  // page moves and would otherwise resize the hero underneath it.
+  useEffect(() => {
+    const publishNavHeight = () => {
+      const height = navRef.current?.offsetHeight;
+      if (height) {
+        document.documentElement.style.setProperty(
+          "--nav-height",
+          `${height}px`
+        );
+      }
+    };
+
+    publishNavHeight();
+    window.addEventListener("resize", publishNavHeight);
+
+    return () => window.removeEventListener("resize", publishNavHeight);
+  }, [isMobile]);
 
   useEffect(() => {
     // Check if mobile
@@ -31,16 +52,23 @@ const NavBar = () => {
     window.addEventListener("resize", checkMobile);
 
     const handleScroll = () => {
+      // Whichever section has most recently scrolled past the navbar wins, so
+      // the underline stays correct regardless of section heights or order.
+      const threshold = (navRef.current?.offsetHeight ?? 0) + 24;
       let current = "";
+      let closestTop = -Infinity;
+
       for (const id of sections) {
         const el = document.getElementById(id);
-        if (el) {
-          const offset = el.offsetTop - 300;
-          if (window.scrollY >= offset) {
-            current = id;
-          }
+        if (!el) continue;
+
+        const { top } = el.getBoundingClientRect();
+        if (top <= threshold && top > closestTop) {
+          closestTop = top;
+          current = id;
         }
       }
+
       setActiveSection(current);
 
       // Calculate scroll progress (0 to 1, maxing at 300px scroll)
@@ -67,6 +95,7 @@ const NavBar = () => {
 
   return (
     <nav
+      ref={navRef}
       className="sticky z-50  w-full transition-all duration-300 ease-out flex justify-center"
       style={{
         top: `${topOffset}px`,

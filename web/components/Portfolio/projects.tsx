@@ -212,7 +212,7 @@ const Web = () => {
         {majors.map((p) => (
           <div
             key={p.name}
-            className="glass-card rounded-2xl overflow-hidden group"
+            className="glass-card project-card rounded-2xl overflow-hidden group"
           >
             <div className="relative overflow-hidden">
               {p.link ? (
@@ -222,24 +222,18 @@ const Web = () => {
                   rel="noopener noreferrer"
                   className="block"
                 >
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={p.photo}
-                      alt={p.name}
-                      className="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                </a>
-              ) : (
-                <div className="relative overflow-hidden">
                   <img
                     src={p.photo}
                     alt={p.name}
-                    className="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full aspect-video object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
+                </a>
+              ) : (
+                <img
+                  src={p.photo}
+                  alt={p.name}
+                  className="w-full aspect-video object-cover"
+                />
               )}
             </div>
 
@@ -286,11 +280,11 @@ const Web = () => {
       </div>
 
       {/* Scrollable row of the rest (same sizing as your current bottom cards) */}
-      <div className="relative">
+      <div className="relative pt-3">
         <div
           className="
             flex flex-row gap-4 md:gap-6
-            overflow-x-auto pb-2
+            overflow-x-auto pt-2 pb-4
             snap-x snap-mandatory
             custom-scrollbar
             [-webkit-overflow-scrolling:touch]
@@ -300,7 +294,7 @@ const Web = () => {
             <div
               key={p.name}
               className="
-                glass-card rounded-2xl overflow-hidden group
+                glass-card project-card rounded-2xl overflow-hidden group
                 shrink-0
                 snap-start
                 w-[78%] sm:w-[52%] md:w-[40%] lg:w-[28%]
@@ -314,24 +308,18 @@ const Web = () => {
                     rel="noopener noreferrer"
                     className="block"
                   >
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={p.photo}
-                        alt={p.name}
-                        className="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </div>
-                  </a>
-                ) : (
-                  <div className="relative overflow-hidden">
                     <img
                       src={p.photo}
                       alt={p.name}
-                      className="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full aspect-video object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
+                  </a>
+                ) : (
+                  <img
+                    src={p.photo}
+                    alt={p.name}
+                    className="w-full aspect-video object-cover"
+                  />
                 )}
               </div>
 

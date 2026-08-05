@@ -2,7 +2,6 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
-import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import {
   DndContext,
   DragEndEvent,
@@ -23,6 +22,7 @@ import { CSS } from "@dnd-kit/utilities";
 import NavBar from "@/components/navabar_2";
 import Head from "next/head";
 import PageColorPicker from "@/components/PageColorPicker";
+import { supabase } from "@/lib/supabaseClient";
 
 /**
  * Week Todo Calendar (Google Calendar-ish week view)
@@ -51,18 +51,6 @@ type TodoRow = {
   user_id: string; // UUID
   completed: boolean;
 };
-
-function supabaseClient(): SupabaseClient {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-  if (!url || !key) {
-    // Fail loudly in dev instead of silently breaking.
-    throw new Error(
-      "Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY"
-    );
-  }
-  return createClient(url, key);
-}
 
 function pad2(n: number) {
   return String(n).padStart(2, "0");
@@ -329,8 +317,6 @@ function Modal({
 }
 
 export default function WeekTodoCalendarPage() {
-  const supabase = useMemo(() => supabaseClient(), []);
-
   const [userId, setUserId] = useState<string | null>(null);
   const [showCompleted, setShowCompleted] = useState(false);
 
