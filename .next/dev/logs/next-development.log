@@ -1,0 +1,12 @@
+{"timestamp":"00:00:01.652","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:04.859","source":"Browser","level":"LOG","message":"[Vercel Web Analytics] Debug mode is enabled by default in development. No requests will be sent to the server."}
+{"timestamp":"00:00:04.859","source":"Browser","level":"LOG","message":"[Vercel Web Analytics] [view] http://localhost:3000/ {\"o\":\"http://localhost:3000/\",\"r\":\"\",\"sdkn\":\"@vercel/analytics/react\",\"sdkv\":\"1.5.0\",\"sv\":\"0.1.3\"} /_vercel/insights/view"}
+{"timestamp":"00:00:10.612","source":"Browser","level":"LOG","message":"[Vercel Web Analytics] Debug mode is enabled by default in development. No requests will be sent to the server."}
+{"timestamp":"00:00:10.613","source":"Browser","level":"LOG","message":"[Vercel Web Analytics] [view] http://localhost:3000/voice-notes/iloveyoutaylor {\"o\":\"http://localhost:3000/voice-notes/iloveyoutaylor\",\"r\":\"\",\"sdkn\":\"@vercel/analytics/react\",\"sdkv\":\"1.5.0\",\"sv\":\"0.1.3\"} /_vercel/insights/view"}
+{"timestamp":"00:01:27.651","source":"Server","level":"LOG","message":"✓ Compiled in 106ms"}
+{"timestamp":"00:02:11.672","source":"Server","level":"LOG","message":"✓ Compiled in 78ms"}
+{"timestamp":"00:02:21.610","source":"Server","level":"LOG","message":"✓ Compiled in 54ms"}
+{"timestamp":"00:02:52.475","source":"Server","level":"LOG","message":"✓ Compiled in 88ms"}
+{"timestamp":"00:03:00.592","source":"Server","level":"LOG","message":"✓ Compiled in 79ms"}
+{"timestamp":"00:03:32.774","source":"Browser","level":"LOG","message":"[Vercel Web Analytics] Debug mode is enabled by default in development. No requests will be sent to the server."}
+{"timestamp":"00:03:32.775","source":"Browser","level":"LOG","message":"[Vercel Web Analytics] [view] http://localhost:3000/voice-notes/iloveyoutaylor {\"o\":\"http://localhost:3000/voice-notes/iloveyoutaylor\",\"r\":\"\",\"sdkn\":\"@vercel/analytics/react\",\"sdkv\":\"1.5.0\",\"sv\":\"0.1.3\"} /_vercel/insights/view"}

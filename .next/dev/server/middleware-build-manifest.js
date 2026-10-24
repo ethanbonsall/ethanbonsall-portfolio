@@ -1,0 +1,52 @@
+globalThis.__BUILD_MANIFEST = {
+  "pages": {
+    "/": [
+      "static/chunks/[root-of-the-server]__0_3fp31._.js",
+      "static/chunks/node_modules_next_dist_compiled_14ibvna._.js",
+      "static/chunks/node_modules_next_dist_shared_lib_046bn4k._.js",
+      "static/chunks/node_modules_next_dist_client_01nfwoe._.js",
+      "static/chunks/node_modules_next_dist_0zk-zb1._.js",
+      "static/chunks/node_modules_next_1xtejl5._.js",
+      "static/chunks/node_modules_react-dom_0kla17-._.js",
+      "static/chunks/node_modules_framer-motion_dist_es_03do0ev._.js",
+      "static/chunks/node_modules_07s6go7._.js",
+      "static/chunks/pages_index_0du2_q-._.js",
+      "static/chunks/turbopack-pages_index_1_1moxd._.js"
+    ],
+    "/_app": [
+      "static/chunks/node_modules_next_dist_compiled_14ibvna._.js",
+      "static/chunks/node_modules_next_dist_shared_lib_196_nl_._.js",
+      "static/chunks/node_modules_next_dist_client_16lnmlo._.js",
+      "static/chunks/node_modules_next_dist_0zk-zb1._.js",
+      "static/chunks/node_modules_react-dom_0kla17-._.js",
+      "static/chunks/node_modules_0azgl9v._.js",
+      "static/chunks/[root-of-the-server]__1fs3_oc._.js",
+      "static/chunks/styles_globals_1sjip1h.css",
+      "static/chunks/pages__app_0du2_q-._.js",
+      "static/chunks/turbopack-pages__app_1wgp4p-._.js"
+    ],
+    "/voice-notes/iloveyoutaylor": [
+      "static/chunks/node_modules_next_dist_compiled_0lyf85n._.js",
+      "static/chunks/node_modules_next_dist_shared_lib_1vsvqbg._.js",
+      "static/chunks/node_modules_next_dist_client_16lnmlo._.js",
+      "static/chunks/node_modules_next_dist_0zk-zb1._.js",
+      "static/chunks/node_modules_next_head_0wi9zur.js",
+      "static/chunks/node_modules_react-dom_0kla17-._.js",
+      "static/chunks/node_modules_1o4479e._.js",
+      "static/chunks/[root-of-the-server]__1uyl0ox._.js",
+      "static/chunks/pages_voice-notes_iloveyoutaylor_tsx_0du2_q-._.js",
+      "static/chunks/turbopack-pages_voice-notes_iloveyoutaylor_tsx_0jyltea._.js"
+    ]
+  },
+  "devFiles": [],
+  "polyfillFiles": [],
+  "lowPriorityFiles": [
+    "static/development/_buildManifest.js",
+    "static/development/_ssgManifest.js",
+    "static/development/_clientMiddlewareManifest.js"
+  ],
+  "rootMainFiles": [],
+  "rootMainFilesTree": {},
+  "pagesChunkGroupBootstrapParams": {},
+  "chunkLoadingGlobal": "TURBOPACK"
+};
